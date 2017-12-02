@@ -1,0 +1,105 @@
+<div class="page-title">
+    <div>
+        <h1><i class="fa fa-dashboard"></i> Group Details</h1>
+    </div>
+</div>
+<div class="row">
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div *ngIf="newListForm">
+            <div class="modal-header">
+                <h1>{{modalHeaderText}}</h1>
+            </div>
+            <form [formGroup]="addNewForm" #f="ngForm" (ngSubmit)="saveNewListItem()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label">Title</label>
+                        <input class="form-control" type="text" placeholder="Title" formControlName="title"
+                               id="titleNewItem">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary icon-btn">Add</button>&nbsp;&nbsp;&nbsp;
+                    <a class="btn btn-default icon-btn" href="javascript:;" (click)="closeNew()">Cancel</a>
+                </div>
+            </form>
+        </div>
+        <div *ngIf="currentListItem">
+            <div class="modal-header">
+                <h1>{{modalHeaderText}}</h1>
+            </div>
+            <form [formGroup]="detailsItemForm" #f="ngForm" (ngSubmit)="saveItemGroup()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="control-label">Title</label>
+                        <input class="form-control" type="text" placeholder="Title" formControlName="title"
+                               id="titleItem">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary icon-btn">Add</button>&nbsp;&nbsp;&nbsp;
+                    <a class="btn btn-default icon-btn" href="javascript:;" (click)="closeEdit()">Cancel</a>
+                </div>
+            </form>
+        </div>
+
+    </ng-template>
+
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-title">
+                <h1>Edit main group</h1>
+            </div>
+            <form [formGroup]="detailsForm" #f="ngForm" (ngSubmit)="saveListGroup()">
+                <div class="card-body">
+
+                    <div class="form-group">
+                        <label class="control-label">Title</label>
+                        <input class="form-control" type="text" placeholder="Title" formControlName="title">
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary icon-btn" type="submit">
+                        Save
+                    </button>&nbsp;&nbsp;&nbsp;
+                    <a class="btn btn-default icon-btn" href="javascript:;" [routerLink]="['/admin/list-groups']">
+                        Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-title">
+                <button class="btn btn-primary" (click)="openNew(content)">Add new sub group</button>
+            </div>
+            <div class="card-body" *ngIf="listing">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Active</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let item of listing.lists">
+                            <td>#{{item._id}}</td>
+                            <td>{{item.title[0].text}}</td>
+                            <td>{{item.isActive}}</td>
+                            <td>
+                                <a href="javascript:;" (click)="openEdit(content,item)">Edit</a>-/-
+                                <a href="javascript:;" (click)="deleteList(item)">Delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

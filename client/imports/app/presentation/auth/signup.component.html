@@ -1,0 +1,38 @@
+<section class="material-half-bg">
+    <div class="cover"></div>
+</section>
+<section class="login-content">
+    <div class="logo">
+        <h1>Vali</h1>
+    </div>
+    <div class="login-box">
+        <form class="login-form" [formGroup]="signupForm" #f="ngForm" (ngSubmit)="signup()">
+            <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN UP</h3>
+            <div class="form-group">
+                <label class="control-label">Email</label>
+                <input class="form-control" type="email" placeholder="Email" autofocus formControlName="email">
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Password</label>
+                <input formControlName="password" type="password" class="form-control" placeholder="Password">
+            </div>
+
+            <div class="form-group">
+                <div class="utility">
+                    <p class="semibold-text mb-0">
+                        <a [routerLink]="['/login']">Sign-in</a>
+                    </p>
+                </div>
+            </div>
+            <div class="form-group btn-container">
+                <button type="submit" class="btn btn-primary btn-block">
+                    Register
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+
+
+

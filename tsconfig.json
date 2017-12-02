@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "lib": [
+      "dom",
+      "es2015"
+    ],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "target": "es5",
+    "skipLibCheck": true,
+    "stripInternal": true,
+    "noImplicitAny": false
+  },
+  "include": [
+    "imports/**/*.ts",
+    "client/**/*.ts",
+    "server/**/*.ts"
+  ],
+  "files": [
+    "typings.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "types": [
+    "meteor-typings",
+    "@types/meteor",
+    "@types/node",
+    "@types/meteor-publish-composite"
+  ],
+  "compileOnSave": false
+}
