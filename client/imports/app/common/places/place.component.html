@@ -1,0 +1,22 @@
+<div class="col-xs-12 m-t-10">
+    <div [formGroup]="placeForm">
+        <div class="col-xs-12  col-sm-2">
+            <b class="text pull-right">{{place.title[0].text}}</b>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <input class="form-control" type="text" placeholder="{{place.placeholder[0].text}}"
+                   formControlName="title">
+        </div>
+        <div class="col-xs-12 col-sm-2">
+            <input class="form-control" type="text" placeholder="0" formControlName="distanceValue">
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            <select class="form-control" formControlName="distanceType">
+                <option *ngFor="let lngUnit of lengthUnits"
+                        [ngValue]="lngUnit._id">
+                    {{lngUnit.title[0].text}}
+                </option>
+            </select>
+        </div>
+    </div>
+</div>

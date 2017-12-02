@@ -1,0 +1,18 @@
+<h1>Type your location : </h1>
+<div class="form-group">
+    <input placeholder="type location . . . " autocorrect="off"
+           autocapitalize="off"
+           spellcheck="off" type="text" class="form-control" #search
+           [formControl]="searchControl">
+</div>
+<agm-map [latitude]="location.latitude"
+         [longitude]="location.longitude"
+         [zoom]="zoom" [scrollwheel]="false"
+         (mapClick)="mapClicked($event)">
+    <agm-marker [latitude]="location.latitude"
+                [longitude]="location.longitude"
+                [markerDraggable]="true"
+                (dragEnd)="markerDragEnd($event)">
+
+    </agm-marker>
+</agm-map>

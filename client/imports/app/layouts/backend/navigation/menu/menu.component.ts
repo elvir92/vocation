@@ -23,6 +23,6 @@ export class MenuBackendComponent {
 
     logout() {
         Meteor.logout();
-        this.router.navigate(['/login']);
+        this.router.navigate(['']);
     }
 }
