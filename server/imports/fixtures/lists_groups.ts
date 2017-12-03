@@ -7,7 +7,7 @@ export function loadListGroupsAndLists() {
 
 
     if (ListsGroups.find({}).fetch().length == 0) {
-        for (let i = 0; i < 12; i++) {
+        for (let i = 0; i < 3; i++) {
             let tlt: IText = {
                 text: Fake.sentence(1),
                 language: 'en'
@@ -19,7 +19,7 @@ export function loadListGroupsAndLists() {
             };
             let listGroupId = ListsGroups.collection.insert(listGroup);
 
-            for (let j = 0; j < 12; j++) {
+            for (let j = 0; j < 3; j++) {
                 let txt: IText = {
                     text: Fake.sentence(10),
                     language: 'en'
