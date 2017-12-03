@@ -1,6 +1,7 @@
 import {ILocation} from "./location";
 import {ILengthUnit} from "./length_unit";
 import {IText} from "./text";
+import {IPicture} from "./picture";
 
 export interface IProperty {
     _id?: string;
@@ -24,4 +25,10 @@ export interface IPropertyPlace {
     title: IText [],
     distanceValue: string,
     distanceType: ILengthUnit
+}
+
+
+export interface IPropertyPictures {
+    property: IProperty;
+    pictures: IPicture [],
 }

@@ -1,12 +1,11 @@
 @import "../../../template/backend/sass/main";
-@import '../../../../../node_modules/angular2-toaster/toaster';
+@import "../../../../../node_modules/angular2-toaster/toaster";
 
-.modal-backdrop.fade
-{
+.modal-backdrop.fade {
   opacity: 0.5;
 }
-.modal-open .modal
-{
+
+.modal-open .modal {
   opacity: 1;
 }
 

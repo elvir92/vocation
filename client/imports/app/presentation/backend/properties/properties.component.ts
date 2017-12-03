@@ -8,6 +8,7 @@ import {Subscription} from 'rxjs/Subscription';
 
 import {PaginationService, PaginationInstance} from "ng2-pagination";
 import {IMongoOptions} from "../../../../../../imports/models/mongo-options";
+import {componentDestroyed} from "ng2-rx-componentdestroyed";
 
 @Component({
     //selector: 'app-',
@@ -30,7 +31,7 @@ export class PropertiesComponent implements OnInit, OnDestroy {
         this.optionsSub = Observable.combineLatest(
             this.pageSize,
             this.curPage
-        ).subscribe(([pageSize, curPage]) => {
+        ).takeUntil(componentDestroyed(this)).subscribe(([pageSize, curPage]) => {
             //console.log("re call")
             const options: IMongoOptions = {
                 limit: pageSize as number,
@@ -39,7 +40,7 @@ export class PropertiesComponent implements OnInit, OnDestroy {
 
             this.paginationService.setCurrentPage(this.paginationService.defaultId(), curPage as number);
 
-            MeteorObservable.subscribe('properties', options.limit, options.skip).subscribe(() => {
+            MeteorObservable.subscribe('backend-properties', options.limit, options.skip).takeUntil(componentDestroyed(this)).subscribe(() => {
                 MeteorObservable.autorun().subscribe(() => {
                     //this.listGroups = this.findListGroups(options);
                     this.list = this.findProperties(options);
@@ -60,6 +61,7 @@ export class PropertiesComponent implements OnInit, OnDestroy {
 
         // Get total messages count in database so we can have an indication of when to
         // stop the auto-subscriber
+        //TODO: uraditi subscribe na DB , inac bug
         MeteorObservable.call('countProperties').subscribe((count: number) => {
             this.listPropertySize = count;
             this.paginationService.setTotalItems(this.paginationService.defaultId(), this.listPropertySize);
@@ -81,7 +83,8 @@ export class PropertiesComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.optionsSub.unsubscribe();
+        //this.optionsSub.unsubscribe();
+        //this.backendSub.unsubscribe();
     }
 
     onPageChanged(page: number): void {
@@ -91,5 +94,6 @@ export class PropertiesComponent implements OnInit, OnDestroy {
 
     findProperties(options: IMongoOptions): Observable<IProperty[]> {
         return Properties.find({}, options);
+
     }
 }

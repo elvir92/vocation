@@ -1,4 +1,39 @@
-<h1>HOME FRONTEND</h1>
-<a href="javascript:;" [routerLink]="['/backend/dashboard']">
-    Backend
-</a>
+<div class="container">
+    <div class="row">
+        <div class="content col-sm-12">
+            <div class="row">
+                <div class="col-sm-6 col-md-4" *ngFor="let item of list | async">
+                    <div class="property-box">
+                        <div class="property-box-image">
+                            <a href="javascript:;">
+                                <div *ngIf="item.pictures">
+                                    <img [src]="item.pictures[0].url" [alt]="item.property.name[0].text"/>
+                                </div>
+                                <span class="property-box-excerpt">
+                                    {{item.property.name[0].text}}
+                                </span>
+                            </a>
+                        </div><!-- /.property-image -->
+
+                        <div class="property-box-content">
+                            <div class="property-box-meta">
+                                <strong>{{item.property.headline[0].text}}</strong>
+                            </div><!-- /.property-box-meta -->
+                        </div><!-- /.property-box-content -->
+
+                        <div class="property-box-bottom">
+                            <div class="property-box-price">
+                            </div><!-- /.property-box-price -->
+
+                            <a href="headers-call-to-action.html#" class="property-box-view">
+                                View Detail
+                            </a><!-- /.property-box-view -->
+                        </div><!-- /.property-box-bottom -->
+                    </div><!-- /.property-box -->
+                </div>
+            </div><!-- /.row -->
+        </div><!-- /.content -->
+    </div><!-- /.row -->
+</div><!-- /.container -->
+
+

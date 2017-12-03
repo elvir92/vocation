@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {IPlace} from '../../../../../../imports/models';
 import {Places} from "../../../../../../imports/collections";
 import {Observable} from 'rxjs/Observable';
@@ -7,6 +7,7 @@ import 'rxjs/add/operator/combineLatest';
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {NgbModal, NgbModalOptions, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {ToasterService} from "angular2-toaster";
+import {componentDestroyed} from "ng2-rx-componentdestroyed";
 
 @Component({
     //selector: 'app-dashboard',
@@ -14,7 +15,7 @@ import {ToasterService} from "angular2-toaster";
     //styleUrls: ['./home.component.scss']
 })
 
-export class PlacesComponent implements OnInit {
+export class PlacesComponent implements OnInit, OnDestroy {
     list: Observable<IPlace[]>;
     private modalRef: NgbModalRef;
 
@@ -23,7 +24,7 @@ export class PlacesComponent implements OnInit {
 
     newForm: boolean;
     currentPlace: IPlace;
-    modalHeaderText:string;
+    modalHeaderText: string;
 
     private toasterService: ToasterService;
 
@@ -32,6 +33,9 @@ export class PlacesComponent implements OnInit {
                 private modalService: NgbModal) {
         //console.log("places component");
         this.toasterService = toasterService;
+    }
+
+    ngOnDestroy(): void {
     }
 
 
@@ -214,7 +218,7 @@ export class PlacesComponent implements OnInit {
 
     getPlaces() {
         //console.log("getPlaces");
-        MeteorObservable.subscribe('places').subscribe(() => {
+        MeteorObservable.subscribe('places').takeUntil(componentDestroyed(this)).subscribe(() => {
             MeteorObservable.autorun().subscribe(() => {
                 this.list = this.findPlaces();
             });

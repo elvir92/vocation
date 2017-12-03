@@ -1,5 +1,4 @@
-import {Component, ViewEncapsulation} from '@angular/core';
-
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 
 @Component({
     selector: 'app-layout',
@@ -8,5 +7,16 @@ import {Component, ViewEncapsulation} from '@angular/core';
     encapsulation: ViewEncapsulation.None
 
 })
-export class AuthLayoutComponent {
+export class AuthLayoutComponent implements OnInit, OnDestroy {
+
+    constructor() {
+    }
+
+    ngOnInit(): void {
+        console.log("Auth init")
+    }
+
+    ngOnDestroy() {
+        console.log("Auth destroy");
+    }
 }

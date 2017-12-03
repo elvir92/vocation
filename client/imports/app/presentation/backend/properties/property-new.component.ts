@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MeteorObservable} from 'meteor-rxjs';
 import {Observable} from 'rxjs';
@@ -17,6 +17,7 @@ import {Pictures, ListsGroups, Lists, Places, LengthUnits} from "../../../../../
 import {} from 'googlemaps';
 
 import {Router} from "@angular/router";
+import {componentDestroyed} from "ng2-rx-componentdestroyed";
 
 @Component({
     //selector: 'app-',
@@ -24,7 +25,7 @@ import {Router} from "@angular/router";
     //styleUrls: ['./property-new.component.scss']template
 })
 
-export class PropertyNewComponent implements OnInit {
+export class PropertyNewComponent implements OnInit, OnDestroy {
     // TODO: Trebalo bi napraviti cim prvi put klikne na next, da se kreira proeprty kao draft,
     // zatim da se url promjeni tako da ima ID, u slucaju refresha stranice da se ne izgube podaci.
     // Tako da se moze nastaviti kao pravi draft.
@@ -64,6 +65,9 @@ export class PropertyNewComponent implements OnInit {
             propertyDescription: ['', [Validators.required, Validators.minLength(5)]],
             places: this._fb.array([])
         });
+    }
+
+    ngOnDestroy(): void {
     }
 
     onImage(imageId: string) {
@@ -155,7 +159,7 @@ export class PropertyNewComponent implements OnInit {
     }
 
     private getPictures() {
-        MeteorObservable.subscribe('pictures').subscribe(() => {
+        MeteorObservable.subscribe('pictures').takeUntil(componentDestroyed(this)).subscribe(() => {
             MeteorObservable.autorun().subscribe(() => {
                 this.findPictures();
             });
@@ -167,7 +171,7 @@ export class PropertyNewComponent implements OnInit {
     }
 
     private getListing() {
-        MeteorObservable.subscribe('listing').subscribe(() => {
+        MeteorObservable.subscribe('listing').takeUntil(componentDestroyed(this)).subscribe(() => {
             MeteorObservable.autorun().subscribe(() => {
                 this.listing = this.findListing();
             });
@@ -191,7 +195,7 @@ export class PropertyNewComponent implements OnInit {
     }
 
     private getPlaces() {
-        MeteorObservable.subscribe('places').subscribe(() => {
+        MeteorObservable.subscribe('places').takeUntil(componentDestroyed(this)).subscribe(() => {
             MeteorObservable.autorun().subscribe(() => {
                 this.places = this.findPlaces();
 
@@ -208,7 +212,7 @@ export class PropertyNewComponent implements OnInit {
     }
 
     private getLengthUnits() {
-        MeteorObservable.subscribe('length-units').subscribe(() => {
+        MeteorObservable.subscribe('length-units').takeUntil(componentDestroyed(this)).subscribe(() => {
             MeteorObservable.autorun().subscribe(() => {
                 this.lengthUnits = this.findLengthUnits();
             });

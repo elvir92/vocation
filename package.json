@@ -28,6 +28,7 @@
     "meteor-node-stubs": "^0.3.2",
     "meteor-rxjs": "^0.4.8",
     "ng2-pagination": "^2.0.2",
+    "ng2-rx-componentdestroyed": "^1.1.2",
     "ngx-dropzone-wrapper": "^4.6.6",
     "reflect-metadata": "^0.1.10",
     "rxjs": "^5.5.2",

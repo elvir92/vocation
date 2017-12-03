@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ILengthUnit, IText} from '../../../../../../imports/models';
 import {LengthUnits} from "../../../../../../imports/collections";
 import {Observable} from 'rxjs/Observable';
@@ -7,6 +7,7 @@ import 'rxjs/add/operator/combineLatest';
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {NgbModal, NgbModalOptions, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {ToasterService} from "angular2-toaster";
+import {componentDestroyed} from "ng2-rx-componentdestroyed";
 
 @Component({
     //selector: 'app-dashboard',
@@ -15,7 +16,7 @@ import {ToasterService} from "angular2-toaster";
 
 })
 
-export class LengthUnitComponent implements OnInit {
+export class LengthUnitComponent implements OnInit, OnDestroy {
     list: Observable<ILengthUnit[]>;
 
     addNewForm: FormGroup;
@@ -43,6 +44,9 @@ export class LengthUnitComponent implements OnInit {
             title: ['', Validators.required],
         });
         this.getLengthUnits();
+    }
+
+    ngOnDestroy(): void {
     }
 
     openNew(content) {
@@ -183,7 +187,7 @@ export class LengthUnitComponent implements OnInit {
     }
 
     getLengthUnits() {
-        MeteorObservable.subscribe('length-units').subscribe(() => {
+        MeteorObservable.subscribe('length-units').takeUntil(componentDestroyed(this)).subscribe(() => {
             MeteorObservable.autorun().subscribe(() => {
                 this.list = this.findLengthUnits();
             });

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {IListGroup, IListing, IList, IText} from '../../../../../../imports/models';
 import {ListsGroups, Lists} from "../../../../../../imports/collections";
 import {MeteorObservable} from 'meteor-rxjs';
@@ -7,6 +7,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import 'rxjs/add/operator/combineLatest';
 import {NgbModal, NgbModalOptions, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {ToasterService} from "angular2-toaster";
+import {componentDestroyed} from "ng2-rx-componentdestroyed";
 
 @Component({
     //selector: 'app-dashboard',
@@ -14,7 +15,7 @@ import {ToasterService} from "angular2-toaster";
     //styleUrls: ['./home.component.scss']
 })
 
-export class ListGroupDetailComponent implements OnInit {
+export class ListGroupDetailComponent implements OnInit, OnDestroy {
     listing: IListing;
     listGroupId: string;
     addNewForm: FormGroup;
@@ -52,6 +53,9 @@ export class ListGroupDetailComponent implements OnInit {
             this.listGroupId = params['id'];
             this.getListingByGroup();
         });
+    }
+
+    ngOnDestroy(): void {
     }
 
     openNew(content) {
@@ -232,7 +236,7 @@ export class ListGroupDetailComponent implements OnInit {
     }
 
     getListingByGroup() {
-        MeteorObservable.subscribe('listing-by-group', this.listGroupId).subscribe(() => {
+        MeteorObservable.subscribe('listing-by-group', this.listGroupId).takeUntil(componentDestroyed(this)).subscribe(() => {
             MeteorObservable.autorun().subscribe(() => {
                 this.listing = this.findOneListing(this.listGroupId);
             });

@@ -12,6 +12,7 @@ import {Router} from "@angular/router";
 import {NgbModal, NgbModalRef, NgbModalOptions} from "@ng-bootstrap/ng-bootstrap";
 import {ToasterService} from "angular2-toaster";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
+import {componentDestroyed} from "ng2-rx-componentdestroyed";
 
 @Component({
     //selector: 'app-dashboard',
@@ -66,7 +67,7 @@ export class ListGroupComponent implements OnInit, OnDestroy {
             });
             */
 
-            MeteorObservable.subscribe('listing', options.limit, options.skip).subscribe(() => {
+            MeteorObservable.subscribe('listing', options.limit, options.skip).takeUntil(componentDestroyed(this)).subscribe(() => {
                 MeteorObservable.autorun().subscribe(() => {
                     //this.listGroups = this.findListGroups(options);
                     this.listGroups = this.findListing(options);

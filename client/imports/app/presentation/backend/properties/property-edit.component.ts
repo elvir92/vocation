@@ -1,10 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MeteorObservable} from 'meteor-rxjs';
 import {Observable} from 'rxjs';
 
 import {
-    IPropertyPlace,
     IListing,
     IListGroup,
     IProperty,
@@ -18,6 +17,7 @@ import {Pictures, ListsGroups, Lists, Places, LengthUnits} from "../../../../../
 import {} from 'googlemaps';
 
 import {ActivatedRoute, Params, Router} from "@angular/router";
+import {componentDestroyed} from "ng2-rx-componentdestroyed";
 
 @Component({
     //selector: 'app-',
@@ -25,7 +25,8 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
     //styleUrls: ['./property-new.component.scss']template
 })
 
-export class PropertyEditComponent implements OnInit {
+export class PropertyEditComponent implements OnInit, OnDestroy {
+
     listing: Observable<IListing[]>;
     pictures: Observable<IPicture[]>;
     private propertyId: string;
@@ -50,7 +51,7 @@ export class PropertyEditComponent implements OnInit {
         });
         //init places
 
-        this.activatedRoute.params.subscribe((params: Params) => {
+        this.activatedRoute.params.takeUntil(componentDestroyed(this)).subscribe((params: Params) => {
             this.propertyId = params['id'];
             this.getPropertyDetail();
         });
@@ -59,6 +60,9 @@ export class PropertyEditComponent implements OnInit {
         this.getLengthUnits();
         this.getPlaces();
         this.getPictures();
+    }
+
+    ngOnDestroy(): void {
     }
 
     deletePicture(image: IPicture) {
@@ -177,7 +181,7 @@ export class PropertyEditComponent implements OnInit {
     }
 
     private getPictures() {
-        MeteorObservable.subscribe('pictures').subscribe(() => {
+        MeteorObservable.subscribe('pictures').takeUntil(componentDestroyed(this)).subscribe(() => {
             MeteorObservable.autorun().subscribe(() => {
                 this.findPictures();
             });
@@ -189,7 +193,7 @@ export class PropertyEditComponent implements OnInit {
     }
 
     private getListing() {
-        MeteorObservable.subscribe('listing').subscribe(() => {
+        MeteorObservable.subscribe('listing').takeUntil(componentDestroyed(this)).subscribe(() => {
             MeteorObservable.autorun().subscribe(() => {
                 this.listing = this.findListing();
             });
@@ -212,7 +216,7 @@ export class PropertyEditComponent implements OnInit {
     }
 
     private getPlaces() {
-        MeteorObservable.subscribe('places').subscribe(() => {
+        MeteorObservable.subscribe('places').takeUntil(componentDestroyed(this)).subscribe(() => {
             MeteorObservable.autorun().subscribe(() => {
                 this.places = this.findPlaces();
                 this.loadedPlaces = true;
@@ -226,7 +230,7 @@ export class PropertyEditComponent implements OnInit {
     }
 
     private getLengthUnits() {
-        MeteorObservable.subscribe('length-units').subscribe(() => {
+        MeteorObservable.subscribe('length-units').takeUntil(componentDestroyed(this)).subscribe(() => {
             MeteorObservable.autorun().subscribe(() => {
                 this.lengthUnits = this.findLengthUnits();
             });
