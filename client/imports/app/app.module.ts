@@ -11,7 +11,6 @@ import {BackendLayoutComponent} from "./layouts/backend/backend-layout.component
 import {AuthLayoutComponent} from "./layouts/auth/auth-layout.component";
 import {AuthGuard} from "./_guards/auth.guard";
 import {AuthAdminGuard} from "./_guards/auth.admin.guard";
-import {AccountsModule} from 'angular2-meteor-accounts-ui';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ToasterModule} from "angular2-toaster";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -22,7 +21,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 @NgModule({
     imports: [
         BrowserModule,
-        AccountsModule,
         RouterModule.forRoot(AppRoutes),
         NgbModule.forRoot(),
         BrowserAnimationsModule,

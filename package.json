@@ -19,7 +19,6 @@
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-beta.5",
     "@types/meteor-publish-composite": "0.0.33",
     "@types/node": "^8.0.53",
-    "angular2-meteor-accounts-ui": "^1.0.0",
     "angular2-toaster": "^4.0.1",
     "angular2-wizard": "^0.4.0",
     "babel-runtime": "^6.26.0",
