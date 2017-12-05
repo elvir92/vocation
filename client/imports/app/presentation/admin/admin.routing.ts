@@ -11,12 +11,14 @@ export const AdminRoutes: Routes = [
             {
                 path: 'places',
                 component: PlacesComponent,
+                pathMatch: 'full',
                 data: {
                     title: 'Places'
                 }
             },
             {
                 path: 'list-groups',
+                pathMatch: 'full',
                 component: ListGroupComponent,
                 data: {
                     title: 'Groups'
@@ -24,6 +26,7 @@ export const AdminRoutes: Routes = [
             },
             {
                 path: 'list-groups/:id',
+                pathMatch: 'full',
                 component: ListGroupDetailComponent,
                 data: {
                     title: 'Group Details'
@@ -34,7 +37,8 @@ export const AdminRoutes: Routes = [
                 component: LengthUnitComponent,
                 data: {
                     title: 'Length Units'
-                }
+                },
+                pathMatch: 'full'
             },
 
         ]

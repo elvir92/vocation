@@ -11,6 +11,7 @@ export const BackendRoutes: Routes = [
             {
                 path: 'dashboard',
                 component: HomeComponent,
+                pathMatch: 'full',
                 data: {
                     title: 'Dashboard'
                 }
@@ -18,6 +19,7 @@ export const BackendRoutes: Routes = [
             {
                 path: 'property-new',
                 component: PropertyNewComponent,
+                pathMatch: 'full',
                 data: {
                     title: 'New Property'
                 }
@@ -25,6 +27,7 @@ export const BackendRoutes: Routes = [
             {
                 path: 'properties',
                 component: PropertiesComponent,
+                pathMatch: 'full',
                 data: {
                     title: 'Properties'
                 }
@@ -32,6 +35,7 @@ export const BackendRoutes: Routes = [
             {
                 path: 'property-edit/:id',
                 component: PropertyEditComponent,
+                pathMatch: 'full',
                 data: {
                     title: 'Properties'
                 }

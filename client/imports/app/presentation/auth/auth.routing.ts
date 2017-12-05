@@ -12,21 +12,24 @@ export const AuthRoutes: Routes = [
                 component: LoginComponent,
                 data: {
                     title: 'Login'
-                }
+                },
+                pathMatch: 'full',
             },
             {
                 path: 'signup',
                 component: SignupComponent,
                 data: {
                     title: 'Signup'
-                }
+                },
+                pathMatch: 'full',
             },
             {
                 path: 'recover',
                 component: RecoverComponent,
                 data: {
                     title: 'Recover'
-                }
+                },
+                pathMatch: 'full',
             },
         ]
     }
