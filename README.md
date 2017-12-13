@@ -2,6 +2,8 @@
 
 This project is built with angular and meteor.
 
+You can see demo : https://elvir-ademir.scalingo.io/
+
 ### Prerequisites
 
 We need to have meteor installed on your machine.
