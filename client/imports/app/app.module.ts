@@ -17,6 +17,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HeaderBackendComponent} from "./layouts/backend/navigation/header/header.component";
 import {MenuBackendComponent} from "./layouts/backend/navigation/menu/menu.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { SidebarModule } from 'ng-sidebar';
 
 @NgModule({
     imports: [
@@ -27,6 +28,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
         FormsModule,
         ReactiveFormsModule,
         ToasterModule,
+        SidebarModule.forRoot(),
     ],
     declarations: [
         AppComponent,
