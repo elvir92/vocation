@@ -2,6 +2,7 @@ import {Meteor} from 'meteor/meteor';
 import {loadListGroupsAndLists} from "./imports/fixtures/lists_groups";
 import {loadPlaces} from "./imports/fixtures/places";
 import {loadLengthUnits} from "./imports/fixtures/length-unit";
+import {loadAdminUser} from "./imports/fixtures/users";
 
 import './imports/publications/listing';
 import './imports/publications/lists';
@@ -21,6 +22,7 @@ import './imports/methods/properties';
 
 Meteor.startup(() => {
     // code to run on server at startup
+    loadAdminUser();
     loadListGroupsAndLists();
     loadPlaces();
     loadLengthUnits();
