@@ -5,7 +5,7 @@ import 'rxjs/add/operator/filter';
     selector: 'app-layout',
     templateUrl: './backend-layout.component.html',
     styleUrls: ['./backend-layout.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.Native
 
 })
 export class BackendLayoutComponent implements OnInit, OnDestroy {
