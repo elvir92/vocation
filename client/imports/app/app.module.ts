@@ -13,8 +13,6 @@ import {AuthAdminGuard} from "./_guards/auth.admin.guard";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ToasterModule} from "angular2-toaster";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {HeaderBackendComponent} from "./layouts/backend/navigation/header/header.component";
-import {MenuBackendComponent} from "./layouts/backend/navigation/menu/menu.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
@@ -31,8 +29,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
         AppComponent,
         FrontendLayoutComponent,
         AuthLayoutComponent,
-        HeaderBackendComponent,
-        MenuBackendComponent,
     ],
     providers: [
         AuthGuard,
