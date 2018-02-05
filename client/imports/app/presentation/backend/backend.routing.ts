@@ -3,10 +3,13 @@ import {HomeComponent} from "./home/home.component";
 import {PropertyNewComponent} from "./properties/property-new.component";
 import {PropertiesComponent} from "./properties/properties.component";
 import {PropertyEditComponent} from "./properties/property-edit.component";
+import {BackendLayoutComponent} from "./_layout/backend-layout.component";
+
 
 export const BackendRoutes: Routes = [
     {
         path: '',
+        component: BackendLayoutComponent,
         children: [
             {
                 path: 'dashboard',
