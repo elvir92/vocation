@@ -1,6 +1,4 @@
 import {Routes} from '@angular/router';
-
-import {BackendLayoutComponent} from "./layouts/backend/backend-layout.component";
 import {FrontendLayoutComponent} from "./layouts/frontend/frontend-layout.component";
 import {AuthGuard} from "./_guards/auth.guard";
 import {AuthLayoutComponent} from "./layouts/auth/auth-layout.component";
@@ -18,6 +16,11 @@ export const AppRoutes: Routes = [
         ]
     },
     {
+        path: 'backend',
+        canActivate: [AuthGuard],
+        loadChildren: './presentation/backend/backend.module#BackendModule'
+    },
+    /*{
         path: 'backend',
         component: BackendLayoutComponent,
         canActivate: [AuthGuard],
@@ -39,6 +42,7 @@ export const AppRoutes: Routes = [
             },
         ]
     },
+    */
     {
         path: '',
         component: AuthLayoutComponent,
