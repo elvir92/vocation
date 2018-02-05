@@ -9,15 +9,10 @@ import {Router} from "@angular/router";
 export class UserMenuComponent implements OnInit {
     isOpen: boolean = false;
 
-    //currentUser = null;
-    Hari;
-
-
     @Input() currentUser = null;
 
     @HostListener('document:click', ['$event', '$event.target'])
     onClick(event: MouseEvent, targetElement: HTMLElement) {
-        console.log("clicked");
         if (!targetElement) {
             return;
         }

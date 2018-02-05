@@ -20,6 +20,7 @@ export class ToolbarComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.toolbarHelpers.currentUser.currentUserName = Meteor.user().emails[0].address;
     }
 
 }
