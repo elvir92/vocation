@@ -1,6 +1,13 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {MediaChange, ObservableMedia} from '@angular/flex-layout';
-
+import {
+    trigger,
+    state,
+    style,
+    animate,
+    transition,
+    query,
+} from '@angular/animations'
 
 @Component({
     selector: 'app-layout',
@@ -32,9 +39,7 @@ export class BackendLayoutComponent implements OnInit {
     }
 
     getRouteAnimation(outlet) {
-
-        return outlet.activatedRouteData.animation;
-        //return outlet.isActivated ? outlet.activatedRoute : ''
+        return outlet.activatedRouteData.animation
     }
 
     toggleView() {
