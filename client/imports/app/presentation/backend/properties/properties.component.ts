@@ -9,6 +9,8 @@ import {Subscription} from 'rxjs/Subscription';
 import {PaginationService, PaginationInstance} from "ng2-pagination";
 import {IMongoOptions} from "../../../../../../imports/models/mongo-options";
 import {componentDestroyed} from "ng2-rx-componentdestroyed";
+import {DataSource} from '@angular/cdk/collections';
+
 
 @Component({
     //selector: 'app-',
@@ -24,10 +26,21 @@ export class PropertiesComponent implements OnInit, OnDestroy {
 
     optionsSub: Subscription;
 
+    public displayedColumns = ['id', 'name', 'summary', 'status', 'action'];
+
+    dataSource: PropertyDataSource | null;
+
+    /*
+    public exampleDatabase = new ExampleDatabase();
+    public dataSource: ExampleDataSource | null;
+    public showFilterTableCode;
+    */
+
     constructor(private paginationService: PaginationService,) {
     }
 
     ngOnInit() {
+
         this.optionsSub = Observable.combineLatest(
             this.pageSize,
             this.curPage
@@ -43,7 +56,8 @@ export class PropertiesComponent implements OnInit, OnDestroy {
             MeteorObservable.subscribe('backend-properties', options.limit, options.skip).takeUntil(componentDestroyed(this)).subscribe(() => {
                 MeteorObservable.autorun().subscribe(() => {
                     //this.listGroups = this.findListGroups(options);
-                    this.list = this.findProperties(options);
+                    //this.list = this.findProperties(options);
+                    this.dataSource = new PropertyDataSource(options);
                 });
             });
         });
@@ -95,5 +109,18 @@ export class PropertiesComponent implements OnInit, OnDestroy {
     findProperties(options: IMongoOptions): Observable<IProperty[]> {
         return Properties.find({}, options);
 
+    }
+}
+
+export class PropertyDataSource extends DataSource<any> {
+    constructor(private options: IMongoOptions) {
+        super();
+    }
+
+    connect(): Observable<IProperty[]> {
+        return Properties.find({}, this.options);
+    }
+
+    disconnect() {
     }
 }

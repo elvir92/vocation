@@ -17,13 +17,17 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatTabsModule} from '@angular/material';
+import {
+    MatDialogModule, MatInputModule, MatListModule, MatMenuModule, MatTableModule,
+    MatTabsModule
+} from '@angular/material';
 
 import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 import {PERFECT_SCROLLBAR_CONFIG} from 'ngx-perfect-scrollbar';
 import {PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 import {BackendLayoutComponent} from "./_layout/backend-layout.component";
 import {CoreModule} from "./_layout/core/core.module";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -44,12 +48,18 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         }),
         DropzoneModule.forChild(),
         CoreModule,
+        MatListModule,
+        MatInputModule,
+        MatDialogModule,
         MatToolbarModule,
         MatButtonModule,
         MatIconModule,
         MatTabsModule,
         MatSidenavModule,
         PerfectScrollbarModule,
+        MatTableModule,
+        MatMenuModule,
+        FlexLayoutModule,
     ],
     declarations: [
         BackendLayoutComponent,
