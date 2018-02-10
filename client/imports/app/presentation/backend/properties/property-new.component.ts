@@ -29,10 +29,18 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
     // TODO: Trebalo bi napraviti cim prvi put klikne na next, da se kreira proeprty kao draft,
     // zatim da se url promjeni tako da ima ID, u slucaju refresha stranice da se ne izgube podaci.
     // Tako da se moze nastaviti kao pravi draft.
+    isLinear = true;
+    firstStepValidation = false;
+    secondStepValidation = false;
+
+    firstFormGroup: FormGroup;
+    secondFormGroup: FormGroup;
+
     listing: Observable<IListing[]>;
     pictures: Observable<IPicture[]>;
     places: IPlace[];
     lengthUnits: ILengthUnit[];
+
 
     propertyForm: FormGroup;
 
@@ -52,6 +60,16 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
         //console.log("properties const");
     }
 
+    validateFirst() {
+        console.log("validateFirst");
+        this.firstStepValidation = true;
+    }
+
+    validateSecond() {
+        console.log("validateSecond");
+        this.secondStepValidation = true;
+    }
+
     ngOnInit() {
         this.getListing();
         this.getLengthUnits();
@@ -65,6 +83,14 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
             propertyDescription: ['', [Validators.required, Validators.minLength(5)]],
             places: this._fb.array([])
         });
+
+        this.firstFormGroup = this._fb.group({
+            firstCtrl: ['', Validators.required]
+        });
+        this.secondFormGroup = this._fb.group({
+            secondCtrl: ['', Validators.required]
+        });
+
     }
 
     ngOnDestroy(): void {
