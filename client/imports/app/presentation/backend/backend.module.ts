@@ -18,7 +18,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {
-    MatDialogModule, MatInputModule, MatListModule, MatMenuModule, MatTableModule,
+    MatDialogModule, MatInputModule, MatListModule, MatMenuModule, MatStepperModule, MatTableModule,
     MatTabsModule
 } from '@angular/material';
 
@@ -48,6 +48,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         }),
         DropzoneModule.forChild(),
         CoreModule,
+        FlexLayoutModule,
         MatListModule,
         MatInputModule,
         MatDialogModule,
@@ -59,7 +60,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         PerfectScrollbarModule,
         MatTableModule,
         MatMenuModule,
-        FlexLayoutModule,
+        MatStepperModule,
+
     ],
     declarations: [
         BackendLayoutComponent,
