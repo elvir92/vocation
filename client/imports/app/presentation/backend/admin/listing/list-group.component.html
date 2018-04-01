@@ -1,0 +1,62 @@
+<div class="page-title">
+    <div>
+        <h1><i class="fa fa-dashboard"></i> List Groups</h1>
+    </div>
+</div>
+<div class="row">
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            Add new Group
+        </div>
+        <form [formGroup]="newForm" #f="ngForm" (ngSubmit)="addNewListGroup()">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label">Title</label>
+                    <input class="form-control" type="text" placeholder="Title" formControlName="title"/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary icon-btn">Add</button>&nbsp;&nbsp;&nbsp;
+                <a class="btn btn-default icon-btn" href="javascript:;" (click)="closeNew()">Cancel</a>
+            </div>
+        </form>
+    </ng-template>
+
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-title">
+                <button class="btn btn-primary" (click)="openNew(content)">Add new main Group</button>
+            </div>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Active</th>
+                            <th>Sub count</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let item of listGroups | async">
+                            <td class="semi-bold">#{{item.listGroup._id}}</td>
+                            <td>{{item.listGroup.title[0].text}}</td>
+                            <td>{{item.listGroup.isActive}}</td>
+                            <td>{{item.lists.length}}</td>
+                            <td class="min-width nowrap">
+                                <a [routerLink]="['/admin/list-groups',item.listGroup._id ]">Edit</a>-/-
+                                <a href="javascript:;" (click)="deleteListGroup(item.listGroup)">Delete</a>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="onPageChanged($event)"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

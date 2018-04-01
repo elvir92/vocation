@@ -30,9 +30,12 @@ export class BackendLayoutComponent implements OnInit {
     }
 
     constructor(private media: ObservableMedia) {
+        console.log("Backend-layout");
     }
 
     ngOnInit() {
+        console.log("Backend-init");
+
         this.media.subscribe((mediaChange: MediaChange) => {
             this.toggleView();
         });

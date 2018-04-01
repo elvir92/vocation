@@ -5,14 +5,15 @@
         </mat-toolbar>
 
         <div class="stepper-container">
-
             <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
-                <div fxFlex.xs="100" fxFlex.lg="100" fxFlex.md="50" fxFlex.sm="50">
-
+                <div fxFlex.xs="100">
                     <form [formGroup]="propertyForm">
                         <mat-horizontal-stepper [linear]="isLinear">
-                            <mat-step [stepControl]="property.location.latitude && property.location.longitude">
+                            <mat-step [stepControl]="locationValidation">
                                 <ng-template matStepLabel>Location</ng-template>
+
+                                <mat-divider></mat-divider>
+
                                 <app-location (onChange)="onChangeLocation($event)"></app-location>
                                 <h5>Longitude : {{property.location.longitude}} Latitude
                                     : {{property.location.latitude}}</h5>
@@ -29,25 +30,35 @@
                             </mat-step>
                             <mat-step>
                                 <ng-template matStepLabel>Places</ng-template>
+
+                                <mat-divider></mat-divider>
+
                                 <app-place
                                         *ngFor="let placeForm of propertyForm.controls.places.controls; let i=index"
-                                        [group]="placeForm" [lengthUnits]="lengthUnits"
+                                        [group]="placeForm"
+                                        [lengthUnits]="lengthUnits"
                                         [place]="places[i]"></app-place>
 
                                 <mat-divider></mat-divider>
 
-                                <div>
-                                    <button mat-button matStepperPrevious>
-                                        <mat-icon>navigate_before</mat-icon>
-                                        Back
-                                    </button>
+                                <div fxLayout="row">
+                                    <div fxLayout="row" fxFlex="50" fxLayoutAlign="start center">
+                                        <button mat-button matStepperPrevious>
+                                            <mat-icon>navigate_before</mat-icon>
+                                            Back
+                                        </button>
+                                    </div>
+
+                                    <div fxLayout="row" fxFlex="50" fxLayoutAlign="end center">
+                                        <div fxLayoutAlign="end">
+                                            <button mat-button matStepperNext (click)="addOrSaveProperty()">
+                                                Next
+                                                <mat-icon>navigate_next</mat-icon>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div fxLayoutAlign="end">
-                                    <button mat-button matStepperNext (click)="addOrSaveProperty()">
-                                        Next
-                                        <mat-icon>navigate_next</mat-icon>
-                                    </button>
-                                </div>
+
                             </mat-step>
                             <mat-step>
                                 <ng-template matStepLabel>Activities</ng-template>
@@ -67,68 +78,98 @@
 
                                 <mat-divider></mat-divider>
 
-                                <div>
-                                    <button mat-button matStepperPrevious>
-                                        <mat-icon>navigate_before</mat-icon>
-                                        Back
-                                    </button>
+                                <div fxLayout="row">
+                                    <div fxLayout="row" fxFlex="50" fxLayoutAlign="start center">
+                                        <button mat-button matStepperPrevious>
+                                            <mat-icon>navigate_before</mat-icon>
+                                            Back
+                                        </button>
+                                    </div>
+
+                                    <div fxLayout="row" fxFlex="50" fxLayoutAlign="end center">
+                                        <div fxLayoutAlign="end">
+                                            <button mat-button matStepperNext (click)="addOrSaveProperty()">
+                                                Next
+                                                <mat-icon>navigate_next</mat-icon>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div fxLayoutAlign="end">
-                                    <button mat-button matStepperNext (click)="addOrSaveProperty()">
-                                        Next
-                                        <mat-icon>navigate_next</mat-icon>
-                                    </button>
-                                </div>
+
                             </mat-step>
-                            <mat-step [stepControl]="propertyForm.value.propertyName">
+                            <mat-step>
                                 <ng-template matStepLabel>Descriptions</ng-template>
-                                <div class="form-group">
-                                    <label class="col-lg-2 m-t-10" for="inputPropName">Property name</label>
-                                    <div class="col-lg-10 m-t-10">
-                                        <input class="form-control" type="text" id="inputPropName"
-                                               placeholder="Property name"
-                                               formControlName="propertyName">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-2 m-t-10" for="inputPropHeadline">Property headline</label>
-                                    <div class="col-lg-10 m-t-10">
-                                        <input class="form-control" type="text" id="inputPropHeadline"
-                                               placeholder="Property headline"
-                                               formControlName="propertyHeadline">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-2 m-t-10" for="inputSummary">Property summary</label>
-                                    <div class="col-lg-10 m-t-10">
-                        <textarea class="form-control" id="inputSummary" rows="3"
-                                  formControlName="propertySummary"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-2 m-t-10" for="inputPropDescription">Property
-                                        description</label>
-                                    <div class="col-lg-10 m-t-10">
-                        <textarea class="form-control" id="inputPropDescription" cols="30" rows="10"
-                                  placeholder="Property description"
-                                  formControlName="propertyDescription"></textarea>
-                                    </div>
-                                </div>
+
+                                <mat-form-field class="full-width">
+                                    <input matInput
+                                           id="inputPropName"
+                                           placeholder="Property name"
+                                           autocorrect="off"
+                                           autocapitalize="off"
+                                           spellcheck="off"
+                                           type="text"
+                                           [formControl]="propertyForm.controls['propertyName']">
+                                </mat-form-field>
+
+
+                                <mat-form-field class="full-width">
+                                    <input matInput
+                                           id="inputPropHeadline"
+                                           placeholder="Property headline"
+                                           autocorrect="off"
+                                           autocapitalize="off"
+                                           spellcheck="off"
+                                           type="text"
+                                           required
+                                           [formControl]="propertyForm.controls['propertyHeadline']">
+                                    <mat-error *ngIf="propertyForm.controls['propertyHeadline'].invalid">This field is required!</mat-error>
+
+                                </mat-form-field>
+
+                                <mat-form-field class="full-width">
+					                <textarea
+                                            matInput
+                                            id="inputSummary"
+                                            placeholder="Property summary"
+                                            matTextareaAutosize
+                                            matAutosizeMinRows="2"
+                                            matAutosizeMaxRows="6"
+                                            [formControl]="propertyForm.controls['propertySummary']"></textarea>
+                                </mat-form-field>
+
+                                <mat-form-field class="full-width">
+                                    <textarea
+                                            matInput
+                                            id="inputPropDescription"
+                                            placeholder="Property description"
+                                            matTextareaAutosize
+                                            matAutosizeMinRows="10"
+                                            matAutosizeMaxRows="30"
+                                            [formControl]="propertyForm.controls['propertyDescription']"></textarea>
+                                </mat-form-field>
 
                                 <mat-divider></mat-divider>
 
-                                <div>
-                                    <button mat-button matStepperPrevious>
-                                        <mat-icon>navigate_before</mat-icon>
-                                        Back
-                                    </button>
+
+                                <div fxLayout="row">
+                                    <div fxLayout="row" fxFlex="50" fxLayoutAlign="start center">
+                                        <button mat-button matStepperPrevious>
+                                            <mat-icon>navigate_before</mat-icon>
+                                            Back
+                                        </button>
+                                    </div>
+
+                                    <div fxLayout="row" fxFlex="50" fxLayoutAlign="end center">
+                                        <div fxLayoutAlign="end">
+                                            <button mat-button matStepperNext (click)="addOrSaveProperty()">
+                                                Next
+                                                <mat-icon>navigate_next</mat-icon>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div fxLayoutAlign="end">
-                                    <button mat-button matStepperNext (click)="addOrSaveProperty()">
-                                        Next
-                                        <mat-icon>navigate_next</mat-icon>
-                                    </button>
-                                </div>
+
+
                             </mat-step>
                             <mat-step>
                                 <ng-template matStepLabel>Photos</ng-template>
@@ -155,17 +196,23 @@
 
                                 <mat-divider></mat-divider>
 
-                                <div>
-                                    <button mat-button matStepperPrevious>
-                                        <mat-icon>navigate_before</mat-icon>
-                                        Back
-                                    </button>
-                                </div>
-                                <div fxLayoutAlign="end">
-                                    <button mat-button (click)="saveProperty()">
-                                        Done
-                                        <mat-icon>done</mat-icon>
-                                    </button>
+
+                                <div fxLayout="row">
+                                    <div fxLayout="row" fxFlex="50" fxLayoutAlign="start center">
+                                        <button mat-button matStepperPrevious>
+                                            <mat-icon>navigate_before</mat-icon>
+                                            Back
+                                        </button>
+                                    </div>
+
+                                    <div fxLayout="row" fxFlex="50" fxLayoutAlign="end center">
+                                        <div fxLayoutAlign="end">
+                                            <button mat-button matStepperNext (click)="saveProperty()">
+                                                Next
+                                                <mat-icon>navigate_next</mat-icon>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </mat-step>
                         </mat-horizontal-stepper>
