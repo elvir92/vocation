@@ -1,10 +1,11 @@
-<h1>Type your location : </h1>
-<div class="form-group">
-    <input placeholder="type location . . . " autocorrect="off"
+<mat-form-field class="full-width">
+    <input matInput placeholder="Type your location"
+           autocorrect="off"
            autocapitalize="off"
-           spellcheck="off" type="text" class="form-control" #search
+           spellcheck="off" type="text" #search
            [formControl]="searchControl">
-</div>
+</mat-form-field>
+
 <agm-map [latitude]="location.latitude"
          [longitude]="location.longitude"
          [zoom]="zoom" [scrollwheel]="false"

@@ -1,22 +1,33 @@
-<div class="col-xs-12 m-t-10">
+<div fxLayout="column">
     <div [formGroup]="placeForm">
-        <div class="col-xs-12  col-sm-2">
-            <b class="text pull-right">{{place.title[0].text}}</b>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-            <input class="form-control" type="text" placeholder="{{place.placeholder[0].text}}"
-                   formControlName="title">
-        </div>
-        <div class="col-xs-12 col-sm-2">
-            <input class="form-control" type="text" placeholder="0" formControlName="distanceValue">
-        </div>
-        <div class="col-xs-12 col-sm-4">
-            <select class="form-control" formControlName="distanceType">
-                <option *ngFor="let lngUnit of lengthUnits"
-                        [ngValue]="lngUnit._id">
-                    {{lngUnit.title[0].text}}
-                </option>
-            </select>
+        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
+            <div fxFlex.xs="100" fxFlex.lg="25" fxFlex.md="25" fxFlex.sm="25">
+                <h4>{{place.title[0].text}}</h4>
+            </div>
+            <div fxFlex.xs="100" fxFlex.lg="25" fxFlex.md="25" fxFlex.sm="25">
+                <mat-form-field class="full-width">
+                    <input matInput
+                           placeholder="{{place.placeholder[0].text}}"
+                           type="text"
+                           formControlName="title">
+                </mat-form-field>
+            </div>
+            <div fxFlex.xs="100" fxFlex.lg="25" fxFlex.md="25" fxFlex.sm="25">
+                <mat-form-field class="full-width">
+                    <input matInput
+                           placeholder="0"
+                           type="number"
+                           formControlName="distanceValue">
+                </mat-form-field>
+            </div>
+            <div fxFlex.xs="100" fxFlex.lg="25" fxFlex.md="25" fxFlex.sm="25">
+                <mat-form-field class="full-width">
+                    <mat-select formControlName="distanceType">
+                        <mat-option *ngFor="let lngUnit of lengthUnits"
+                                    [value]="lngUnit._id">{{lngUnit.title[0].text}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
         </div>
     </div>
 </div>

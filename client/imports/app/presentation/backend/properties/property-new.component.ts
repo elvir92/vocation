@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MeteorObservable} from 'meteor-rxjs';
 import {Observable} from 'rxjs';
 
@@ -30,11 +30,9 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
     // zatim da se url promjeni tako da ima ID, u slucaju refresha stranice da se ne izgube podaci.
     // Tako da se moze nastaviti kao pravi draft.
     isLinear = true;
-    firstStepValidation = false;
-    secondStepValidation = false;
 
-    firstFormGroup: FormGroup;
-    secondFormGroup: FormGroup;
+    locationValidation = false;
+
 
     listing: Observable<IListing[]>;
     pictures: Observable<IPicture[]>;
@@ -60,16 +58,6 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
         //console.log("properties const");
     }
 
-    validateFirst() {
-        console.log("validateFirst");
-        this.firstStepValidation = true;
-    }
-
-    validateSecond() {
-        console.log("validateSecond");
-        this.secondStepValidation = true;
-    }
-
     ngOnInit() {
         this.getListing();
         this.getLengthUnits();
@@ -83,14 +71,6 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
             propertyDescription: ['', [Validators.required, Validators.minLength(5)]],
             places: this._fb.array([])
         });
-
-        this.firstFormGroup = this._fb.group({
-            firstCtrl: ['', Validators.required]
-        });
-        this.secondFormGroup = this._fb.group({
-            secondCtrl: ['', Validators.required]
-        });
-
     }
 
     ngOnDestroy(): void {
@@ -122,6 +102,7 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
 
     onChangeLocation(location: ILocation) {
         this.property.location = location;
+        console.log(location);
     }
 
     addOrSaveProperty() {
@@ -172,8 +153,8 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
         //For select first item is default. . .
         return this._fb.group({
             placeId: placeId,
-            title: ['', Validators.required],
-            distanceValue: ['', Validators.required],
+            title: '',
+            distanceValue: [''],
             distanceType: this.lengthUnits[0]._id,
         });
     }

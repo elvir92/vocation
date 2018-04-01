@@ -18,7 +18,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {
-    MatDialogModule, MatInputModule, MatListModule, MatMenuModule, MatStepperModule, MatTableModule,
+    MatDialogModule, MatInputModule, MatListModule, MatMenuModule, MatSelectModule, MatStepperModule, MatTableModule,
     MatTabsModule
 } from '@angular/material';
 
@@ -61,6 +61,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         MatTableModule,
         MatMenuModule,
         MatStepperModule,
+        MatSelectModule,
 
     ],
     declarations: [
