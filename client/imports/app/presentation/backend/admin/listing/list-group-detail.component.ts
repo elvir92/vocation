@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {IListGroup, IListing, IList, IText} from '../../../../../../imports/models';
-import {ListsGroups, Lists} from "../../../../../../imports/collections";
+import {IListGroup, IListing, IList, IText} from '../../../../../../../imports/models';
+import {ListsGroups, Lists} from "../../../../../../../imports/collections";
 import {MeteorObservable} from 'meteor-rxjs';
 import {ActivatedRoute, Router, Params} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";

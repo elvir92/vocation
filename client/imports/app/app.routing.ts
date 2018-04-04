@@ -16,10 +16,10 @@ export const AppRoutes: Routes = [
         ]
     },
     {
-        path: 'backend',
+        path: '',
         canActivate: [AuthGuard],
         loadChildren: './presentation/backend/backend.module#BackendModule'
-    },
+    },           
     /*{
         path: 'backend',
         component: BackendLayoutComponent,

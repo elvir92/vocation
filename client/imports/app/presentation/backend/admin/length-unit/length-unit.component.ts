@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ILengthUnit, IText} from '../../../../../../imports/models';
-import {LengthUnits} from "../../../../../../imports/collections";
+import {ILengthUnit, IText} from '../../../../../../../imports/models';
+import {LengthUnits} from "../../../../../../../imports/collections";
 import {Observable} from 'rxjs/Observable';
 import {MeteorObservable} from 'meteor-rxjs';
 import 'rxjs/add/operator/combineLatest';
@@ -12,7 +12,7 @@ import {componentDestroyed} from "ng2-rx-componentdestroyed";
 @Component({
     //selector: 'app-dashboard',
     templateUrl: './length-unit.component.html',
-    //styleUrls: ['./home.component.scss']
+    styleUrls: ['./length-unit.component.scss']
 
 })
 
