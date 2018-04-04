@@ -1,3 +1,4 @@
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {CommonModule} from "@angular/common";
@@ -10,6 +11,15 @@ import {LengthUnitComponent} from "./length-unit/length-unit.component";
 import {ReactiveFormsModule, FormsModule} from "@angular/forms";
 import {Ng2PaginationModule} from "ng2-pagination";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {MatIconModule} from '@angular/material/icon';
+import {
+    MatDialogModule, MatInputModule, MatListModule, MatMenuModule, MatSelectModule, MatStepperModule, MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule
+} from '@angular/material';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 @NgModule({
     imports: [
@@ -18,7 +28,21 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
         ReactiveFormsModule,
         RouterModule.forChild(AdminRoutes),
         Ng2PaginationModule,
-        NgbModule
+        NgbModule,
+        FlexLayoutModule,
+        MatListModule,
+        MatInputModule,
+        MatDialogModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatIconModule,
+        MatTabsModule,
+        MatSidenavModule,
+        PerfectScrollbarModule,
+        MatTableModule,
+        MatMenuModule,
+        MatStepperModule,
+        MatSelectModule,
     ],
     declarations: [
         PlacesComponent,
