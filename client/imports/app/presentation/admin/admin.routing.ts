@@ -6,7 +6,7 @@ import {LengthUnitComponent} from "./length-unit/length-unit.component";
 
 export const AdminRoutes: Routes = [
     {
-        path: '',
+        path: '',     
         children: [
             {
                 path: 'places',

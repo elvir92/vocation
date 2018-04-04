@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {IPlace} from '../../../../../../imports/models';
-import {Places} from "../../../../../../imports/collections";
+import {IPlace} from '../../../../../../../imports/models';
+import {Places} from "../../../../../../../imports/collections";
 import {Observable} from 'rxjs/Observable';
 import {MeteorObservable} from 'meteor-rxjs';
 import 'rxjs/add/operator/combineLatest';

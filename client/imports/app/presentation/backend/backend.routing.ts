@@ -4,11 +4,12 @@ import {PropertyNewComponent} from "./properties/property-new.component";
 import {PropertiesComponent} from "./properties/properties.component";
 import {PropertyEditComponent} from "./properties/property-edit.component";
 import {BackendLayoutComponent} from "./_layout/backend-layout.component";
+import { AuthAdminGuard } from '../../_guards';
 
 
 export const BackendRoutes: Routes = [
     {
-        path: '',
+        path: 'backend',
         component: BackendLayoutComponent,
         children: [
             {
@@ -42,8 +43,13 @@ export const BackendRoutes: Routes = [
                 data: {
                     title: 'Properties'
                 }
-            },
-
+            }
         ]
-    }
+    },
+    {
+        path: 'admin',
+        component: BackendLayoutComponent,
+        loadChildren: './admin/admin.module#AdminModule',
+        canActivate: [AuthAdminGuard]
+    },
 ];
