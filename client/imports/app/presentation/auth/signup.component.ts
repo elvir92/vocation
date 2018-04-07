@@ -7,6 +7,7 @@ import {Accounts} from 'meteor/accounts-base';
 
 @Component({
     templateUrl: './signup.component.html',
+    styleUrls: ['./login.component.scss']    
 })
 
 export class SignupComponent implements OnInit {
