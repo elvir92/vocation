@@ -11,6 +11,7 @@ import './imports/publications/length_units';
 import './imports/publications/places';
 import './imports/publications/properties';
 import './imports/publications/pictures';
+import './imports/publications/emails';
 
 import './imports/methods/lists_groups';
 import './imports/methods/lists';
@@ -18,6 +19,7 @@ import './imports/methods/length_units';
 import './imports/methods/places';
 import './imports/methods/pictures';
 import './imports/methods/properties';
+import './imports/methods/email';
 
 
 Meteor.startup(() => {

@@ -20,6 +20,7 @@ import {
     MatSidenavModule
 } from '@angular/material';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { SubscribersComponent } from './subscribers/subscribers.component';
 
 @NgModule({
     imports: [
@@ -49,6 +50,7 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
         ListGroupComponent,
         ListGroupDetailComponent,
         LengthUnitComponent,
+        SubscribersComponent,
     ]
 })
 

@@ -1,12 +1,13 @@
-import {Routes} from '@angular/router';
-import {PlacesComponent} from "./places/places.component";
-import {ListGroupComponent} from "./listing/list-group.component";
-import {ListGroupDetailComponent} from "./listing/list-group-detail.component";
-import {LengthUnitComponent} from "./length-unit/length-unit.component";
+import { Routes } from '@angular/router';
+import { PlacesComponent } from "./places/places.component";
+import { ListGroupComponent } from "./listing/list-group.component";
+import { ListGroupDetailComponent } from "./listing/list-group-detail.component";
+import { LengthUnitComponent } from "./length-unit/length-unit.component";
+import { SubscribersComponent } from './subscribers/subscribers.component';
 
 export const AdminRoutes: Routes = [
     {
-        path: '',     
+        path: '',
         children: [
             {
                 path: 'places',
@@ -40,7 +41,14 @@ export const AdminRoutes: Routes = [
                 },
                 pathMatch: 'full'
             },
-
+            {
+                path: 'subscribers',
+                component: SubscribersComponent,
+                pathMatch: 'full',
+                data: {
+                    title: 'Subscribers'
+                }
+            },
         ]
     }
 ];

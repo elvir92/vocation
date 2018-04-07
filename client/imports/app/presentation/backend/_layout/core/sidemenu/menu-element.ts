@@ -33,6 +33,14 @@ export const menus = [
                 "open": false,
                 "admin": true,
             },
+            
+            {
+                "name": "Subscribers",
+                "icon": "subscriptions",
+                "link": "/admin/subscribers",
+                "open": false,
+                "admin": true,
+            },
         ]
     },
     {
