@@ -10,6 +10,7 @@ export const menus = [
         "icon": "settings",
         "open": false,
         "link": false,
+        "admin": true,
         "sub": [
             {
                 "name": "Places",
