@@ -4,3 +4,4 @@ export * from './lists';
 export * from './length_units';
 export * from './places';
 export * from './pictures';
+export * from './emails';
