@@ -22,6 +22,8 @@ export class LengthUnitComponent implements OnInit, OnDestroy {
     addNewForm: FormGroup;
     detailsForm: FormGroup;
 
+    disabledButton: boolean;
+
     newForm: boolean;
     currentLengthUnit: ILengthUnit;
     modalHeaderText: string;
@@ -43,6 +45,7 @@ export class LengthUnitComponent implements OnInit, OnDestroy {
         this.addNewForm = this.formBuilder.group({
             title: ['', Validators.required],
         });
+        this.disabledButton = false;
         this.getLengthUnits();
     }
 
@@ -50,13 +53,14 @@ export class LengthUnitComponent implements OnInit, OnDestroy {
     }
 
     openNew(content) {
+        this.disabledButton = true;
         this.addNew(true);
         this.modalHeaderText = "Add new length unit";
 
-        //console.log("open called..");
         let ngbModalOptions: NgbModalOptions = {
             backdrop: 'static',
-            keyboard: false
+            keyboard: false,
+            windowClass: 'custom-modal'
         };
 
         this.modalRef = this.modalService.open(content, ngbModalOptions);
@@ -65,6 +69,7 @@ export class LengthUnitComponent implements OnInit, OnDestroy {
     closeNew() {
         //console.log("close new")
         this.addNew(false);
+        this.disabledButton = false;
         this.modalHeaderText = "";
 
         this.modalRef.close();
@@ -73,6 +78,8 @@ export class LengthUnitComponent implements OnInit, OnDestroy {
 
     openEdit(content, currentLength: ILengthUnit) {
         this.newForm = false;
+        this.disabledButton = true;
+        
         this.editCurrent(currentLength);
         this.modalHeaderText = "Edit length unit";
 
@@ -98,8 +105,15 @@ export class LengthUnitComponent implements OnInit, OnDestroy {
         //console.log("close edit")
         this.editCurrent(null);
         this.modalHeaderText = "";
+        this.disabledButton = false;        
         this.modalRef.close();
         this.modalRef.dismiss();
+    }
+
+    closeModal() {
+        this.closeEdit();
+        this.closeNew();
+        this.disabledButton = false;
     }
 
     addNew(value: boolean): void {
@@ -114,7 +128,6 @@ export class LengthUnitComponent implements OnInit, OnDestroy {
         //console.log(currentItem);
         this.currentLengthUnit = currentItem;
         let currTitle = '';
-
         if (currentItem) {
             currTitle = currentItem.title[0].text;
             // $("#titleItem").focus();
@@ -142,6 +155,7 @@ export class LengthUnitComponent implements OnInit, OnDestroy {
                 }
             });
         }
+        this.closeModal();
     }
 
     saveNewLengthUnit() {
