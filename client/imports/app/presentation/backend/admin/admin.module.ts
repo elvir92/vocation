@@ -1,3 +1,4 @@
+import { LengthUnitDialog } from './length-unit/lenght-unit-dialog.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
@@ -45,12 +46,14 @@ import { SubscribersComponent } from './subscribers/subscribers.component';
         MatStepperModule,
         MatSelectModule,
     ],
+    entryComponents: [LengthUnitDialog],
     declarations: [
         PlacesComponent,
         ListGroupComponent,
         ListGroupDetailComponent,
         LengthUnitComponent,
         SubscribersComponent,
+        LengthUnitDialog
     ]
 })
 

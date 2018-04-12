@@ -8,6 +8,10 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {NgbModal, NgbModalOptions, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {ToasterService} from "angular2-toaster";
 import {componentDestroyed} from "ng2-rx-componentdestroyed";
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { LengthUnitDialog } from './lenght-unit-dialog.component';
+import { filter } from 'rxjs/operators';
+
 
 @Component({
     //selector: 'app-dashboard',
@@ -19,171 +23,70 @@ import {componentDestroyed} from "ng2-rx-componentdestroyed";
 export class LengthUnitComponent implements OnInit, OnDestroy {
     list: Observable<ILengthUnit[]>;
 
-    addNewForm: FormGroup;
-    detailsForm: FormGroup;
-
-    disabledButton: boolean;
-
-    newForm: boolean;
     currentLengthUnit: ILengthUnit;
-    modalHeaderText: string;
-    private modalRef: NgbModalRef;
     private toasterService: ToasterService;
+    dialogRef: MatDialogRef<LengthUnitDialog>;
 
 
     constructor(private formBuilder: FormBuilder,
                 toasterService: ToasterService,
-                private modalService: NgbModal) {
-        //console.log("properties const");
+                public dialog: MatDialog) {
         this.toasterService = toasterService;
     }
 
     ngOnInit() {
-        this.detailsForm = this.formBuilder.group({
-            title: ['', Validators.required],
-        });
-        this.addNewForm = this.formBuilder.group({
-            title: ['', Validators.required],
-        });
-        this.disabledButton = false;
         this.getLengthUnits();
     }
 
     ngOnDestroy(): void {
     }
 
-    openNew(content) {
-        this.disabledButton = true;
-        this.addNew(true);
-        this.modalHeaderText = "Add new length unit";
-
-        let ngbModalOptions: NgbModalOptions = {
-            backdrop: 'static',
-            keyboard: false,
-            windowClass: 'custom-modal'
-        };
-
-        this.modalRef = this.modalService.open(content, ngbModalOptions);
-    }
-
-    closeNew() {
-        //console.log("close new")
-        this.addNew(false);
-        this.disabledButton = false;
-        this.modalHeaderText = "";
-
-        this.modalRef.close();
-        this.modalRef.dismiss();
-    }
-
-    openEdit(content, currentLength: ILengthUnit) {
-        this.newForm = false;
-        this.disabledButton = true;
-        
-        this.editCurrent(currentLength);
-        this.modalHeaderText = "Edit length unit";
-
-
-        //console.log("open called..");
-        let ngbModalOptions: NgbModalOptions = {
-            backdrop: 'static',
-            keyboard: false
-        };
-
-
-        this.modalRef = this.modalService.open(content, ngbModalOptions);
-        /*
-        this.modalRef = this.modalService.open(content, ngbModalOptions).result.then((result) => {
-            this.closeResult = `Closed with: ${result}`;
-        }, (reason) => {
-            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    openDialog(item?): void {
+        this.dialogRef = this.dialog.open(LengthUnitDialog, {
+            data: {
+                title: item ? item.title[0].text : ''
+            }
         });
-        */
-    }
 
-    closeEdit() {
-        //console.log("close edit")
-        this.editCurrent(null);
-        this.modalHeaderText = "";
-        this.disabledButton = false;        
-        this.modalRef.close();
-        this.modalRef.dismiss();
-    }
+        this.dialogRef
+            .afterClosed()
+            .pipe(filter(title => title))
+            .subscribe(title => {
+                if (item) {
+                    item.title[0].text = title;
 
-    closeModal() {
-        this.closeEdit();
-        this.closeNew();
-        this.disabledButton = false;
-    }
+                    MeteorObservable.call('updateLengthUnit', item).subscribe({
+                        next: () => {
+                        },
+                        error: (e: Error) => {
+                            console.log(e);
+                            this.toasterService.pop('error', '', e.message);
+                        }
+                    });
+                } else {
+                    let texts: IText[] = [];
+                    let value: IText = {
+                        text: title,
+                        language: 'en'
+                    };
+                    texts.push(value);
 
-    addNew(value: boolean): void {
-        this.newForm = value;
-        if (value) {
-            // $("#titleNew").focus();
-            this.editCurrent(null);
-        }
-    }
+                    let item: ILengthUnit = {
+                        isActive: true,
+                        title: texts,
+                    };
 
-    editCurrent(currentItem: ILengthUnit): void {
-        //console.log(currentItem);
-        this.currentLengthUnit = currentItem;
-        let currTitle = '';
-        if (currentItem) {
-            currTitle = currentItem.title[0].text;
-            // $("#titleItem").focus();
-            this.addNew(false);
-        }
-
-        this.detailsForm.setValue({
-            title: currTitle,
-        });
-    }
-
-    saveLengthUnit(): void {
-        if (this.detailsForm.valid) {
-            this.currentLengthUnit.title[0].text = this.detailsForm.value.title;
-
-            MeteorObservable.call('updateLengthUnit', this.currentLengthUnit).subscribe({
-                next: () => {
-                    this.editCurrent(null);
-                    this.detailsForm.reset();
-
-                },
-                error: (e: Error) => {
-                    console.log(e);
-                    this.toasterService.pop('error', '', e.message);
+                    MeteorObservable.call('addLengthUnit', item).subscribe({
+                        next: () => {
+                        },
+                        error: (e: Error) => {
+                            console.log(e);
+                            this.toasterService.pop('error', '', e.message);
+                        }
+                    });
                 }
+                
             });
-        }
-        this.closeModal();
-    }
-
-    saveNewLengthUnit() {
-        if (this.addNewForm.valid) {
-            let texts: IText[] = [];
-            let value: IText = {
-                text: this.addNewForm.value.title,
-                language: 'en'
-            };
-            texts.push(value);
-
-            let item: ILengthUnit = {
-                isActive: true,
-                title: texts,
-            };
-
-            MeteorObservable.call('addLengthUnit', item).subscribe({
-                next: () => {
-                    this.newForm = false;
-                    this.addNewForm.reset();
-                    this.closeNew();
-                },
-                error: (e: Error) => {
-                    console.log(e);
-                    this.toasterService.pop('error', '', e.message);
-                }
-            });
-        }
     }
 
     delete(lengthUnit: ILengthUnit): void {
