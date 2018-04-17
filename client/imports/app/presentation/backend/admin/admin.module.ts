@@ -22,6 +22,7 @@ import {
 } from '@angular/material';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { SubscribersComponent } from './subscribers/subscribers.component';
+import { PlacesDialog } from './places/places-dialog.component';
 
 @NgModule({
     imports: [
@@ -46,14 +47,15 @@ import { SubscribersComponent } from './subscribers/subscribers.component';
         MatStepperModule,
         MatSelectModule,
     ],
-    entryComponents: [LengthUnitDialog],
+    entryComponents: [LengthUnitDialog, PlacesDialog],
     declarations: [
         PlacesComponent,
         ListGroupComponent,
         ListGroupDetailComponent,
         LengthUnitComponent,
         SubscribersComponent,
-        LengthUnitDialog
+        LengthUnitDialog,
+        PlacesDialog
     ]
 })
 
