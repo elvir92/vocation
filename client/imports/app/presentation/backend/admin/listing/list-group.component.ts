@@ -13,11 +13,14 @@ import {NgbModal, NgbModalRef, NgbModalOptions} from "@ng-bootstrap/ng-bootstrap
 import {ToasterService} from "angular2-toaster";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {componentDestroyed} from "ng2-rx-componentdestroyed";
+import { ListGroupAddNewDialog } from './list-group-add-new-dialog.component';
+import { MatDialogRef, MatDialog } from '@angular/material';
+import { filter } from 'rxjs/operators';
 
 @Component({
     //selector: 'app-dashboard',
     templateUrl: './list-group.component.html',
-    //styleUrls: ['./home.component.scss']
+    styleUrls: ['./list-group.component.scss']
 })
 
 export class ListGroupComponent implements OnInit, OnDestroy {
@@ -29,7 +32,7 @@ export class ListGroupComponent implements OnInit, OnDestroy {
 
 
     optionsSub: Subscription;
-    private modalRef: NgbModalRef;
+    dialogRef: MatDialogRef<ListGroupAddNewDialog>;    
     private toasterService: ToasterService;
 
 
@@ -37,7 +40,7 @@ export class ListGroupComponent implements OnInit, OnDestroy {
                 private router: Router,
                 private formBuilder: FormBuilder,
                 toasterService: ToasterService,
-                private modalService: NgbModal) {
+                public dialog: MatDialog) {
         //console.log("properties const");
         this.toasterService = toasterService;
     }
@@ -93,20 +96,29 @@ export class ListGroupComponent implements OnInit, OnDestroy {
             this.paginationService.setTotalItems(this.paginationService.defaultId(), this.listGroupsSize);
         });
     }
+    openDialog(): void {
+        this.dialogRef = this.dialog.open(ListGroupAddNewDialog, {
+ 
+        });
 
-    openNew(content) {
-        //console.log("open called..");
-        let ngbModalOptions: NgbModalOptions = {
-            backdrop: 'static',
-            keyboard: false
-        };
+        this.dialogRef
+            .afterClosed()
+            .pipe(filter(title => title))
+            .subscribe(title => {
+                    let newListGroup: IListGroup = {
+                        isActive: true,
+                        title: [{ language: 'en', text: title }],
+                    };
 
-        this.modalRef = this.modalService.open(content, ngbModalOptions);
-    }
-
-    closeNew() {
-        this.modalRef.close();
-        this.modalRef.dismiss();
+                    MeteorObservable.call('addListGroups', newListGroup).subscribe({
+                        next: () => {
+                        },
+                        error: (e: Error) => {
+                            console.log(e);
+                            this.toasterService.pop('error', '', e.message);
+                        }
+                    });
+            });
     }
 
     addNewListGroup(): void {
@@ -120,7 +132,6 @@ export class ListGroupComponent implements OnInit, OnDestroy {
                 next: () => {
                     //navigate to anouther page -> listing page
                     //this.router.navigate(['/admin/list-groups']);
-                    this.closeNew();
                 },
                 error: (e: Error) => {
                     console.log(e);
