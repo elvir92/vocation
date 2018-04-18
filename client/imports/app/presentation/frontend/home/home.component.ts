@@ -1,15 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { IProperty, IPropertyPictures } from "../../../../../../imports/models/property";
-import { MeteorObservable } from 'meteor-rxjs';
-import { Properties } from "../../../../../../imports/collections/properties";
-import { Pictures } from "../../../../../../imports/collections/pictures";
-import { componentDestroyed } from "ng2-rx-componentdestroyed";
-
+import {IProperty, IPropertyPictures} from "../../../../../../imports/models/property";
+import {MeteorObservable} from 'meteor-rxjs';
 
 @Component({
-    styleUrls: ['./home.component.scss'],    
+    styleUrls: ['./home.component.scss'],
     templateUrl: './home-temp.component.html'
 })
 
@@ -18,17 +14,18 @@ export class HomeComponent implements OnInit, OnDestroy {
     email: string;
     loading = false;
 
-    constructor() {
+    constructor(){
+
     }
 
     ngOnInit() {
         console.log('home init');
-       /* MeteorObservable.subscribe('properties').takeUntil(componentDestroyed(this)).subscribe(() => {
-            MeteorObservable.autorun().subscribe(() => {
-                //this.listGroups = this.findListGroups(options);
-                this.list = this.findProperties();
-            });
-        });*/
+        /* MeteorObservable.subscribe('properties').takeUntil(componentDestroyed(this)).subscribe(() => {
+             MeteorObservable.autorun().subscribe(() => {
+                 //this.listGroups = this.findListGroups(options);
+                 this.list = this.findProperties();
+             });
+         });*/
     }
 
     addEmail() {

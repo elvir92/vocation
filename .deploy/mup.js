@@ -12,7 +12,9 @@ module.exports = {
 
     app: {
         // TODO: change app name and path
-        name: 'vocation',
+        //Uncomment this line for developmenet deployment
+        //name: 'vocation',
+        name: 'crohouse',
         path: '../',
 
         servers: {
@@ -26,7 +28,8 @@ module.exports = {
         env: {
             // TODO: Change to your app's url
             // If you are using ssl, it needs to start with https://
-            PORT: 3000,
+            //Uncomment this line for developmenet deployment
+            //PORT: 3000,
             ROOT_URL: 'http://crohouse.com',
             MONGO_URL: 'mongodb://mongodb/meteor',
             MONGO_OPLOG_URL: 'mongodb://mongodb/local',
@@ -61,4 +64,6 @@ module.exports = {
     //     letsEncryptEmail: 'email@domain.com'
     //   }
     // }
+    plugins: ['mup-fix-bin-paths']
+
 };
