@@ -18,10 +18,14 @@ import {
     MatTabsModule,
     MatToolbarModule,
     MatButtonModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatExpansionModule
 } from '@angular/material';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { SubscribersComponent } from './subscribers/subscribers.component';
+import { PlacesDialog } from './places/places-dialog.component';
+import { ListGroupAddNewDialog } from './listing/list-group-add-new-dialog.component';
+import { ListGroupDetailDialog } from './listing/list-group-detail-dialog.component';
 
 @NgModule({
     imports: [
@@ -45,15 +49,19 @@ import { SubscribersComponent } from './subscribers/subscribers.component';
         MatMenuModule,
         MatStepperModule,
         MatSelectModule,
+        MatExpansionModule
     ],
-    entryComponents: [LengthUnitDialog],
+    entryComponents: [LengthUnitDialog, PlacesDialog, ListGroupAddNewDialog, ListGroupDetailDialog],
     declarations: [
         PlacesComponent,
         ListGroupComponent,
         ListGroupDetailComponent,
         LengthUnitComponent,
         SubscribersComponent,
-        LengthUnitDialog
+        LengthUnitDialog,
+        PlacesDialog,
+        ListGroupAddNewDialog,
+        ListGroupDetailDialog
     ]
 })
 

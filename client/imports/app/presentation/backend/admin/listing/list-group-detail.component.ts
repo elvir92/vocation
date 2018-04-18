@@ -8,11 +8,14 @@ import 'rxjs/add/operator/combineLatest';
 import {NgbModal, NgbModalOptions, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {ToasterService} from "angular2-toaster";
 import {componentDestroyed} from "ng2-rx-componentdestroyed";
+import { ListGroupDetailDialog } from './list-group-detail-dialog.component';
+import { MatDialogRef, MatDialog } from '@angular/material';
+import { filter } from 'rxjs/operators';
 
 @Component({
     //selector: 'app-dashboard',
     templateUrl: './list-group-detail.component.html',
-    //styleUrls: ['./home.component.scss']
+    styleUrls: ['./list-group.component.scss']
 })
 
 export class ListGroupDetailComponent implements OnInit, OnDestroy {
@@ -25,7 +28,8 @@ export class ListGroupDetailComponent implements OnInit, OnDestroy {
     newListForm: boolean;
 
     modalHeaderText: string;
-    private modalRef: NgbModalRef;
+    dialogRef: MatDialogRef<ListGroupDetailDialog>;
+    
     private toasterService: ToasterService;
 
 
@@ -33,7 +37,7 @@ export class ListGroupDetailComponent implements OnInit, OnDestroy {
                 private router: Router,
                 private formBuilder: FormBuilder,
                 toasterService: ToasterService,
-                private modalService: NgbModal) {
+                public dialog: MatDialog) {
         //console.log("properties const");
         this.toasterService = toasterService;
     }
@@ -58,58 +62,55 @@ export class ListGroupDetailComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
     }
 
-    openNew(content) {
-        this.addNewListForm(true);
-        this.modalHeaderText = "New Sub-Group";
-
-        //console.log("open called..");
-        let ngbModalOptions: NgbModalOptions = {
-            backdrop: 'static',
-            keyboard: false
-        };
-
-        this.modalRef = this.modalService.open(content, ngbModalOptions);
-    }
-
-    closeNew() {
-        //console.log("close new")
-        this.addNewListForm(false);
-        this.modalHeaderText = "";
-
-        this.modalRef.close();
-        this.modalRef.dismiss();
-    }
-
-    openEdit(content, currentItem: IList) {
-        this.newListForm = false;
-        this.setCurrentListItem(currentItem);
-        this.modalHeaderText = "Edit length unit";
-
-
-        //console.log("open called..");
-        let ngbModalOptions: NgbModalOptions = {
-            backdrop: 'static',
-            keyboard: false
-        };
-
-
-        this.modalRef = this.modalService.open(content, ngbModalOptions);
-        /*
-        this.modalRef = this.modalService.open(content, ngbModalOptions).result.then((result) => {
-            this.closeResult = `Closed with: ${result}`;
-        }, (reason) => {
-            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    openDialog(item?): void {
+        this.dialogRef = this.dialog.open(ListGroupDetailDialog, {
+            data: {
+                title: item ? item.title[0].text : ''
+            }
         });
-        */
+
+        this.dialogRef
+            .afterClosed()
+            .pipe(filter(title => title))
+            .subscribe(title => {
+                if (item) {
+                    item.title[0].text = title;
+
+                    MeteorObservable.call('updateListItem', item).subscribe({
+                        next: () => {
+                        },
+                        error: (e: Error) => {
+                            console.log(e);
+                            this.toasterService.pop('error', '', e.message);
+                        }
+                    });
+                } else {
+                    let texts: IText[] = [];
+                    let value: IText = {
+                        text: title,
+                        language: 'en'
+                    };
+                    texts.push(value);
+
+                    let item: IList = {
+                        isActive: true,
+                        parentId: this.listGroupId,
+                        title: texts
+                    };
+
+                    MeteorObservable.call('addListItem', item).subscribe({
+                        next: () => {
+                        },
+                        error: (e: Error) => {
+                            console.log(e);
+                            this.toasterService.pop('error', '', e.message);
+                        }
+                    });
+                }
+
+            });
     }
 
-    closeEdit() {
-        //console.log("close edit")
-        this.setCurrentListItem(null);
-        this.modalHeaderText = "";
-        this.modalRef.close();
-        this.modalRef.dismiss();
-    }
 
     saveListGroup(): void {
         if (this.detailsForm.valid) {
@@ -129,61 +130,6 @@ export class ListGroupDetailComponent implements OnInit, OnDestroy {
         }
     }
 
-    saveItemGroup(): void {
-        if (this.detailsItemForm.valid) {
-            this.currentListItem.title[0].text = this.detailsItemForm.value.title;
-
-            MeteorObservable.call('updateListItem', this.currentListItem).subscribe({
-                next: () => {
-                    this.setCurrentListItem(null);
-                    this.detailsItemForm.reset();
-                    this.closeEdit();
-                },
-                error: (e: Error) => {
-                    console.log(e);
-                    this.toasterService.pop('error', '', e.message);
-                }
-            });
-        }
-    }
-
-    addNewListForm(value: boolean): void {
-        this.newListForm = value;
-        if (value) {
-            //$("#titleNewItem").focus();
-            this.setCurrentListItem(null);
-        }
-    }
-
-    saveNewListItem() {
-        if (this.addNewForm.valid) {
-            let texts: IText[] = [];
-            let value: IText = {
-                text: this.addNewForm.value.title,
-                language: 'en'
-            };
-            texts.push(value);
-
-            let item: IList = {
-                isActive: true,
-                parentId: this.listGroupId,
-                title: texts
-            };
-
-            MeteorObservable.call('addListItem', item).subscribe({
-                next: () => {
-                    this.newListForm = false;
-                    this.addNewForm.reset();
-                    this.closeNew();
-                },
-                error: (e: Error) => {
-                    console.log(e);
-                    this.toasterService.pop('error', '', e.message);
-                }
-            });
-        }
-    }
-
     setCurrentListItem(currentItem: IList): void {
         //console.log(currentItem);
         this.currentListItem = currentItem;
@@ -192,7 +138,6 @@ export class ListGroupDetailComponent implements OnInit, OnDestroy {
         if (currentItem) {
             currTitle = currentItem.title[0].text;
             //$("#titleItem").focus();
-            this.addNewListForm(false);
         }
 
         this.detailsItemForm.setValue({
