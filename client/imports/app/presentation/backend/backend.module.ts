@@ -18,8 +18,28 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {
-    MatDialogModule, MatInputModule, MatListModule, MatMenuModule, MatSelectModule, MatStepperModule, MatTableModule,
-    MatTabsModule
+    MatAutocompleteModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule, MatRippleModule,
+    MatSelectModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule,
+    MatStepperModule,
+    MatTableModule,
+    MatTabsModule, MatTooltipModule
 } from '@angular/material';
 
 import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
@@ -43,7 +63,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         RouterModule.forChild(BackendRoutes),
         Ng2PaginationModule,
         AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyB0wQKw08eJ7nH_FDKooxK1g1fmGYRhAR4',
+            apiKey: 'AIzaSyBAK4deSMZrhM5paI_ua0uKoDzC2cm7rpE',
             libraries: ['places']
         }),
         DropzoneModule.forChild(),
@@ -62,7 +82,26 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         MatMenuModule,
         MatStepperModule,
         MatSelectModule,
-
+        MatDatepickerModule,
+        MatAutocompleteModule,
+        MatButtonToggleModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatChipsModule,
+        MatDividerModule,
+        MatExpansionModule,
+        MatGridListModule,
+        MatNativeDateModule,
+        MatPaginatorModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule,
+        MatRadioModule,
+        MatRippleModule,
+        MatSliderModule,
+        MatSlideToggleModule,
+        MatSnackBarModule,
+        MatSortModule,
+        MatTooltipModule,
     ],
     declarations: [
         BackendLayoutComponent,
