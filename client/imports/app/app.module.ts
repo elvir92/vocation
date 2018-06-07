@@ -14,6 +14,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ToasterModule} from "angular2-toaster";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HeaderComponent} from "./layouts/frontend/header/header.component";
+import {FooterComponent} from "./layouts/frontend/footer/footer.component";
+import { MatButtonModule,MatCardModule,MatToolbarModule,MatInputModule,MatListModule} from '@angular/material'
 
 @NgModule({
     imports: [
@@ -24,11 +27,15 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
         FormsModule,
         ReactiveFormsModule,
         ToasterModule,
+        MatToolbarModule,
+        MatButtonModule
     ],
     declarations: [
         AppComponent,
         FrontendLayoutComponent,
         AuthLayoutComponent,
+        HeaderComponent,
+        FooterComponent,
     ],
     providers: [
         AuthGuard,
