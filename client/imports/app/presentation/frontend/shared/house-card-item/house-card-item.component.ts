@@ -13,7 +13,6 @@ import {IPlace} from '../../../../../../../imports/models';
 
 export class HouseCardItemComponent implements OnInit, OnDestroy {
 
-    @Input()
     data: Iplace;
 
 
