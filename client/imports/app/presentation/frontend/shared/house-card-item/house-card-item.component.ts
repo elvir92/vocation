@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, Input} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {IProperty, IPropertyPictures} from "../../../../../../imports/models/property";
@@ -13,6 +13,7 @@ import {IPlace} from '../../../../../../../imports/models';
 
 export class HouseCardItemComponent implements OnInit, OnDestroy {
 
+    @Input()
     data: Iplace;
 
 
@@ -21,7 +22,7 @@ export class HouseCardItemComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-
+      console.log('Data is' + JSON.toString(this.data)) ;
     }
 
 

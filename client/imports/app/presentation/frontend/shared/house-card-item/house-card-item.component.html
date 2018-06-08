@@ -1,13 +1,13 @@
 <mat-card class="example-card">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>Zagreb</mat-card-title>
-    <mat-card-subtitle>Elvir elvir</mat-card-subtitle>
+    <mat-card-title style="white-space: nowrap;">{{data.title[0].text}}</mat-card-title>
+    <mat-card-subtitle style="white-space: nowrap;">{{data.title[0].text}}</mat-card-subtitle>
   </mat-card-header>
-  <img mat-card-image src="/assets/img/crohouse.jpg" alt="Photo of a Shiba Inu">
+  <img mat-card-image src="/assets/img/crohouse.jpg" alt="">
   <mat-card-content>
     <p>
-      This is apartment located on near shore of Croatia
+    {{data.placeholder[0].text}}
     </p>
   </mat-card-content>
   <mat-card-actions>
