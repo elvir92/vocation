@@ -1,0 +1,50 @@
+<mat-card style="width:600px; margin:auto;background: none;">
+  <mat-card-header style="width:300px; color: lightblue; margin:auto;">
+    <mat-card-title><h4 style="font-size:30px; ">Register New User</h4></mat-card-title>
+  </mat-card-header>
+  <mat-card-content style="width:400px; margin:auto;" >
+    <form novalidate [formGroup]="userRegistrationForm" >
+      <mat-form-field style="width:400px;">
+        <input matInput  placeholder="Name" type="text" formControlName="name">
+        <mat-error>
+          {{errors.name}}
+        </mat-error>
+      </mat-form-field>
+    <br/><br/><br/>
+
+
+
+      <mat-form-field style="width:400px;">
+          <input  matInput placeholder="Email address" type="email" formControlName="email">
+          <mat-error>
+            {{errors.email}}
+          </mat-error>
+      </mat-form-field>
+<br/><br/>
+<br/>
+
+
+      <mat-form-field style="width:400px;">
+          <input matInput  placeholder="Password" type="password" formControlName="password">
+          <mat-error>
+            {{errors.password}}
+          </mat-error>
+      </mat-form-field>
+<br/><br/>
+<br/>
+
+
+      <mat-form-field style="width:400px;">
+        <input  matInput  placeholder="Description" type="text" formControlName="description">
+        <mat-error>
+          {{errors.description}}
+        </mat-error>
+      </mat-form-field>
+<br/><br/>
+<br/>
+
+      <button style="width:400px; background-color: lightblue; margin:auto" mat-button [disabled]="userRegistrationForm.invalid" (click)="register(userRegistrationForm.value)">Register</button>
+
+    </form>
+  </mat-card-content>
+</mat-card>

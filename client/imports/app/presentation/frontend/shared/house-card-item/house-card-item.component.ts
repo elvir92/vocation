@@ -22,7 +22,6 @@ export class HouseCardItemComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-      console.log('Data is' + JSON.toString(this.data)) ;
     }
 
 

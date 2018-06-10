@@ -1,6 +1,7 @@
 import {Routes} from '@angular/router';
 import {HomeComponent} from "./home/home.component";
 import {ProfileComponent} from "./profile/profile.component";
+import {RegisterComponent} from "../auth/register.component";
 
 export const FrontendRoutes: Routes = [
     {
@@ -17,9 +18,15 @@ export const FrontendRoutes: Routes = [
             {
                 path: 'profile',
                 component: ProfileComponent,
-
                 data: {
                     title: 'Profile'
+                }
+            },
+            {
+                path: 'register',
+                component: RegisterComponent,
+                data: {
+                    title: 'Register'
                 }
 
             },
