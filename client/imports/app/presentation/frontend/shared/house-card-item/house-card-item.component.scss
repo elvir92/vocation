@@ -1,9 +1,11 @@
 .house-card-item {
   max-width: 180px;
+  //max-height: 250px;
   margin: 14px;
+
 }
 
-.example-header-image {
+.house-card-header-image {
   background-image: url("/assets/img/crohouse.jpg");
   background-size: cover;
 }
