@@ -7,12 +7,18 @@ import 'rxjs/add/operator/filter';
     styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+    user = Meteor.user();
+
     constructor() {
     }
-
     ngOnInit(): void {
+      console.log(Meteor.user())
     }
 
     ngOnDestroy() {
+    }
+    logout(){
+      Meteor.logout();
+      this.user = null;
     }
 }

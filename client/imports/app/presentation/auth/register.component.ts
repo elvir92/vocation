@@ -58,7 +58,7 @@ export class RegisterComponent {
                          if (err) {
                              this.error = err;
                          } else {
-                             this.router.navigate(['/backend/dashboard']);
+                             this.router.navigate(['/profile']);
                          }
                      });
                  });

@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 
 export class ProfileComponent implements OnInit, OnDestroy {
 
-
+    user = Meteor.user();
     constructor(){
 
     }
