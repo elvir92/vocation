@@ -1,44 +1,21 @@
-<div >
-  <mat-card class="example-header-image" >
-  <mat-card-header style="text-align:center; display:block;">
-    <mat-card-title style="font-size:23px; color: cadetblue;">CroHouse Apartments</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-  <form>
-  <mat-form-field style="padding:20px">
-    <mat-select [(value)]="selected" placeholder="City" >
-      <mat-option value="1">Zagreb</mat-option>
-      <mat-option value="2">Rijeka</mat-option>
-      <mat-option value="3">Opatija</mat-option>
-      <mat-option value="3">Zadar</mat-option>
-      <mat-option value="3">Opatija</mat-option>
+<div style="height: 100vh;">
 
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field style="padding:20px">
-    <input matInput [matDatepicker]="picker" placeholder="Start date">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-
-  <mat-form-field style="padding:20px">
-    <input matInput [matDatepicker]="picker1" placeholder="End date">
-    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-    <mat-datepicker #picker1></mat-datepicker>
-  </mat-form-field>
-
-  <mat-form-field style="padding:20px">
-    <mat-select placeholder="Guests">
-    <mat-option value="1">1</mat-option>
-    <mat-option value="2">2</mat-option>
-    <mat-option value="3">3</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-        <button mat-button style="width:100px;">Search</button>
-</form>
-</mat-card-content>
-</mat-card>
-<houses-list></houses-list>
-  </div>
+    <div class="bgimg">
+        <div class="topleft-img">
+            <img src="/assets/img/logo.png" width="200px" height="200px" alt="crohouse.com">
+        </div>
+        <div class="topleft">
+            <span style="font-size: 1.2em;"><b>Email : <a style="color:white;" href="mailto:info@crohuse.com">info@crohouse.com</a></b></span><br>
+            <span style="font-size: 1.2em;">Instagram : <a style="color:white;" href="https://www.instagram.com/crohouse_com/" target="_blank">crohouse_com</a> </span><br>
+            <span style="font-size: 1.3em;">Facebook : <a style="color:white;" href="https://www.facebook.com/crohousecroatia" target="_blank">crohouse.com</a></span>
+        </div>
+        <div class="middle">
+            <h1>COMING SOON</h1>
+            <hr>
+            <input type="text" placeholder="Your Email" [(ngModel)]="email">
+            <hr>
+            <button [hidden]="loading" (click)="addEmail()">Subscribe</button>
+            <p [hidden]="!loading">Thanks for Subscribing!</p>
+        </div>
+    </div>
+</div>

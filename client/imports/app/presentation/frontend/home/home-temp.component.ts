@@ -5,11 +5,11 @@ import {IProperty, IPropertyPictures} from "../../../../../../imports/models/pro
 import {MeteorObservable} from 'meteor-rxjs';
 
 @Component({
-    styleUrls: ['./home.component.scss'],
-    templateUrl: './home.component.html'
+    styleUrls: ['./home-temp.component.scss'],
+    templateUrl: './home-temp.component.html'
 })
 
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeTempComponent implements OnInit, OnDestroy {
 
     selected = '1';
     selected1 = '2';
