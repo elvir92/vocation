@@ -29,7 +29,7 @@ import {
         MatCardModule
     ],
     declarations: [
-        HomeTempComponent,        
+        HomeTempComponent
     ],
     providers:[
     ]

@@ -2,9 +2,9 @@
     <mat-toolbar-row>
       <img src="/assets/img/logo.png" width="110px" height="100px" alt="crohouse.com">
         <span class="example-spacer"></span>
-        <button mat-button routerLink="/">Home</button>
-        <button *ngIf="!user"mat-button routerLink="/register">Register</button>
-        <button *ngIf="user" mat-button routerLink="/profile">Profile</button>
+        <button mat-button routerLink="/front">Home</button>
+        <button *ngIf="!user"mat-button routerLink="/front/register">Register</button>
+        <button *ngIf="user" mat-button routerLink="/front/profile">Profile</button>
         <button *ngIf="!user" mat-button  routerLink="/login">Login</button>
         <button *ngIf="user" (click)="logout()" mat-button  routerLink="/">Logout</button>
     </mat-toolbar-row>

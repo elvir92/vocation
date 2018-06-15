@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {FrontendRoutes} from "./frontend.routing";
 import {HomeComponent} from "./home/home.component";
+import {HomeTempComponent} from "./home/home-temp.component";
 import {RegisterComponent} from "../auth/register.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {HousesListComponent} from "./shared/houses-list/houses-list.component";
