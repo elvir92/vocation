@@ -5,17 +5,12 @@
   </mat-card-header>
   <mat-card-content>
   <form>
+    <img src="/assets/img/logo.png" width="150px" height="150px"   alt="crohouse.com">
   <mat-form-field style="padding:20px">
     <mat-select [(value)]="selected" placeholder="City" >
-      <mat-option value="1">Zagreb</mat-option>
-      <mat-option value="2">Rijeka</mat-option>
-      <mat-option value="3">Opatija</mat-option>
-      <mat-option value="3">Zadar</mat-option>
-      <mat-option value="3">Opatija</mat-option>
-
+      <mat-option *ngFor="let item of cities | async" value="{{ item._id }}">{{ item.cityName }}</mat-option>
     </mat-select>
   </mat-form-field>
-
   <mat-form-field style="padding:20px">
     <input matInput [matDatepicker]="picker" placeholder="Start date">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -38,6 +33,7 @@
 
         <button mat-button style="width:100px;">Search</button>
 </form>
+
 </mat-card-content>
 </mat-card>
 <houses-list></houses-list>

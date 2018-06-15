@@ -3,6 +3,7 @@ import {loadListGroupsAndLists} from "./imports/fixtures/lists_groups";
 import {loadPlaces} from "./imports/fixtures/places";
 import {loadLengthUnits} from "./imports/fixtures/length-unit";
 import {loadAdminUser} from "./imports/fixtures/users";
+import {loadCities} from "./imports/fixtures/cities";
 
 import './imports/publications/listing';
 import './imports/publications/lists';
@@ -12,6 +13,7 @@ import './imports/publications/places';
 import './imports/publications/properties';
 import './imports/publications/pictures';
 import './imports/publications/emails';
+import './imports/publications/cities';
 
 import './imports/methods/lists_groups';
 import './imports/methods/lists';
@@ -20,6 +22,7 @@ import './imports/methods/places';
 import './imports/methods/pictures';
 import './imports/methods/properties';
 import './imports/methods/email';
+import './imports/methods/cities';
 
 
 Meteor.startup(() => {
@@ -27,6 +30,7 @@ Meteor.startup(() => {
     loadAdminUser();
     loadListGroupsAndLists();
     loadPlaces();
+    loadCities();
     loadLengthUnits();
 
     if (Meteor.isServer) {
