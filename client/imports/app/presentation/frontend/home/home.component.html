@@ -1,39 +1,45 @@
-<div class="container">
-    <div class="row">
-        <div class="content col-sm-12">
-            <div class="row">
-                <div class="col-sm-6 col-md-4" *ngFor="let item of list | async">
-                    <div class="property-box">
-                        <div class="property-box-image">
-                            <a href="javascript:;">
-                                <div *ngIf="item.pictures">
-                                    <img [src]="item.pictures[0].url" [alt]="item.property.name[0].text"/>
-                                </div>
-                                <span class="property-box-excerpt">
-                                    {{item.property.name[0].text}}
-                                </span>
-                            </a>
-                        </div><!-- /.property-image -->
-
-                        <div class="property-box-content">
-                            <div class="property-box-meta">
-                                <strong>{{item.property.headline[0].text}}</strong>
-                            </div><!-- /.property-box-meta -->
-                        </div><!-- /.property-box-content -->
-
-                        <div class="property-box-bottom">
-                            <div class="property-box-price">
-                            </div><!-- /.property-box-price -->
-
-                            <a href="headers-call-to-action.html#" class="property-box-view">
-                                View Detail
-                            </a><!-- /.property-box-view -->
-                        </div><!-- /.property-box-bottom -->
-                    </div><!-- /.property-box -->
-                </div>
-            </div><!-- /.row -->
-        </div><!-- /.content -->
-    </div><!-- /.row -->
-</div><!-- /.container -->
-
-
+<div >
+    <mat-card class="example-header-image" >
+    <mat-card-header style="text-align:center; display:block;">
+      <mat-card-title style="font-size:23px; color: cadetblue;">CroHouse Apartments</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+    <form>
+    <mat-form-field style="padding:20px">
+      <mat-select [(value)]="selected" placeholder="City" >
+        <mat-option value="1">Zagreb</mat-option>
+        <mat-option value="2">Rijeka</mat-option>
+        <mat-option value="3">Opatija</mat-option>
+        <mat-option value="3">Zadar</mat-option>
+        <mat-option value="3">Opatija</mat-option>
+  
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field style="padding:20px">
+      <input matInput [matDatepicker]="picker" placeholder="Start date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  
+    <mat-form-field style="padding:20px">
+      <input matInput [matDatepicker]="picker1" placeholder="End date">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+  
+    <mat-form-field style="padding:20px">
+      <mat-select placeholder="Guests">
+      <mat-option value="1">1</mat-option>
+      <mat-option value="2">2</mat-option>
+      <mat-option value="3">3</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+          <button mat-button style="width:100px;">Search</button>
+  </form>
+  </mat-card-content>
+  </mat-card>
+  <houses-list></houses-list>
+    </div>
+  

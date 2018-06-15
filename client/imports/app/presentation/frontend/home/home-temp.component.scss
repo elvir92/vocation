@@ -1,0 +1,68 @@
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 15px;
+    opacity: 0.91;
+  }
+  
+  button {
+    opacity: 0.91;
+    color: #007bff;
+    background-color: #fff;
+    border-color: #007bff;
+    width: 100%;
+    padding: 14px 20px;
+    margin: 8px 0;
+    font-size: 15px;
+  
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .bgimg {
+    background-image: url('/assets/img/crohouse.jpg');
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    color: white;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 25px;
+  }
+  
+    .topleft-img {
+      position: absolute;
+      top:0;
+      left: 16px;
+    }
+  .topleft{
+      position: absolute;
+      top: 50%;
+      left: 16px;
+    }
+  
+  .bottomleft {
+    position: absolute;
+    bottom: 0;
+    left: 16px;
+  }
+  
+  .middle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  hr {
+    margin: auto;
+    width: 40%;
+  }
+  

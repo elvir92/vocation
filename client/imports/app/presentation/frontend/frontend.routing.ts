@@ -1,11 +1,12 @@
-import {Routes} from '@angular/router';
-import {HomeComponent} from "./home/home.component";
-import {ProfileComponent} from "./profile/profile.component";
-import {RegisterComponent} from "../auth/register.component";
+import { Routes } from '@angular/router';
+import { HomeComponent } from "./home/home.component";
+import { HomeTempComponent } from "./home/home-temp.component";
+import { ProfileComponent } from "./profile/profile.component";
+import { RegisterComponent } from "../auth/register.component";
 
 export const FrontendRoutes: Routes = [
     {
-        path: '',
+        path: 'front',
         children: [
             {
                 path: '',
@@ -30,9 +31,6 @@ export const FrontendRoutes: Routes = [
                 }
 
             },
-         ]
+        ]
     },
-
-
-
 ];

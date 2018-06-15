@@ -9,7 +9,7 @@ import {Cities} from "../../../../../../imports/collections/cities";
 
 @Component({
     styleUrls: ['./home.component.scss'],
-    templateUrl: './home-temp.component.html'
+    templateUrl: './home.component.html'
 })
 
 export class HomeComponent implements OnInit, OnDestroy {
