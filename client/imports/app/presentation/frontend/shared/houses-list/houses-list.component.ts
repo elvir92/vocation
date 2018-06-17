@@ -33,6 +33,7 @@ export class HousesListComponent implements OnInit, OnDestroy {
         MeteorObservable.subscribe('places').takeUntil(componentDestroyed(this)).subscribe(() => {
             MeteorObservable.autorun().subscribe(() => {
                 this.list = this.findPlaces();
+                console.log(this.list)
             });
         });
     }
