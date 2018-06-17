@@ -35,7 +35,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
     }
     findCities(): Observable<City[]> {
-        console.log(Cities.find());
         return Cities.find();
     }
 }

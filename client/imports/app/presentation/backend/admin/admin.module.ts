@@ -6,6 +6,7 @@ import {CommonModule} from "@angular/common";
 
 import {AdminRoutes} from "./admin.routing";
 import {PlacesComponent} from "./places/places.component";
+import { CitiesComponent } from "./cities/cities.component";
 import {ListGroupComponent} from "./listing/list-group.component";
 import {ListGroupDetailComponent} from "./listing/list-group-detail.component";
 import {LengthUnitComponent} from "./length-unit/length-unit.component";
@@ -24,6 +25,7 @@ import {
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { SubscribersComponent } from './subscribers/subscribers.component';
 import { PlacesDialog } from './places/places-dialog.component';
+import { CitiesDialog } from './cities/cities-dialog.component';
 import { ListGroupAddNewDialog } from './listing/list-group-add-new-dialog.component';
 import { ListGroupDetailDialog } from './listing/list-group-detail-dialog.component';
 
@@ -51,15 +53,17 @@ import { ListGroupDetailDialog } from './listing/list-group-detail-dialog.compon
         MatSelectModule,
         MatExpansionModule
     ],
-    entryComponents: [LengthUnitDialog, PlacesDialog, ListGroupAddNewDialog, ListGroupDetailDialog],
+    entryComponents: [LengthUnitDialog, PlacesDialog,CitiesDialog, ListGroupAddNewDialog, ListGroupDetailDialog],
     declarations: [
         PlacesComponent,
+        CitiesComponent,
         ListGroupComponent,
         ListGroupDetailComponent,
         LengthUnitComponent,
         SubscribersComponent,
         LengthUnitDialog,
         PlacesDialog,
+        CitiesDialog,
         ListGroupAddNewDialog,
         ListGroupDetailDialog
     ]
@@ -67,4 +71,3 @@ import { ListGroupDetailDialog } from './listing/list-group-detail-dialog.compon
 
 export class AdminModule {
 }
-

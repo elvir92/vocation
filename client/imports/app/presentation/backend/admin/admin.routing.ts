@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { PlacesComponent } from "./places/places.component";
+import { CitiesComponent } from "./cities/cities.component";
 import { ListGroupComponent } from "./listing/list-group.component";
 import { ListGroupDetailComponent } from "./listing/list-group-detail.component";
 import { LengthUnitComponent } from "./length-unit/length-unit.component";
@@ -17,6 +18,14 @@ export const AdminRoutes: Routes = [
                     title: 'Places'
                 }
             },
+            {
+                    path: 'cities',
+                    component: CitiesComponent,
+                    pathMatch: 'full',
+                    data: {
+                        title: 'Cities'
+                    }
+                },
             {
                 path: 'list-groups',
                 pathMatch: 'full',

@@ -20,6 +20,13 @@ export const menus = [
                 "admin": true,
             },
             {
+                "name": "Cities",
+                "icon": "explore",
+                "link": "/admin/cities",
+                "open": false,
+                "admin": true,
+            },
+            {
                 "name": "Listing",
                 "icon": "list",
                 "link": "/admin/list-groups",
@@ -33,7 +40,7 @@ export const menus = [
                 "open": false,
                 "admin": true,
             },
-            
+
             {
                 "name": "Subscribers",
                 "icon": "subscriptions",
