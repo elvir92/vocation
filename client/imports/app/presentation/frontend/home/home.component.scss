@@ -1,12 +1,11 @@
 .mat-card {
-    background: none;
-        color: rgba(0, 0, 0, 0.87);
+    background-color: transparent;
+    //color: rgba(0, 0, 0, 0.87);
+}
+.my-mat-card {
+
 }
 
-.example-header-image {
-  background-image: url("/assets/img/crohouse.png");
-  background-size: cover;
-}
-.mat-button, .mat-fab, .mat-icon-button, .mat-mini-fab, .mat-raised-button {
-  color: cadetblue;
+.mat-button, .mat-fab, .mat-icon-button, .mat-mini-fab, .mat-raised-button .mat-datepicker {
+  color: black;
 }

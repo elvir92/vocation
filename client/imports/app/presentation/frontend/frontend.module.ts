@@ -3,6 +3,8 @@ import {RouterModule} from '@angular/router';
 import {FrontendRoutes} from "./frontend.routing";
 import {HomeComponent} from "./home/home.component";
 import {HomeTempComponent} from "./home/home-temp.component";
+import {GroupListComponent} from "./shared/group-list/group-list.component";
+import {GroupItemComponent} from "./shared/group-item/group-item.component";
 import {RegisterComponent} from "../auth/register.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {HousesListComponent} from "./shared/houses-list/houses-list.component";
@@ -38,7 +40,9 @@ import {
         ProfileComponent,
         HousesListComponent,
         HouseCardItemComponent,
-        RegisterComponent
+        RegisterComponent,
+        GroupListComponent,
+        GroupItemComponent,
     ],
     providers:[
     ]

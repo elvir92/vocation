@@ -1,4 +1,5 @@
-<mat-toolbar class="toolbar-color mat-elevation-z6" style="  background: url('/assets/img/crohouse.jpg'); background-size: cover;" >
+<div layout-fill>
+<mat-toolbar class="transparent" style="background-color: transparent">
     <mat-toolbar-row>
       <img src="/assets/img/logo.png" width="110px" height="100px" alt="crohouse.com">
         <span class="example-spacer"></span>
@@ -9,3 +10,4 @@
         <button *ngIf="user" (click)="logout()" mat-button  routerLink="/">Logout</button>
     </mat-toolbar-row>
 </mat-toolbar>
+</div>
