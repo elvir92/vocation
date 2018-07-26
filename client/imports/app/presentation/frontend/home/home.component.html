@@ -1,26 +1,26 @@
 <div class="container">
-    <h1 style="font-size:25px; font-weight: bold; color: white; text-align: center;">CroHouse Apartments</h1>
-    <h3 style="font-size:18px; color: white; text-align: center;">Book holiday home in Croatia direct with the owner. CroHouse Apartments booking website offers all types of private accommodation for rent: rooms, studios, apartments, houses, villas and other vacation rentals in Croatia.</h3>
+    <h1 style="font-size:25px; font-weight: bold; color: white; text-align: center; margin-top: 3vh;">CroHouse Apartments</h1>
+    <h3 style="font-size:18px; color: white; text-align: center; margin-top: 10vh;">Book holiday home in Croatia direct with the owner. CroHouse Apartments booking website offers all types of private accommodation for rent: rooms, studios, apartments, houses, villas and other vacation rentals in Croatia.</h3>
 
-    <div style="background-color: lightblue; border-radius: 25px; flex-flow: row; margin-top: 10vh;" layout="row">
-          <mat-form-field style="margin-left: 4vh; padding: 1vh;">
-          <mat-select color="white" [(value)]="selected" placeholder="City" >
+   <!-- <div style="background-color: #88BCB7; border-radius: 8.2%;  margin-top: 10vh;" layout="row">
+          <mat-form-field style="margin-left: 4vh; padding: 1.5vh;">
+          <mat-select [(value)]="selected" placeholder="City" >
               <mat-option *ngFor="let item of cities | async" value="{{ item._id }}">{{ item.cityName }}</mat-option>
           </mat-select>
       </mat-form-field>
-          <mat-form-field style="margin-left:4vh; padding: 1vh;">
+          <mat-form-field style="margin-left:4vh; padding: 1.5vh;">
               <input matInput [matDatepicker]="picker" placeholder="Start date">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
 
-          <mat-form-field style="margin-left:4vh; padding: 1vh;">
+          <mat-form-field style="margin-left:4vh; padding: 1.5vh;">
               <input matInput [matDatepicker]="picker1" placeholder="End date">
               <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
               <mat-datepicker #picker1></mat-datepicker>
           </mat-form-field>
 
-          <mat-form-field style="margin-left:4vh; padding: 1vh;">
+          <mat-form-field style="margin-left:4vh; padding: 1.5vh; ">
               <mat-select placeholder="Guests">
                   <mat-option value="1">1</mat-option>
                   <mat-option value="2">2</mat-option>
@@ -29,6 +29,6 @@
           </mat-form-field>
           <button mat-button style="width:40vh; margin-left:4vh; padding: 1vh;">Search</button>
     </div>
-
+  !-->
     <group-list></group-list>
 </div>

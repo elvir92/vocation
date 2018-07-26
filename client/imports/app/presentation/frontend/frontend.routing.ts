@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from "./home/home.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { RegisterComponent } from "../auth/register.component";
+import { AccommodationComponent } from "./accomodation/accommodation.component";
 
 export const FrontendRoutes: Routes = [
     {
@@ -30,6 +31,14 @@ export const FrontendRoutes: Routes = [
                 }
 
             },
+            {
+                path: 'accommodation',
+                component: AccommodationComponent,
+                data: {
+                    title: 'Accommodation'
+                }
+
+            }
         ]
     },
 ];

@@ -9,6 +9,7 @@ import {RegisterComponent} from "../auth/register.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {HousesListComponent} from "./shared/houses-list/houses-list.component";
 import {HouseCardItemComponent} from "./shared/house-card-item/house-card-item.component";
+import {AccommodationComponent} from "./accomodation/accommodation.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {CommonModule} from "@angular/common";
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -43,6 +44,7 @@ import {
         RegisterComponent,
         GroupListComponent,
         GroupItemComponent,
+        AccommodationComponent,
     ],
     providers:[
     ]

@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit, Input} from '@angular/core';
 import 'rxjs/add/operator/map';
 import {Group} from '../../../../../../../imports/models';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'group-card-item',
@@ -14,7 +15,7 @@ export class GroupItemComponent implements OnInit, OnDestroy {
     data: Group;
 
 
-    constructor(){
+    constructor(private router:Router){
 
     }
 
@@ -24,7 +25,8 @@ export class GroupItemComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
     }
-    public setPerson = (person) => {
-       alert("Kliknuo si");
+    public selectAccomodation = (accommodation) => {
+       this.router.navigate(['front/accommodation', { accommodation: accommodation }]);
+
     }
 }
