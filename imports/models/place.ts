@@ -5,4 +5,12 @@ export interface IPlace {
     title: IText [];
     placeholder: IText [];
     isActive: boolean;
+    address: string;
+    city:{
+      cityName:string;
+      cityId:number;
+    };
+    numberOfRooms:number;
+    parking: boolean;
+    climate: boolean;    
 }

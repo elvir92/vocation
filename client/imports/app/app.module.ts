@@ -7,17 +7,17 @@ import {RouterModule} from '@angular/router';
 import {AppComponent} from './app.component';
 import {AppRoutes} from "./app.routing";
 import {FrontendLayoutComponent} from "./layouts/frontend/frontend-layout.component";
-import {BackendLayoutComponent} from "./layouts/backend/backend-layout.component";
+import {FrontendTempLayoutComponent} from "./layouts/frontend/frontend-layout-temp.component";
 import {AuthLayoutComponent} from "./layouts/auth/auth-layout.component";
 import {AuthGuard} from "./_guards/auth.guard";
 import {AuthAdminGuard} from "./_guards/auth.admin.guard";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ToasterModule} from "angular2-toaster";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {HeaderBackendComponent} from "./layouts/backend/navigation/header/header.component";
-import {MenuBackendComponent} from "./layouts/backend/navigation/menu/menu.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { SidebarModule } from 'ng-sidebar';
+import {HeaderComponent} from "./layouts/frontend/header/header.component";
+import {FooterComponent} from "./layouts/frontend/footer/footer.component";
+import { MatButtonModule,MatCardModule,MatToolbarModule,MatInputModule,MatListModule} from '@angular/material'
 
 @NgModule({
     imports: [
@@ -28,15 +28,16 @@ import { SidebarModule } from 'ng-sidebar';
         FormsModule,
         ReactiveFormsModule,
         ToasterModule,
-        SidebarModule.forRoot(),
+        MatToolbarModule,
+        MatButtonModule
     ],
     declarations: [
         AppComponent,
         FrontendLayoutComponent,
-        BackendLayoutComponent,
+        FrontendTempLayoutComponent,
         AuthLayoutComponent,
-        HeaderBackendComponent,
-        MenuBackendComponent,
+        HeaderComponent,
+        FooterComponent,
     ],
     providers: [
         AuthGuard,

@@ -7,7 +7,7 @@ import {Accounts} from 'meteor/accounts-base';
 
 @Component({
     templateUrl: './recover.component.html',
-
+    styleUrls: ['./login.component.scss']
 })
 export class RecoverComponent implements OnInit {
     recoverForm: FormGroup;

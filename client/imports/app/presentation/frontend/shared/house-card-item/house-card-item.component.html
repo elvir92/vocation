@@ -1,0 +1,20 @@
+<mat-card class="house-card-item">
+  <mat-card-header>
+    <div mat-card-avatar class="house-card-header-image"></div>
+    <mat-card-title style="white-space: nowrap;">{{data.title[0].text}}</mat-card-title>
+    <mat-card-subtitle style="white-space: nowrap;">{{data.title[0].text}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="/assets/img/crohouse.jpg" alt="">
+  <mat-card-content>
+    <p>
+    {{data.placeholder[0].text}}
+    </p>
+    <p>
+    {{data.address}}
+    </p>
+    {{data.parking}}
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>DETAILS</button>
+  </mat-card-actions>
+</mat-card>

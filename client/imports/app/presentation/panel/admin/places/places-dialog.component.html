@@ -1,0 +1,15 @@
+<form [formGroup]="form" (ngSubmit)="submit(form)">
+    <h1 mat-dialog-title>Place</h1>
+    <mat-dialog-content>
+        <mat-form-field>
+            <input matInput formControlName="title" placeholder="Enter title">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput formControlName="placeholder" placeholder="Enter placeholder">
+        </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button type="submit">Save</button>
+        <button mat-button type="button" mat-dialog-close>Cancel</button>
+    </mat-dialog-actions>
+</form>

@@ -1,0 +1,53 @@
+.login-container {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    background: url('/assets/img/crohouse.jpg');
+    background-size: cover;
+    .login-form {
+        position: relative;
+        top: 10%;
+        font-family: 'Roboto', 'Arial';
+        width: 320px;
+        margin: 0 auto;
+        background: white;
+        opacity: 0.95;
+        padding:8px 0px;
+        .login-form__lost-pw{
+            color: #7F7D7D;
+            text-decoration: none;            
+            font-size: 13px;            
+            position: relative;
+            bottom: 20px;
+            right: 38px;
+            &:hover{
+                color: black;
+            }
+        }
+        .login-form__create-new-acc-box {
+            text-align: center;
+            padding-bottom: 30px;
+        }
+        .login-form__create-new-acc {
+            color: #7F7D7D;
+            font-size: 13px;
+            text-decoration: none;
+            padding-right: 10px;
+            &:hover {
+                color: black;
+            }
+        }
+        .mat-form-field-infix {
+            width: auto;
+        }
+        &:hover {
+            box-shadow : 0 0 10px rgba(0, 0, 0, 0.6);
+            -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+            -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+            -o-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+        }
+        button {
+            background-color: #007bff;
+        }
+    }
+}

@@ -1,12 +1,21 @@
 import {Routes} from '@angular/router';
-
-import {BackendLayoutComponent} from "./layouts/backend/backend-layout.component";
 import {FrontendLayoutComponent} from "./layouts/frontend/frontend-layout.component";
+import {FrontendTempLayoutComponent} from "./layouts/frontend/frontend-layout-temp.component";
 import {AuthGuard} from "./_guards/auth.guard";
 import {AuthLayoutComponent} from "./layouts/auth/auth-layout.component";
 import {AuthAdminGuard} from "./_guards/auth.admin.guard";
 
 export const AppRoutes: Routes = [
+    {
+        path: '',
+        component: FrontendTempLayoutComponent,
+        children: [
+            {
+                path: '',
+                loadChildren: './presentation/frontend/front-temp.module#FrontTempModule'
+            },
+        ]
+    },
     {
         path: '',
         component: FrontendLayoutComponent,
@@ -18,27 +27,10 @@ export const AppRoutes: Routes = [
         ]
     },
     {
-        path: 'backend',
-        component: BackendLayoutComponent,
+        path: '',
         canActivate: [AuthGuard],
-        children: [
-            {
-                path: '',
-                loadChildren: './presentation/backend/backend.module#BackendModule'
-            },
-        ]
-    },
-    {
-        path: 'admin',
-        component: BackendLayoutComponent,
-        canActivate: [AuthAdminGuard],
-        children: [
-            {
-                path: '',
-                loadChildren: './presentation/admin/admin.module#AdminModule'
-            },
-        ]
-    },
+        loadChildren: './presentation/panel/panel.module#PanelModule'
+    },               
     {
         path: '',
         component: AuthLayoutComponent,
