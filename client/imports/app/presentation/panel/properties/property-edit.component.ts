@@ -114,7 +114,7 @@ export class PropertyEditComponent implements OnInit, OnDestroy {
         this.property.isActive = true;
         this.addOrSaveProperty();
 
-        this.router.navigate(['/backend/properties']);
+        this.router.navigate(['/properties']);
 
     }
 

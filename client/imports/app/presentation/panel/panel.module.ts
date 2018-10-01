@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {BackendRoutes} from "./backend.routing";
+import {PanelRoutes} from "./panel.routing";
 import {HomeComponent} from "./home/home.component";
 import {FormWizardModule} from 'angular2-wizard';
 import {PropertyNewComponent} from "./properties/property-new.component";
@@ -8,7 +8,7 @@ import {CommonModule} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AgmCoreModule} from "@agm/core";
 import {DropzoneModule} from "ngx-dropzone-wrapper";
-import {COMMON_DECLARATIONS} from "../../common/index";
+import {COMMON_DECLARATIONS} from "../../common";
 import {PropertiesComponent} from "./properties/properties.component";
 import {Ng2PaginationModule} from "ng2-pagination";
 import {PropertyEditComponent} from "./properties/property-edit.component";
@@ -45,7 +45,7 @@ import {
 import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 import {PERFECT_SCROLLBAR_CONFIG} from 'ngx-perfect-scrollbar';
 import {PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
-import {BackendLayoutComponent} from "./_layout/backend-layout.component";
+import {PanelLayoutComponent} from "./_layout/panel-layout.component";
 import {CoreModule} from "./_layout/core/core.module";
 import {FlexLayoutModule} from "@angular/flex-layout";
 
@@ -60,7 +60,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         FormsModule,
         ReactiveFormsModule,
         FormWizardModule,
-        RouterModule.forChild(BackendRoutes),
+        RouterModule.forChild(PanelRoutes),
         Ng2PaginationModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyBAK4deSMZrhM5paI_ua0uKoDzC2cm7rpE',
@@ -104,7 +104,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         MatTooltipModule,
     ],
     declarations: [
-        BackendLayoutComponent,
+        PanelLayoutComponent,
         HomeComponent,
         PropertyNewComponent,
         PropertiesComponent,
@@ -120,6 +120,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 })
 
 
-export class BackendModule {
+export class PanelModule {
 }
 

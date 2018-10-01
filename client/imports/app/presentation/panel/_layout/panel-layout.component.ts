@@ -11,12 +11,12 @@ import {
 
 @Component({
     selector: 'app-layout',
-    templateUrl: './backend-layout.component.html',
-    styleUrls: ['./backend-layout.component.scss']
+    templateUrl: './panel-layout.component.html',
+    styleUrls: ['./panel-layout.component.scss']
 
 })
 
-export class BackendLayoutComponent implements OnInit {
+export class PanelLayoutComponent implements OnInit {
     @Input() isVisible: boolean = true;
     visibility = 'shown';
 
@@ -30,11 +30,11 @@ export class BackendLayoutComponent implements OnInit {
     }
 
     constructor(private media: ObservableMedia) {
-        console.log("Backend-layout");
+        console.log("Panel-layout");
     }
 
     ngOnInit() {
-        console.log("Backend-init");
+        console.log("Panel-init");
 
         this.media.subscribe((mediaChange: MediaChange) => {
             this.toggleView();

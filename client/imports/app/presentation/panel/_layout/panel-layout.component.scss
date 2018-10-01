@@ -1,5 +1,5 @@
-@import '../../backend/_layout/core/sidemenu/sidemenu.component.scss';
-@import '../../backend/_layout/core/sidemenu-item/sidemenu-item.component.scss';
+@import '../../panel/_layout/core/sidemenu/sidemenu.component.scss';
+@import '../../panel/_layout/core/sidemenu-item/sidemenu-item.component.scss';
 
 @mixin auth($theme) {
   $primary: map-get($theme, primary);

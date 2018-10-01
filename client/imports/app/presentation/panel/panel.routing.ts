@@ -3,14 +3,14 @@ import {HomeComponent} from "./home/home.component";
 import {PropertyNewComponent} from "./properties/property-new.component";
 import {PropertiesComponent} from "./properties/properties.component";
 import {PropertyEditComponent} from "./properties/property-edit.component";
-import {BackendLayoutComponent} from "./_layout/backend-layout.component";
+import {PanelLayoutComponent} from "./_layout/panel-layout.component";
 import { AuthAdminGuard } from '../../_guards';
 
 
-export const BackendRoutes: Routes = [
+export const PanelRoutes: Routes = [
     {
-        path: 'backend',
-        component: BackendLayoutComponent,
+        path: '',
+        component: PanelLayoutComponent,
         children: [
             {
                 path: 'dashboard',
@@ -48,7 +48,7 @@ export const BackendRoutes: Routes = [
     },
     {
         path: 'admin',
-        component: BackendLayoutComponent,
+        component: PanelLayoutComponent,
         loadChildren: './admin/admin.module#AdminModule',
         canActivate: [AuthAdminGuard]
     },

@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
                         if (currentUser.profile && currentUser.profile.type && currentUser.profile.type == 0) {
                             this.router.navigate(['/admin/places']);
                         } else {
-                            this.router.navigate(['/backend/dashboard']);
+                            this.router.navigate(['/dashboard']);
                         }
                     }
                 });

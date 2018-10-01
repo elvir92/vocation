@@ -2,7 +2,7 @@ export const menus = [
     {
         "name": "Home",
         "icon": "dashboard",
-        "link": "/backend/dashboard",
+        "link": "/dashboard",
         "open": false,
     },
     {
@@ -53,7 +53,7 @@ export const menus = [
     {
         "name": "Properties",
         "icon": "home",
-        "link": "/backend/properties",
+        "link": "/properties",
         "open": false,
     },
     /*

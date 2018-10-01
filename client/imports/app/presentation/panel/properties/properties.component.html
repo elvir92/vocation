@@ -48,7 +48,7 @@
                 <ng-container matColumnDef="action">
                     <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
                     <mat-cell *matCellDef="let row">
-                        <a [routerLink]="['/backend/property-edit',row._id ]" class="btn-standard">Edit</a>-/-
+                        <a [routerLink]="['/property-edit',row._id ]" class="btn-standard">Edit</a>-/-
                         <a href="javascript:;" (click)="deleteProperty(row)"
                            class="btn-alert">Delete</a>
                     </mat-cell>
@@ -66,7 +66,7 @@
 </div>
 
 <mat-menu #chatMenu="matMenu">
-    <button mat-menu-item [routerLink]="['/backend/property-new']">
+    <button mat-menu-item [routerLink]="['/property-new']">
         <mat-icon> add_circle</mat-icon>
         <span> Add new property</span>
     </button>

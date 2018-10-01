@@ -29,31 +29,8 @@ export const AppRoutes: Routes = [
     {
         path: '',
         canActivate: [AuthGuard],
-        loadChildren: './presentation/backend/backend.module#BackendModule'
-    },           
-    /*{
-        path: 'backend',
-        component: BackendLayoutComponent,
-        canActivate: [AuthGuard],
-        children: [
-            {
-                path: '',
-                loadChildren: './presentation/backend/backend.module#BackendModule'
-            },
-        ]
-    },
-    {
-        path: 'admin',
-        component: BackendLayoutComponent,
-        canActivate: [AuthAdminGuard],
-        children: [
-            {
-                path: '',
-                loadChildren: './presentation/admin/admin.module#AdminModule'
-            },
-        ]
-    },
-    */
+        loadChildren: './presentation/panel/panel.module#PanelModule'
+    },               
     {
         path: '',
         component: AuthLayoutComponent,

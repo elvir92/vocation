@@ -43,7 +43,7 @@ export class SignupComponent implements OnInit {
                             if (err) {
                                 this.error = err;
                             } else {
-                                this.router.navigate(['/backend/dashboard']);
+                                this.router.navigate(['/dashboard']);
                             }
                         });
                     });
