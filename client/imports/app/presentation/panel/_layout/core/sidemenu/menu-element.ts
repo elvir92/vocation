@@ -56,6 +56,12 @@ export const menus = [
         "link": "/properties",
         "open": false,
     },
+    {
+        "name": "My profile",
+        "icon": "account_circle",
+        "link": "/my-profile",
+        "open": false
+    }
     /*
 
     {

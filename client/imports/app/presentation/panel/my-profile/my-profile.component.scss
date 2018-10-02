@@ -1,0 +1,42 @@
+.edit-user-container {
+  text-align: center;
+  margin-top: 2rem;
+
+  .edit-user-form {
+    position: relative;
+    top: 10%;
+    font-family: 'Roboto', 'Arial';
+    width: 70%;
+    margin: 0 auto;
+    background: whitesmoke;
+    opacity: 0.95;
+    padding: 8px 0px;
+
+    mat-form-field {
+      width: 40%;
+    }
+
+    .social-links {
+      mat-form-field {
+        width: 11%;
+      }
+    }
+
+    .mat-form-field-infix {
+      width: auto;
+    }
+
+    &:hover {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+      -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+      -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+      -o-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    }
+
+    button {
+      background-color: #007bff;
+      color: whitesmoke;
+      font-weight: 500;
+    }
+  }
+}
