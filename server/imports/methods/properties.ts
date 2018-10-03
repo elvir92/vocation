@@ -1,4 +1,3 @@
-import {Meteor} from 'meteor/meteor';
 import {IProperty} from "../../../imports/models";
 import {Properties} from "../../../imports/collections/properties";
 

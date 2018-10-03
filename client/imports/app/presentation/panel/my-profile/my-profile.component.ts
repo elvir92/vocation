@@ -1,6 +1,8 @@
+import {MeteorObservable} from 'meteor-rxjs';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
+import {IProfile} from '../../../../../../imports/models';
 
 @Component({
     templateUrl: './my-profile.component.html',
@@ -13,13 +15,20 @@ export class MyProfileComponent implements OnInit, OnDestroy {
     error: string;
     currentUser: any;
 
+    //TODO: Use this property to load your current information about user. 
+    // You can see inside mongo db how look user object. Basically it has profile property 
+    // and inside property we can store all info about user, except password email, we don't need username field
+    // Or google : Meteor.user to se object structure at meteor doc.
+    
+    // inside IProfile we can add all our custom properties
+    profile: IProfile;
 
     constructor(private formBuilder: FormBuilder) {
     }
 
     ngOnInit() {
         this.currentUser = Meteor.user();
-        console.log("CUrrent user, " this.currentUser)
+        console.log("Current user ", this.currentUser)
 
         this.userEditForm = this.formBuilder.group({
             first_name: ['', Validators.required],
@@ -39,6 +48,18 @@ export class MyProfileComponent implements OnInit, OnDestroy {
   
     ngOnDestroy() {
         
+    }
+
+    //To save data on server
+    onSave() {
+        MeteorObservable.call('updateProfile', this.profile).subscribe({
+            next: () => {
+                //TODO: add notification toast or something similar [NOT IMPORTANT TODO]
+            },
+            error: (e: Error) => {
+                console.log(e);
+            }
+        });
     }
 
 }
