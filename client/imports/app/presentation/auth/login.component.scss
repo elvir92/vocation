@@ -8,11 +8,14 @@
         position: relative;
         top: 10%;
         font-family: 'Roboto', 'Arial';
-        width: 320px;
+        width: 50%;
         margin: 0 auto;
         background: white;
         opacity: 0.95;
         padding:8px 0px;
+        mat-form-field {
+            width: 60%; 
+        }
         .login-form__lost-pw{
             color: #7F7D7D;
             text-decoration: none;            
@@ -48,6 +51,11 @@
         }
         button {
             background-color: #007bff;
+        }
+        .social-links {
+            mat-form-field {
+                width: 19.5%;
+            }
         }
     }
 }
