@@ -1,6 +1,7 @@
 import { MeteorObservable } from 'meteor-rxjs';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from '@angular/router';
 
 import {IProfile} from '../../../../../../imports/models';
 
@@ -17,7 +18,8 @@ export class MyProfileComponent implements OnInit, OnDestroy {
     
     profile: IProfile;
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor(private router: Router,
+                private formBuilder: FormBuilder) {
     }
 
     ngOnInit() {
@@ -48,7 +50,7 @@ export class MyProfileComponent implements OnInit, OnDestroy {
             this.profile = this.userEditForm.value;
             MeteorObservable.call('updateProfile', this.profile).subscribe({
                 next: () => {
-                    //TODO: add notification toast or something similar [NOT IMPORTANT TODO]
+                    this.router.navigate(['dashboard']);
                 },
                 error: (e: Error) => {
                     console.log(e);
