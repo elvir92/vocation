@@ -55,7 +55,7 @@ export const menus = [
         "icon": "home",
         "link": "/properties",
         "open": false,
-    },
+    }
     /*
 
     {

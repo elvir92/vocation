@@ -23,7 +23,7 @@ import './imports/methods/pictures';
 import './imports/methods/properties';
 import './imports/methods/email';
 import './imports/methods/cities';
-
+import './imports/methods/users';
 
 Meteor.startup(() => {
     // code to run on server at startup

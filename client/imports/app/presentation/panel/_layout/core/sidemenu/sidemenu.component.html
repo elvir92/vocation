@@ -8,7 +8,11 @@
             <img width="50" [style.borderRadius]="'50%'" src="/assets/user-image.jpg">
         </div>
         -->
-        <app-sidemenu-item *ngFor="let menu of menus" [menu]="menu" [iconOnly]="iconOnly"></app-sidemenu-item>
+        <app-sidemenu-item 
+            *ngFor="let menu of menus" 
+            [menu]="menu" 
+            [iconOnly]="iconOnly">
+        </app-sidemenu-item>
     </div>
 
 </perfect-scrollbar>

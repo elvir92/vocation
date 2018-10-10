@@ -2,7 +2,26 @@
     <form class="login-form" [formGroup]="signupForm" #f="ngForm" (ngSubmit)="signup()">
         <div class="login-form__create-new-acc-box">
             <a class="login-form__create-new-acc" [routerLink]="['/login']">Sign-in</a>
-        </div>        
+        </div>     
+
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="First name" type="text" value="" formControlName="first_name">
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Last name" type="text" value="" formControlName="last_name">
+            </mat-form-field>
+        </div>
+        
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Username" type="text" value="" formControlName="username">
+            </mat-form-field>
+        </div>
+        
         <div>
             <mat-form-field class="example-full-width">
                 <input matInput placeholder="Email" type="email" value="" formControlName="email">
@@ -12,6 +31,30 @@
         <div>
             <mat-form-field class="example-full-width">
                 <input matInput placeholder="Password" type="password" value="" formControlName="email" formControlName="password">
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field>
+            <textarea rows="5" matInput placeholder="Description" formControlName="description"></textarea>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field>
+                <input type="number" matInput placeholder="Telephone" value="" formControlName="phone">
+                <mat-icon matSuffix>local_phone</mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="social-links">
+            <mat-form-field>
+                <input matInput placeholder="Facebook" type="text" value="" formControlName="facebook_link">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Twitter" type="text" value="" formControlName="twitter_link">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Instagram" type="text" value="" formControlName="instagram_link">
             </mat-form-field>
         </div>
 

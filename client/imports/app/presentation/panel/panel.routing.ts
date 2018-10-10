@@ -5,6 +5,7 @@ import {PropertiesComponent} from "./properties/properties.component";
 import {PropertyEditComponent} from "./properties/property-edit.component";
 import {PanelLayoutComponent} from "./_layout/panel-layout.component";
 import { AuthAdminGuard } from '../../_guards';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 
 export const PanelRoutes: Routes = [
@@ -43,7 +44,15 @@ export const PanelRoutes: Routes = [
                 data: {
                     title: 'Properties'
                 }
-            }
+            },
+            {
+                path: 'my-profile',
+                component: MyProfileComponent,
+                pathMatch: 'full',
+                data: {
+                    title: 'My Profile'
+                }
+            },
         ]
     },
     {

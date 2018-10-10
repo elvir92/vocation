@@ -12,6 +12,7 @@ import {COMMON_DECLARATIONS} from "../../common";
 import {PropertiesComponent} from "./properties/properties.component";
 import {Ng2PaginationModule} from "ng2-pagination";
 import {PropertyEditComponent} from "./properties/property-edit.component";
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
@@ -107,6 +108,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         PanelLayoutComponent,
         HomeComponent,
         PropertyNewComponent,
+        MyProfileComponent,
         PropertiesComponent,
         PropertyEditComponent,
         ...COMMON_DECLARATIONS

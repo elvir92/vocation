@@ -10,4 +10,5 @@ export * from './place';
 export * from './picture';
 export * from './email';
 export * from './groups';
-export * from './city'
+export * from './city';
+export * from './profile';
