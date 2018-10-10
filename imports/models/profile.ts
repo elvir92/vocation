@@ -7,4 +7,5 @@ export class IProfile {
     facebookLink: string
     twitterLink: string
     instagramLink: string
+    type:number
 }

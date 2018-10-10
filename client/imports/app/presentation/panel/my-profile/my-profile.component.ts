@@ -14,7 +14,7 @@ export class MyProfileComponent implements OnInit, OnDestroy {
 
     userEditForm: FormGroup;
     error: string;
-    currentUser: any;
+    currentUser: Meteor.User;
     
     profile: IProfile;
 
@@ -46,17 +46,19 @@ export class MyProfileComponent implements OnInit, OnDestroy {
 
     //To save data on server
     onSave() {
-        if (this.userEditForm.valid) {
-            this.profile = this.userEditForm.value;
-            MeteorObservable.call('updateProfile', this.profile).subscribe({
-                next: () => {
-                    this.router.navigate(['dashboard']);
-                },
-                error: (e: Error) => {
-                    console.log(e);
-                }
-            });
-        } 
+        // if (this.userEditForm.valid) {
+        this.profile = this.userEditForm.value;                
+        this.profile.type = ("profile" in this.currentUser && "type" in this.currentUser.profile && this.currentUser.profile.type === 0) ? 0 : 1;
+
+        MeteorObservable.call('updateProfile', this.profile).subscribe({
+            next: () => {
+                this.router.navigate(['dashboard']);
+            },
+            error: (e: Error) => {
+                console.log(e);
+            }
+        });
+        // } 
     }
 
 }
