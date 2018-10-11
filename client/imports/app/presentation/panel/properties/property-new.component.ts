@@ -1,8 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {MeteorObservable} from 'meteor-rxjs';
-import {Observable} from 'rxjs';
-import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { MeteorObservable } from 'meteor-rxjs';
+import { Observable } from 'rxjs';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 import {
     IPicture,
@@ -14,11 +14,10 @@ import {
     ILengthUnit,
     ILocation
 } from '../../../../../../imports/models';
-import {Pictures, ListsGroups, Lists, Places, LengthUnits} from "../../../../../../imports/collections";
-import {} from 'googlemaps';
+import { Pictures, ListsGroups, Lists, Places, LengthUnits } from "../../../../../../imports/collections";
 
-import {Router} from "@angular/router";
-import {componentDestroyed} from "ng2-rx-componentdestroyed";
+import { Router } from "@angular/router";
+import { componentDestroyed } from "ng2-rx-componentdestroyed";
 
 @Component({
     //selector: 'app-',
@@ -40,11 +39,12 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
     lengthUnits: ILengthUnit[];
 
     pricing = [];
+    basePrice = new FormControl();
 
-    periodName: string;
-    startPricePeriod = new FormControl(new Date());
+    periodName = new FormControl();
+    startPricePeriod = new FormControl();
     endPricePeriod = new FormControl();
-    valuePricePeriod: string;
+    valuePricePeriod = new FormControl();
 
     propertyForm: FormGroup;
     descriptionForm: FormGroup;
@@ -75,7 +75,7 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
     };
 
 
-    constructor(private _fb: FormBuilder, private router: Router,) {
+    constructor(private _fb: FormBuilder, private router: Router, ) {
         //console.log("properties const");
     }
 
@@ -101,21 +101,29 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
     }
 
-    //Dodavanje novog period-a , bitno je da range od-do na klik se validira tako sto se ne moze override-at periodi koji su dodani na listu...
-    // Kod editovanja pojedinog period-a isto treba pazit da se taj edit, tj. kalendar za editovanje ne moze prikazat ili overrideat druge periode koje
-    //postoje, to znaci, ako zelis da dodas period taj period mora biti 'cist';
     addNewPeriodPrice() {
-        console.log(this.startPricePeriod);
-        console.log(this.endPricePeriod);
-        console.log(this.valuePricePeriod);
-        console.log(this.periodName);
-
-        this.pricing.push({
-            name: this.periodName,
+        //TODO: Validirati period da li je vec dodan
+        const price = {
+            name: this.periodName.value,
             start: this.startPricePeriod.value,
             end: this.endPricePeriod.value,
-            value: this.valuePricePeriod
-        });
+            value: this.valuePricePeriod.value
+        };
+        let isValid = this.checkIfDateIsValid(price.start, price.end);
+        if(isValid){
+            this.pricing.push(price); 
+            //TODO: make reset function
+            this.startPricePeriod.reset();           
+            this.endPricePeriod.reset();           
+            this.periodName.reset();           
+            this.valuePricePeriod.reset();           
+        }
+        //TODO: add toast notification
+    }
+
+    removePrice(price){
+        let i = this.pricing.findIndex( p => p === price);
+        this.pricing.splice(i, 1);
     }
 
     onImage(imageId: string) {
@@ -170,18 +178,30 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
     }
 
     //---------------------------------PRIVATE FUNCTIONS--------------------------------
+    private checkIfDateIsValid(start,end): Boolean {
+        let valid = true;
+        for (let i = 0; i < this.pricing.length; i++) {
+            const price = this.pricing[i];
+            if ((start >= price.start && start <= price.end) || (end >= price.start && end <= price.end)) {
+                valid = false;
+                return;
+            }
+        }
+        return valid;
+    }
+
     private setPropertyObject(): void {
-        this.property.name = [{text: this.descriptionForm.value.propertyName, language: 'en'}];
-        this.property.headline = [{text: this.descriptionForm.value.propertyHeadline, language: 'en'}];
-        this.property.summary = [{text: this.descriptionForm.value.propertySummary, language: 'en'}];
-        this.property.description = [{text: this.descriptionForm.value.propertyDescription, language: 'en'}];
+        this.property.name = [{ text: this.descriptionForm.value.propertyName, language: 'en' }];
+        this.property.headline = [{ text: this.descriptionForm.value.propertyHeadline, language: 'en' }];
+        this.property.summary = [{ text: this.descriptionForm.value.propertySummary, language: 'en' }];
+        this.property.description = [{ text: this.descriptionForm.value.propertyDescription, language: 'en' }];
 
         for (let i in this.propertyForm.value.places) {
             let plVal = this.propertyForm.value.places[i];
             if (plVal.title) {
                 const lngthObj = this.lengthUnits.find(obj => obj._id == plVal.distanceType);
                 this.property.places.push({
-                    title: [{text: plVal.title, language: 'en'}],
+                    title: [{ text: plVal.title, language: 'en' }],
                     distanceType: lngthObj ? lngthObj : plVal.distanceType,
                     placeId: plVal.placeId,
                     distanceValue: plVal.distanceValue
@@ -216,7 +236,7 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
     }
 
     private findPictures() {
-        this.pictures = Pictures.find({_id: {$in: this.property.images}});
+        this.pictures = Pictures.find({ _id: { $in: this.property.images } });
     }
 
     private getListing() {
@@ -230,11 +250,11 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
 
     private findListing(): Observable<IListing[]> {
         // console.log("Get listing JOIN!!")
-        return ListsGroups.find({isActive: true}).map((items: IListGroup[]) => {
+        return ListsGroups.find({ isActive: true }).map((items: IListGroup[]) => {
             let lst: IListing[] = [];
             items.forEach((item: IListGroup) => {
                 let tmp: IListing = {
-                    lists: Lists.find({parentId: item._id}).fetch(),
+                    lists: Lists.find({ parentId: item._id }).fetch(),
                     listGroup: item
                 };
                 lst.push(tmp);

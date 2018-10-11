@@ -15,6 +15,7 @@ https://www.meteor.com/install
 
 ### Installing
 
+
 ```
 meteor npm install
 ```
@@ -23,4 +24,12 @@ meteor npm install
 meteor --port 3000
 ```
 
+### Deploy
+
+Visit 
+
+
+```
+http://meteor-up.com/docs.html#server-configuration
+```
 

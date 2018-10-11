@@ -14,6 +14,7 @@
 
                             <mat-divider></mat-divider>
 
+
                             <app-location (onChange)="onChangeLocation($event)"></app-location>
                             <h5>Longitude : {{property.location.longitude}} Latitude
                                 : {{property.location.latitude}}</h5>
@@ -36,59 +37,36 @@
                             <!--price-->
 
                             <mat-form-field>
-                                <input matInput
-                                       id="inputValue"
-                                       placeholder="Base price"
-                                       autocorrect="off"
-                                       autocapitalize="off"
-                                       spellcheck="off"
-                                       type="text"
-                                >
+                                <input matInput [formControl]="basePrice" id="basePrice" placeholder="Base price"
+                                    autocorrect="off" autocapitalize="off" spellcheck="off" type="text">
                             </mat-form-field>
 
                             <br>
 
                             <mat-form-field>
-                                <input matInput
-                                       id="periodName"
-                                       placeholder="Perion name"
-                                       autocorrect="off"
-                                       autocapitalize="off"
-                                       spellcheck="off"
-                                       type="text"
-                                       [ngModel]="periodName"
-                                >
+                                <input matInput [formControl]="periodName" id="periodName" placeholder="Period name"
+                                    autocorrect="off" autocapitalize="off" spellcheck="off" type="text">
                             </mat-form-field>
 
                             <mat-form-field>
-                                <input matInput [formControl]="startPricePeriod" [matDatepicker]="picker"
-                                       placeholder="Choose a date">
-                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
+                                <input matInput [formControl]="startPricePeriod" [matDatepicker]="picker1" placeholder="Start">
+                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
                             </mat-form-field>
 
 
                             <mat-form-field>
-                                <input matInput [formControl]="endPricePeriod" [matDatepicker]="picker2"
-                                       placeholder="Choose a date">
+                                <input matInput [formControl]="endPricePeriod" [matDatepicker]="picker2" placeholder="End">
                                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                                 <mat-datepicker #picker2></mat-datepicker>
                             </mat-form-field>
 
-
                             <mat-form-field>
-                                <input matInput
-                                       id="inputValue"
-                                       [ngModel]="valuePricePeriod"
-                                       placeholder="Value"
-                                       autocorrect="off"
-                                       autocapitalize="off"
-                                       spellcheck="off"
-                                       type="text"
-                                >
+                                <input matInput [formControl]="valuePricePeriod" id="valuePricePeriod" placeholder="Value"
+                                    autocorrect="off" autocapitalize="off" spellcheck="off" type="text">
                             </mat-form-field>
 
-                            <button mat-button (click)="addNewPeriodPrice()">
+                            <button mat-button style="float:right" (click)="addNewPeriodPrice()">
                                 <mat-icon>plus</mat-icon>
                                 Add price
                             </button>
@@ -96,23 +74,21 @@
                             <mat-divider></mat-divider>
 
                             <div fxLayout="column">
-                                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px"
-                                     *ngFor="let price of pricing">
+                                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" *ngFor="let price of pricing">
                                     <div fxFlex.xs="100" fxFlex.lg="40" fxFlex.md="40" fxFlex.sm="20">
                                         <b>{{price.name}}</b>
                                     </div>
                                     <div fxFlex.xs="100" fxFlex.lg="40" fxFlex.md="40" fxFlex.sm="20">
-                                        <b>{{price.start}}</b>
+                                        <b>{{price.start | date:"dd/MM/yyyy"}}</b>
                                     </div>
                                     <div fxFlex.xs="100" fxFlex.lg="40" fxFlex.md="40" fxFlex.sm="20">
-                                        <b>{{price.end}}</b>
+                                        <b>{{price.end | date:"dd/MM/yyyy"}}</b>
                                     </div>
                                     <div fxFlex.xs="100" fxFlex.lg="40" fxFlex.md="40" fxFlex.sm="20">
                                         <b>{{price.value}}</b>
                                     </div>
                                     <div fxFlex.xs="100" fxFlex.lg="40" fxFlex.md="40" fxFlex.sm="20">
-                                        <mat-icon>mode_edit</mat-icon>
-                                        <mat-icon>close</mat-icon>
+                                        <mat-icon (click)="removePrice(price)">close</mat-icon>
                                     </div>
                                 </div>
                             </div>
@@ -147,11 +123,8 @@
 
                                 <mat-divider></mat-divider>
 
-                                <app-place
-                                        *ngFor="let placeForm of propertyForm.controls.places.controls; let i=index"
-                                        [group]="placeForm"
-                                        [lengthUnits]="lengthUnits"
-                                        [place]="places[i]"></app-place>
+                                <app-place *ngFor="let placeForm of propertyForm.controls.places.controls; let i=index"
+                                    [group]="placeForm" [lengthUnits]="lengthUnits" [place]="places[i]"></app-place>
 
                                 <mat-divider></mat-divider>
 
@@ -183,8 +156,7 @@
                                 <div class="property-amenities">
                                     <div *ngFor="let item of list.lists">
                                         <label>
-                                            <input type="checkbox"
-                                                   (change)="onChangeList(item, $event.target.checked)">
+                                            <input type="checkbox" (change)="onChangeList(item, $event.target.checked)">
                                             {{item.title[0].text}}
                                         </label>
                                         <br>
@@ -218,60 +190,35 @@
                             <form [formGroup]="descriptionForm">
                                 <ng-template matStepLabel>Descriptions</ng-template>
                                 <mat-form-field class="full-width">
-                                    <input matInput
-                                           id="inputPropName"
-                                           placeholder="Property name"
-                                           autocorrect="off"
-                                           autocapitalize="off"
-                                           spellcheck="off"
-                                           type="text"
-                                           required
-                                           formControlName="propertyName">
+                                    <input matInput id="inputPropName" placeholder="Property name" autocorrect="off"
+                                        autocapitalize="off" spellcheck="off" type="text" required formControlName="propertyName">
                                     <mat-error *ngIf="descriptionForm.controls['propertyName'].invalid">This field is
                                         required!
                                     </mat-error>
                                 </mat-form-field>
 
                                 <mat-form-field class="full-width">
-                                    <input matInput
-                                           id="inputPropHeadline"
-                                           placeholder="Property headline"
-                                           autocorrect="off"
-                                           autocapitalize="off"
-                                           spellcheck="off"
-                                           type="text"
-                                           required
-                                           formControlName="propertyHeadline">
+                                    <input matInput id="inputPropHeadline" placeholder="Property headline" autocorrect="off"
+                                        autocapitalize="off" spellcheck="off" type="text" required formControlName="propertyHeadline">
                                     <mat-error *ngIf="descriptionForm.controls['propertyHeadline'].invalid">This field
                                         is required!
                                     </mat-error>
                                 </mat-form-field>
 
                                 <mat-form-field class="full-width">
-					                <textarea
-                                            matInput
-                                            id="inputSummary"
-                                            placeholder="Property summary"
-                                            matTextareaAutosize
-                                            matAutosizeMinRows="2"
-                                            matAutosizeMaxRows="6"
-                                            required
-                                            formControlName="propertySummary"></textarea>
-                                    <mat-error *ngIf="descriptionForm.controls['propertySummary'].invalid">This field is
+                                    <textarea matInput id="inputSummary" placeholder="Property summary"
+                                        matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="6" required
+                                        formControlName="propertySummary"></textarea>
+                                    <mat-error *ngIf="descriptionForm.controls['propertySummary'].invalid">This field
+                                        is
                                         required!
                                     </mat-error>
                                 </mat-form-field>
 
                                 <mat-form-field class="full-width">
-                                    <textarea
-                                            matInput
-                                            id="inputPropDescription"
-                                            placeholder="Property description"
-                                            matTextareaAutosize
-                                            matAutosizeMinRows="10"
-                                            matAutosizeMaxRows="30"
-                                            required
-                                            formControlName="propertyDescription"></textarea>
+                                    <textarea matInput id="inputPropDescription" placeholder="Property description"
+                                        matTextareaAutosize matAutosizeMinRows="10" matAutosizeMaxRows="30" required
+                                        formControlName="propertyDescription"></textarea>
                                     <mat-error *ngIf="descriptionForm.controls['propertyDescription'].invalid">This
                                         field is required!
                                     </mat-error>
@@ -311,13 +258,11 @@
                                 <div class="col-sm-2 col-xs-12" *ngFor="let item of pictures | async">
                                     <div class="gallery-item">
                                         <div class="gallery-image">
-                                            <img [src]="item.url" [alt]="item.name"/>
+                                            <img [src]="item.url" [alt]="item.name" />
                                         </div><!-- /.gallery-image -->
 
                                         <div class="gallery-caption">
-                                            <a href="javascript:;"
-                                               (click)="deletePicture(item)"
-                                               class="btn-alert">Delete</a>
+                                            <a href="javascript:;" (click)="deletePicture(item)" class="btn-alert">Delete</a>
                                         </div><!-- /.gallery-caption -->
                                     </div><!-- /.gallery-item -->
                                 </div>
