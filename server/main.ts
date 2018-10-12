@@ -2,6 +2,7 @@ import {Meteor} from 'meteor/meteor';
 import {loadListGroupsAndLists} from "./imports/fixtures/lists_groups";
 import {loadPlaces} from "./imports/fixtures/places";
 import {loadLengthUnits} from "./imports/fixtures/length-unit";
+import {loadPropertyTypes} from "./imports/fixtures/property-type";
 import {loadAdminUser} from "./imports/fixtures/users";
 import {loadCities} from "./imports/fixtures/cities";
 
@@ -14,6 +15,7 @@ import './imports/publications/properties';
 import './imports/publications/pictures';
 import './imports/publications/emails';
 import './imports/publications/cities';
+import './imports/publications/property_types';
 
 import './imports/methods/lists_groups';
 import './imports/methods/lists';
@@ -24,6 +26,7 @@ import './imports/methods/properties';
 import './imports/methods/email';
 import './imports/methods/cities';
 import './imports/methods/users';
+import './imports/methods/property_types';
 
 Meteor.startup(() => {
     // code to run on server at startup
@@ -32,6 +35,8 @@ Meteor.startup(() => {
     loadPlaces();
     loadCities();
     loadLengthUnits();
+    loadLengthUnits();
+    loadPropertyTypes();
 
     if (Meteor.isServer) {
         //console.log(process.env.PWD);

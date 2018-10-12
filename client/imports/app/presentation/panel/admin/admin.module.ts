@@ -10,6 +10,8 @@ import { CitiesComponent } from "./cities/cities.component";
 import {ListGroupComponent} from "./listing/list-group.component";
 import {ListGroupDetailComponent} from "./listing/list-group-detail.component";
 import {LengthUnitComponent} from "./length-unit/length-unit.component";
+import {PropertyTypeDialog} from "./property-type/property-type-dialog.component";
+import {PropertyTypeComponent} from "./property-type/property-type.component";
 import {ReactiveFormsModule, FormsModule} from "@angular/forms";
 import {Ng2PaginationModule} from "ng2-pagination";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
@@ -60,6 +62,8 @@ import { ListGroupDetailDialog } from './listing/list-group-detail-dialog.compon
         ListGroupComponent,
         ListGroupDetailComponent,
         LengthUnitComponent,
+        PropertyTypeDialog,
+        PropertyTypeComponent,
         SubscribersComponent,
         LengthUnitDialog,
         PlacesDialog,

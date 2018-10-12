@@ -40,6 +40,13 @@ export const menus = [
                 "open": false,
                 "admin": true,
             },
+            {
+                "name": "Property types",
+                "icon": "compare arrows",
+                "link": "/admin/property-types",
+                "open": false,
+                "admin": true,
+            },
 
             {
                 "name": "Subscribers",

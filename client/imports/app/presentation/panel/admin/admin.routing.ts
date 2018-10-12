@@ -4,6 +4,7 @@ import { CitiesComponent } from "./cities/cities.component";
 import { ListGroupComponent } from "./listing/list-group.component";
 import { ListGroupDetailComponent } from "./listing/list-group-detail.component";
 import { LengthUnitComponent } from "./length-unit/length-unit.component";
+import { PropertyTypeComponent } from "./property-type/property-type.component";
 import { SubscribersComponent } from './subscribers/subscribers.component';
 
 export const AdminRoutes: Routes = [
@@ -47,6 +48,14 @@ export const AdminRoutes: Routes = [
                 component: LengthUnitComponent,
                 data: {
                     title: 'Length Units'
+                },
+                pathMatch: 'full'
+            },
+            {
+                path: 'property-types',
+                component: PropertyTypeComponent,
+                data: {
+                    title: 'Property types'
                 },
                 pathMatch: 'full'
             },

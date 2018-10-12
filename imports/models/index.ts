@@ -12,3 +12,4 @@ export * from './email';
 export * from './groups';
 export * from './city';
 export * from './profile';
+export * from './property_type';
