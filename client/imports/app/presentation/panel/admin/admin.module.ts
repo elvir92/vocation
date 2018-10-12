@@ -1,21 +1,21 @@
 import { LengthUnitDialog } from './length-unit/lenght-unit-dialog.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {NgModule} from '@angular/core';
-import {RouterModule} from '@angular/router';
-import {CommonModule} from "@angular/common";
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from "@angular/common";
 
-import {AdminRoutes} from "./admin.routing";
-import {PlacesComponent} from "./places/places.component";
+import { AdminRoutes } from "./admin.routing";
+import { PlacesComponent } from "./places/places.component";
 import { CitiesComponent } from "./cities/cities.component";
-import {ListGroupComponent} from "./listing/list-group.component";
-import {ListGroupDetailComponent} from "./listing/list-group-detail.component";
-import {LengthUnitComponent} from "./length-unit/length-unit.component";
-import {PropertyTypeDialog} from "./property-type/property-type-dialog.component";
-import {PropertyTypeComponent} from "./property-type/property-type.component";
-import {ReactiveFormsModule, FormsModule} from "@angular/forms";
-import {Ng2PaginationModule} from "ng2-pagination";
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {MatIconModule} from '@angular/material/icon';
+import { ListGroupComponent } from "./listing/list-group.component";
+import { ListGroupDetailComponent } from "./listing/list-group-detail.component";
+import { LengthUnitComponent } from "./length-unit/length-unit.component";
+import { PropertyTypeDialog } from "./property-type/property-type-dialog.component";
+import { PropertyTypeComponent } from "./property-type/property-type.component";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { Ng2PaginationModule } from "ng2-pagination";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { MatIconModule } from '@angular/material/icon';
 import {
     MatDialogModule, MatInputModule, MatListModule, MatMenuModule, MatSelectModule, MatStepperModule, MatTableModule,
     MatTabsModule,
@@ -55,17 +55,24 @@ import { ListGroupDetailDialog } from './listing/list-group-detail-dialog.compon
         MatSelectModule,
         MatExpansionModule
     ],
-    entryComponents: [LengthUnitDialog, PlacesDialog,CitiesDialog, ListGroupAddNewDialog, ListGroupDetailDialog],
+    entryComponents: [
+        LengthUnitDialog,
+        PropertyTypeDialog,
+        PlacesDialog,
+        CitiesDialog,
+        ListGroupAddNewDialog,
+        ListGroupDetailDialog
+    ],
     declarations: [
         PlacesComponent,
         CitiesComponent,
         ListGroupComponent,
         ListGroupDetailComponent,
         LengthUnitComponent,
-        PropertyTypeDialog,
         PropertyTypeComponent,
         SubscribersComponent,
         LengthUnitDialog,
+        PropertyTypeDialog,
         PlacesDialog,
         CitiesDialog,
         ListGroupAddNewDialog,
