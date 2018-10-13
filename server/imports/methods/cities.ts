@@ -45,7 +45,7 @@ Meteor.methods({
         }
 
         Cities.collection.update(city._id, {
-            $set: {cityName: city.cityName}
+            $set: {cityName: city.cityName, country: city.country}
         });
     },
 });

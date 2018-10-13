@@ -3,7 +3,8 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@ang
 import { MeteorObservable } from 'meteor-rxjs';
 import { Observable } from 'rxjs';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-
+import { City } from './../../../../../../imports/models/city';
+import { MapsAPILoader } from "@agm/core";
 import {
     IPicture,
     IListing,
@@ -37,6 +38,8 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
     pictures: Observable<IPicture[]>;
     places: IPlace[];
     lengthUnits: ILengthUnit[];
+
+    geocodedCity: City;
 
     pricing = [];
     basePrice = new FormControl();
@@ -75,7 +78,7 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
     };
 
 
-    constructor(private _fb: FormBuilder, private router: Router, ) {
+    constructor(private _fb: FormBuilder, private router: Router, private mapsAPILoader: MapsAPILoader) {
         //console.log("properties const");
     }
 
@@ -152,10 +155,55 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
 
     onChangeLocation(location: ILocation) {
         this.property.location = location;
-        console.log(location);
+        this.onReverseGeocode(location);
+    }
+
+    onReverseGeocode(latlong) {
+        let lat = latlong.latitude;
+        let long = latlong.longitude;
+
+
+        this.mapsAPILoader.load().then(() => {
+            let geocoder = new google.maps.Geocoder;
+            let latlng = { lat: lat, lng: long };
+            geocoder.geocode({ 'location': latlng }, function (results, status) {
+                if (results[0]) {
+                    let country = results[0].address_components.filter(value => {
+                        if (value.types.some(type => type === 'country')) {
+                            return value;
+                        } 
+                    });
+                    let city = results[0].address_components.filter(value => {
+                        if (value.types.some(type => type === 'locality')) {
+                            return value;
+                        }
+                    })
+
+                    let geocodedCity = {
+                        cityName: city[0].long_name,
+                        country: country[0].long_name
+                    }
+                // postaviti gornji geocodecity na ovaj nekako
+                    this.geocodedCity = geocodedCity;
+                }
+            });
+        })
+    }
+
+    addCity() {
+        console.log("Saving city ", this.geocodedCity);
+        MeteorObservable.call('addCity', this.geocodedCity).subscribe({
+            next: () => {
+                console.log('City saved')
+            },
+            error: (e: Error) => {
+                console.log(e);
+            }
+        });
     }
 
     addOrSaveProperty() {
+        this.addCity();
         this.setPropertyObject();
         const methodName = this.property._id ? 'updateProperty' : 'insertProperty';
         MeteorObservable.call(methodName, this.property).subscribe({

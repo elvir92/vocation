@@ -17,12 +17,14 @@
                         <tr>
                             <th>#</th>
                             <th>City</th>
+                            <th>Country</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr *ngFor="let item of list | async">
                             <td>#{{item._id}}</td>
                             <td>{{item.cityName}}</td>
+                            <td>{{item.country}}</td>
                             <td>
                                 <a class="edit" href="javascript:;" (click)="openDialog(item)">
                                     <i class="material-icons">mode_edit</i>

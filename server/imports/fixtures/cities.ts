@@ -4,12 +4,23 @@ import {City} from "../../../imports/models/city";
 
 export function loadCities() {
     if (Cities.find({}).fetch().length == 0) {
-        let cities = ['Zagreb', 'Rijeka', 'Zadar', 'Split', 'Biograd','Dubrovnik','Pula','Murter','Korcula'];
-        for (let i = 0; i < cities.length; i++) {
+        let croCities = ['Zagreb', 'Rijeka', 'Zadar', 'Split', 'Biograd','Dubrovnik','Pula','Murter','Korcula'];
+        let bhCities = ['Bihac', 'Tuzla', 'Sarajevo', 'Mostar'];
+
+        croCities.forEach(element => {
             let city: City = {
-                cityName: cities[i],
-            };
+                cityName: element,
+                country: 'Croatia'
+            }
             Cities.collection.insert(city);
-        }
+        });
+
+        bhCities.forEach(element => {
+            let city: City = {
+                cityName: element,
+                country: 'Bosna i Hercegovina'
+            }
+            Cities.collection.insert(city);
+        });
     }
 }

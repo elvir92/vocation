@@ -15,6 +15,7 @@ export function loadPlaces() {
                 isActive: true,
                 address: 'Trg bana jelacica',
                 city:{
+                  country: 'Croatia',
                   cityName: 'Zagreb',
                   cityId:22
                 },
