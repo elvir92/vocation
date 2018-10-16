@@ -1,4 +1,4 @@
-import {ILocation} from "./location";
+import {ILocation} from "./geo_location";
 import {ILengthUnit} from "./length_unit";
 import {IText} from "./text";
 import {IPicture} from "./picture";
@@ -6,11 +6,12 @@ import {IPicture} from "./picture";
 export interface IProperty {
     _id?: string;
     userId?: string;
+    addressId?: string;
     name?: IText [];
     headline?: IText [];
     summary?: IText [];
     description?: IText [];
-    location?: ILocation;
+    geoLocation?: ILocation;
     activities?: string[];
     images?: string[];
     places?: IPropertyPlace[];

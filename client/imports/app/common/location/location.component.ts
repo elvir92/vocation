@@ -1,7 +1,7 @@
 import {Component, Input, Output, EventEmitter, OnInit, ViewChild, ElementRef, NgZone} from '@angular/core';
 import {FormControl} from "@angular/forms";
 
-import {ILocation} from "../../../../../imports/models/location";
+import {ILocation} from "../../../../../imports/models/geo_location";
 import {MapsAPILoader} from "@agm/core";
 
 
@@ -15,7 +15,9 @@ export class LocationComponent implements OnInit {
 
     location: ILocation = {
         longitude: 39.8282,
-        latitude: -98.5795
+        latitude: -98.5795,
+        formattedAddress: null,
+        mapObject: null
     };
 
     searchControl: FormControl;
@@ -91,3 +93,4 @@ export class LocationComponent implements OnInit {
     }
 
 }
+ 

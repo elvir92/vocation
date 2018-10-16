@@ -1,14 +1,14 @@
 import {MongoObservable} from 'meteor-rxjs';
-import {City} from '../models/city';
+import {IAddress} from '../models/address';
 import {Meteor} from 'meteor/meteor';
 
-export const Cities = new MongoObservable.Collection<City>('cities');
+export const Addresses = new MongoObservable.Collection<IAddress>('addresses');
 
 function loggedIn() {
     return !!Meteor.user();
 }
 
-Cities.allow({
+Addresses.allow({
     insert: loggedIn,
     update: loggedIn,
     remove: loggedIn

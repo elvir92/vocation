@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import 'rxjs/add/operator/map';
-import {Group} from '../../../../../../../imports/models';
+import {IGroup} from '../../../../../../../imports/models';
 
 @Component({
     selector: 'group-list',
@@ -9,7 +9,7 @@ import {Group} from '../../../../../../../imports/models';
 })
 
 export class GroupListComponent implements OnInit, OnDestroy {
-    list: Group[];
+    list: IGroup[];
 
 
     constructor(){

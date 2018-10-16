@@ -1,10 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import {MeteorObservable} from 'meteor-rxjs';
-import {componentDestroyed} from "ng2-rx-componentdestroyed";
-import {City} from '../../../../../../imports/models';
-import {Cities} from "../../../../../../imports/collections/cities";
+import { MeteorObservable } from 'meteor-rxjs';
+import { componentDestroyed } from "ng2-rx-componentdestroyed";
+import { IAddress } from '../../../../../../imports/models';
+import { Addresses } from "../../../../../../imports/collections/addresses";
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -13,12 +13,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class AccommodationComponent implements OnInit, OnDestroy {
-    cities: Observable<City[]>;
+    addresses: Observable<IAddress[]>;
     sub: any;
     accommodationType: any;
     selected = '1';
 
-    constructor(private route:ActivatedRoute){
+    constructor(private route: ActivatedRoute) {
 
     }
 
@@ -32,13 +32,13 @@ export class AccommodationComponent implements OnInit, OnDestroy {
         this.sub.unsubscribe();
     }
     getCities() {
-        MeteorObservable.subscribe('cities').takeUntil(componentDestroyed(this)).subscribe(() => {
+        MeteorObservable.subscribe('addresses').takeUntil(componentDestroyed(this)).subscribe(() => {
             MeteorObservable.autorun().subscribe(() => {
-                this.cities = this.findCities();
+                this.addresses = this.findCities();
             });
         });
     }
-    findCities(): Observable<City[]> {
-        return Cities.find();
+    findCities(): Observable<IAddress[]> {
+        return Addresses.find();
     }
 }
