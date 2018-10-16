@@ -1,5 +1,6 @@
 import {IProperty} from "../../../imports/models";
 import {Properties} from "../../../imports/collections/properties";
+import { BoundDirectivePropertyAst } from '@angular/compiler';
 
 
 Meteor.methods({
@@ -43,7 +44,8 @@ Meteor.methods({
         property.updatedAt = new Date();
         Properties.collection.update(property._id, {
             $set: {
-                location: property.location,
+                geLocation: property.geoLocation,
+                addressId: property.addressId,
                 name: property.name,
                 headline: property.headline,
                 summary: property.summary,

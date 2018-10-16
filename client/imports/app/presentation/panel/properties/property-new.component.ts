@@ -196,11 +196,11 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
         })
     }
 
-    addCity() {
-        console.log("Saving city ", this.geocodedCity);
-        MeteorObservable.call('addCity', this.geocodedCity).subscribe({
-            next: () => {
-                console.log('City saved')
+    addAddress() {
+        console.log("Saving address ", this.geocodedCity);
+        MeteorObservable.call('addAddress', this.geocodedCity).subscribe({
+            next: (addressId: string) => {
+                this.property.addressId = addressId;
             },
             error: (e: Error) => {
                 console.log(e);
@@ -209,7 +209,7 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
     }
 
     addOrSaveProperty() {
-        this.addCity();
+        this.addAddress();
         this.setPropertyObject();
         const methodName = this.property._id ? 'updateProperty' : 'insertProperty';
         MeteorObservable.call(methodName, this.property).subscribe({
