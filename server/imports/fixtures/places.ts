@@ -12,16 +12,7 @@ export function loadPlaces() {
             let place: IPlace = {
                 placeholder: [{language: 'en', text: placeholders[i]}],
                 title: [{language: 'en', text: titles[i]}],
-                isActive: true,
-                address: 'Trg bana jelacica',
-                city:{
-                  country: 'Croatia',
-                  cityName: 'Zagreb',
-                  cityId:22
-                },
-                numberOfRooms:5,
-                parking: true,
-                climate: true
+                isActive: true                
             };
             Places.collection.insert(place);
         }
