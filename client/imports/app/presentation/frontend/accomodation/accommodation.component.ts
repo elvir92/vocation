@@ -19,26 +19,28 @@ export class AccommodationComponent implements OnInit, OnDestroy {
     selected = '1';
 
     constructor(private route: ActivatedRoute) {
-
     }
 
     ngOnInit() {
-        this.getCities();
+        this.getAddresses();
         this.sub = this.route.params.subscribe(params => {
             this.accommodationType = params['accommodation'];
         });
     }
+
     ngOnDestroy() {
         this.sub.unsubscribe();
     }
-    getCities() {
+
+    getAddresses() {
         MeteorObservable.subscribe('addresses').takeUntil(componentDestroyed(this)).subscribe(() => {
             MeteorObservable.autorun().subscribe(() => {
-                this.addresses = this.findCities();
+                this.addresses = this.findAddresses();
             });
         });
     }
-    findCities(): Observable<IAddress[]> {
+
+    findAddresses(): Observable<IAddress[]> {
         return Addresses.find();
     }
 }

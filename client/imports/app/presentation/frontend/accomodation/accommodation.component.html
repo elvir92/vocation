@@ -3,7 +3,7 @@
             <h1 style="text-align: center;">Accommodation type:  {{accommodationType}}</h1>
          <mat-form-field style="margin-left: 4vh; padding: 1.5vh;">
           <mat-select [(value)]="selected" placeholder="City" >
-              <mat-option *ngFor="let item of cities | async" value="{{ item._id }}">{{ item.cityName }}</mat-option>
+              <mat-option *ngFor="let item of addresses | async" value="{{ item._id }}">{{ item.city }}</mat-option>
           </mat-select>
          </mat-form-field>
          <mat-form-field style="margin-left:4vh; padding: 1.5vh;">

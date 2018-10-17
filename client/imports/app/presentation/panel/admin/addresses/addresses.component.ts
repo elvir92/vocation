@@ -18,7 +18,7 @@ import { filter } from 'rxjs/operators';
     styleUrls: ['./addresses.component.scss']
 })
 
-export class CitiesComponent implements OnInit, OnDestroy {
+export class AddressesComponent implements OnInit, OnDestroy {
     list: Observable<IAddress[]>;
     dialogRef: MatDialogRef<AddressesDialog>;
 
@@ -41,6 +41,7 @@ export class CitiesComponent implements OnInit, OnDestroy {
 
 
     ngOnInit() {
+        //TODO: Make one unique list with country name and array of cities
         this.getAddresses();
     }
 
@@ -114,12 +115,11 @@ export class CitiesComponent implements OnInit, OnDestroy {
     getAddresses() {
         MeteorObservable.subscribe('addresses').takeUntil(componentDestroyed(this)).subscribe(() => {
             MeteorObservable.autorun().subscribe(() => {
-                this.list = this.findAddresses();
-            });
+                return this.findAddresses();});
         });
     }
 
-    findAddresses(): Observable<IAddress[]> {
+    findAddresses(): Observable<IAddress[]> {                
         return Addresses.find();
     }
 }
