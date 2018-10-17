@@ -6,16 +6,16 @@ import { FormGroup } from '@angular/forms';
 
 
 @Component({
-    selector: 'cities-dialog',
-    templateUrl: 'cities-dialog.component.html',
+    selector: 'addresses-dialog',
+    templateUrl: 'addresses-dialog.component.html',
 })
-export class CitiesDialog {
+export class AddressesDialog {
 
     form: FormGroup;
 
     constructor(
         private formBuilder: FormBuilder,
-        public dialogRef: MatDialogRef<CitiesDialog>,
+        public dialogRef: MatDialogRef<AddressesDialog>,
         @Inject(MAT_DIALOG_DATA) private data) { }
 
     ngOnInit() {

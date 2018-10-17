@@ -1,26 +1,26 @@
-import { CitiesDialog } from './cities-dialog.component';
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {City} from '../../../../../../../imports/models';
-import {Cities} from "../../../../../../../imports/collections/cities";
-import {Observable} from 'rxjs/Observable';
-import {MeteorObservable} from 'meteor-rxjs';
+import { AddressesDialog } from './addresses-dialog.component';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { IAddress } from '../../../../../../../imports/models';
+import { Addresses } from "../../../../../../../imports/collections/addresses";
+import { Observable } from 'rxjs/Observable';
+import { MeteorObservable } from 'meteor-rxjs';
 import 'rxjs/add/operator/combineLatest';
-import {FormGroup, FormBuilder, Validators} from "@angular/forms";
-import {NgbModal, NgbModalOptions, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
-import {ToasterService} from "angular2-toaster";
-import {componentDestroyed} from "ng2-rx-componentdestroyed";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { NgbModal, NgbModalOptions, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
+import { ToasterService } from "angular2-toaster";
+import { componentDestroyed } from "ng2-rx-componentdestroyed";
 import { MatDialogRef, MatDialog } from '@angular/material';
 import { filter } from 'rxjs/operators';
 
 @Component({
     //selector: 'app-dashboard',
-    templateUrl: './cities.component.html',
-    styleUrls: ['./cities.component.scss']
+    templateUrl: './addresses.component.html',
+    styleUrls: ['./addresses.component.scss']
 })
 
-export class CitiesComponent implements OnInit, OnDestroy {
-    list: Observable<City[]>;
-    dialogRef: MatDialogRef<CitiesDialog>;
+export class AddressesComponent implements OnInit, OnDestroy {
+    list: Observable<IAddress[]>;
+    dialogRef: MatDialogRef<AddressesDialog>;
 
     addNewForm: FormGroup;
     detailsForm: FormGroup;
@@ -31,8 +31,8 @@ export class CitiesComponent implements OnInit, OnDestroy {
     private toasterService: ToasterService;
 
     constructor(private _fb: FormBuilder,
-                toasterService: ToasterService,
-                public dialog: MatDialog) {
+        toasterService: ToasterService,
+        public dialog: MatDialog) {
         this.toasterService = toasterService;
     }
 
@@ -41,14 +41,14 @@ export class CitiesComponent implements OnInit, OnDestroy {
 
 
     ngOnInit() {
-        this.getCities();
+        //TODO: Make one unique list with country name and array of cities
+        this.getAddresses();
     }
 
     openDialog(item?): void {
-        this.dialogRef = this.dialog.open(CitiesDialog, {
+        this.dialogRef = this.dialog.open(AddressesDialog, {
             data: {
-                cityName: item ? item.cityName : '',
-
+                city: item ? item.city : '',
             }
         });
 
@@ -57,8 +57,8 @@ export class CitiesComponent implements OnInit, OnDestroy {
             .filter(values => values)
             .subscribe(values => {
                 if (item) {
-                    item.cityName = values.cityName;
-                    MeteorObservable.call('updateCity', item).subscribe({
+                    item.city = values.city;
+                    MeteorObservable.call('updateAddress', item).subscribe({
                         next: () => {
                             this.toasterService.pop('success', 'Args Title', "");
                         },
@@ -72,11 +72,12 @@ export class CitiesComponent implements OnInit, OnDestroy {
                         }
                     });
                 } else {
-                    let city: City = {
-                        cityName: values.cityName
+                    let address: IAddress = {
+                        city: values.city,
+                        country:null
                     };
 
-                    MeteorObservable.call('addCity', city).subscribe({
+                    MeteorObservable.call('addAddress', address).subscribe({
                         next: () => {
                             //this.toasterService.pop('success', 'Args Title', "");
                         },
@@ -93,9 +94,9 @@ export class CitiesComponent implements OnInit, OnDestroy {
             });
     }
 
-    delete(city: City): void {
-        if (city) {
-            MeteorObservable.call('removeCity', city).subscribe({
+    delete(address: IAddress): void {
+        if (address) {
+            MeteorObservable.call('removeAddress', address).subscribe({
                 next: () => {
 
                 },
@@ -111,15 +112,14 @@ export class CitiesComponent implements OnInit, OnDestroy {
         }
     }
 
-    getCities() {
-        MeteorObservable.subscribe('cities').takeUntil(componentDestroyed(this)).subscribe(() => {
+    getAddresses() {
+        MeteorObservable.subscribe('addresses').takeUntil(componentDestroyed(this)).subscribe(() => {
             MeteorObservable.autorun().subscribe(() => {
-                this.list = this.findCities();
-            });
+                return this.findAddresses();});
         });
     }
 
-    findCities(): Observable<City[]> {
-        return Cities.find();
+    findAddresses(): Observable<IAddress[]> {                
+        return Addresses.find();
     }
 }

@@ -19,13 +19,14 @@ export const menus = [
                 "open": false,
                 "admin": true,
             },
-            {
-                "name": "Cities",
+            //HIDE this for now
+            /*{
+                "name": "Addresses",
                 "icon": "explore",
-                "link": "/admin/cities",
+                "link": "/admin/addresses",
                 "open": false,
                 "admin": true,
-            },
+            },*/
             {
                 "name": "Listing",
                 "icon": "list",

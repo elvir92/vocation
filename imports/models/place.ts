@@ -7,6 +7,7 @@ export interface IPlace {
     isActive: boolean;
     address: string;
     city:{
+      country: string;
       cityName:string;
       cityId:number;
     };
