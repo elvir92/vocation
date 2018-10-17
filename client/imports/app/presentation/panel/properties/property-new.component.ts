@@ -186,7 +186,7 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
                         }
                     })
 
-                    geocodedCity.cityName = city[0].long_name;
+                    geocodedCity.city = city[0].long_name;
                     geocodedCity.country = country[0].long_name;
 
                     // postaviti gornji geocodecity na ovaj nekako
