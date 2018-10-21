@@ -48,6 +48,20 @@ export const menus = [
                 "open": false,
                 "admin": true,
             },
+            {
+                "name": "Bedroom types",
+                "icon": "compare arrows",
+                "link": "/admin/bedroom-types",
+                "open": false,
+                "admin": true,
+            },
+            {
+                "name": "Bathroom types",
+                "icon": "compare arrows",
+                "link": "/admin/bathroom-types",
+                "open": false,
+                "admin": true,
+            },
 
             {
                 "name": "Subscribers",
