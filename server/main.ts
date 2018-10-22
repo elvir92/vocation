@@ -5,6 +5,8 @@ import {loadLengthUnits} from "./imports/fixtures/length-unit";
 import {loadPropertyTypes} from "./imports/fixtures/property-type";
 import {loadAdminUser} from "./imports/fixtures/users";
 import {loadAddresses} from "./imports/fixtures/addresses";
+import {loadBedroomTypes} from "./imports/fixtures/bedroom-type";
+import {loadBathroomTypes} from "./imports/fixtures/bathroom-type";
 
 import './imports/publications/listing';
 import './imports/publications/lists';
@@ -15,6 +17,8 @@ import './imports/publications/properties';
 import './imports/publications/pictures';
 import './imports/publications/emails';
 import './imports/publications/property_types';
+import './imports/publications/bedroom_types';
+import './imports/publications/bathroom_types';
 import './imports/publications/addresses';
 
 import './imports/methods/lists_groups';
@@ -27,6 +31,8 @@ import './imports/methods/email';
 import './imports/methods/addresses';
 import './imports/methods/users';
 import './imports/methods/property_types';
+import './imports/methods/bedroom_types';
+import './imports/methods/bathroom_types';
 
 
 Meteor.startup(() => {
@@ -38,6 +44,8 @@ Meteor.startup(() => {
     loadLengthUnits();
     loadLengthUnits();
     loadPropertyTypes();
+    loadBedroomTypes();
+    loadBathroomTypes();
 
     if (Meteor.isServer) {
         //console.log(process.env.PWD);

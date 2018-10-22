@@ -1,0 +1,16 @@
+<form [formGroup]="form" (ngSubmit)="submit(form)">
+    <h1 mat-dialog-title>Bedroom type</h1>
+    <div class="row">
+        <mat-dialog-content>
+            <mat-form-field>
+                <input matInput formControlName="type" placeholder="Enter bedroom type">
+            </mat-form-field>
+        </mat-dialog-content>
+    </div>
+    <div class="row">
+        <mat-dialog-actions>
+            <button mat-button type="submit">Save</button>
+            <button mat-button type="button" mat-dialog-close>Cancel</button>
+        </mat-dialog-actions>
+    </div>
+</form>

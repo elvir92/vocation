@@ -1,3 +1,5 @@
+import { BathroomTypeComponent } from './bathroom-type/bathroom-type.component';
+import { BedroomTypeDialog } from './bedroom-type/bedroom-type-dialog.component';
 import { LengthUnitDialog } from './length-unit/lenght-unit-dialog.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgModule } from '@angular/core';
@@ -30,6 +32,8 @@ import { PlacesDialog } from './places/places-dialog.component';
 import { AddressesDialog } from './addresses/addresses-dialog.component';
 import { ListGroupAddNewDialog } from './listing/list-group-add-new-dialog.component';
 import { ListGroupDetailDialog } from './listing/list-group-detail-dialog.component';
+import { BedroomTypeComponent } from './bedroom-type/bedroom-type.component';
+import { BathroomTypeDialog } from './bathroom-type/bathroom-type-dialog.component';
 
 @NgModule({
     imports: [
@@ -59,6 +63,8 @@ import { ListGroupDetailDialog } from './listing/list-group-detail-dialog.compon
         LengthUnitDialog, 
         PlacesDialog, 
         AddressesDialog, 
+        BedroomTypeDialog,
+        BathroomTypeDialog,
         ListGroupAddNewDialog, 
         ListGroupDetailDialog],
     declarations: [
@@ -68,9 +74,13 @@ import { ListGroupDetailDialog } from './listing/list-group-detail-dialog.compon
         ListGroupDetailComponent,
         LengthUnitComponent,
         PropertyTypeComponent,
+        BedroomTypeComponent,
+        BathroomTypeComponent,
         SubscribersComponent,
         LengthUnitDialog,
         PropertyTypeDialog,
+        BedroomTypeDialog,
+        BathroomTypeDialog,
         PlacesDialog,
         AddressesDialog,
         ListGroupAddNewDialog,

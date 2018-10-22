@@ -1,3 +1,5 @@
+import { BathroomTypeComponent } from './bathroom-type/bathroom-type.component';
+import { BedroomTypeComponent } from './bedroom-type/bedroom-type.component';
 import { Routes } from '@angular/router';
 import { PlacesComponent } from "./places/places.component";
 import { AddressesComponent } from "./addresses/addresses.component";
@@ -56,6 +58,22 @@ export const AdminRoutes: Routes = [
                 component: PropertyTypeComponent,
                 data: {
                     title: 'Property types'
+                },
+                pathMatch: 'full'
+            },
+            {
+                path: 'bedroom-types',
+                component: BedroomTypeComponent,
+                data: {
+                    title: 'Bedroom types'
+                },
+                pathMatch: 'full'
+            },
+            {
+                path: 'bathroom-types',
+                component: BathroomTypeComponent,
+                data: {
+                    title: 'Bathroom types'
                 },
                 pathMatch: 'full'
             },
