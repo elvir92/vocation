@@ -1,14 +1,19 @@
 <mat-form-field class="full-width">
     <input matInput placeholder="Type your location"
            autocorrect="off"
-           autocapitalize="off"
-           spellcheck="off" type="text" #search
+           autocapitalize="on"
+           spellcheck="off" 
+           type="text" 
+           #search
            [formControl]="searchControl">
 </mat-form-field>
 
-<agm-map [latitude]="location.latitude"
+<agm-map 
+         (mapReady)="mapReady()" 
+         [latitude]="location.latitude"
          [longitude]="location.longitude"
-         [zoom]="zoom" [scrollwheel]="false"
+         [zoom]="zoom" 
+         [scrollwheel]="false"
          (mapClick)="mapClicked($event)">
     <agm-marker [latitude]="location.latitude"
                 [longitude]="location.longitude"

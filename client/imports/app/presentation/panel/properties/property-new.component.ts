@@ -16,7 +16,8 @@ import {
     ILengthUnit,
     ILocation,
     IAddress,
-    IPropertyType
+    IPropertyType,
+    IPropertyPrice
 } from '../../../../../../imports/models';
 import { Pictures, ListsGroups, Lists, Places, LengthUnits, PropertyTypes } from "../../../../../../imports/collections";
 // import { } from 'googlemaps';
@@ -44,7 +45,6 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
 
     geocodedCity: IAddress = { city: null, country: null };
 
-    pricing = [];
     basePrice = new FormControl();
 
     periodName = new FormControl();
@@ -60,10 +60,13 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
             longitude: 0,
             latitude: 0,
             formattedAddress: '',
-            mapObject: null
+            mapObject: null,
+            city: null,
+            country: null
         },
         activities: [],
         images: [],
+        pricing: [],
         places: [],
         isActive: false,
         isEditMode: true
@@ -98,27 +101,27 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
 
     addNewPeriodPrice() {
         //TODO: Validirati period da li je vec dodan
-        const price = {
+        const price: IPropertyPrice = {
             name: this.periodName.value,
             start: this.startPricePeriod.value,
             end: this.endPricePeriod.value,
             value: this.valuePricePeriod.value
         };
         let isValid = this.checkIfDateIsValid(price.start, price.end);
-        if(isValid){
-            this.pricing.push(price); 
+        if (isValid) {
+            this.property.pricing.push(price);
             //TODO: make reset function
-            this.startPricePeriod.reset();           
-            this.endPricePeriod.reset();           
-            this.periodName.reset();           
-            this.valuePricePeriod.reset();           
+            this.startPricePeriod.reset();
+            this.endPricePeriod.reset();
+            this.periodName.reset();
+            this.valuePricePeriod.reset();
         }
         //TODO: add toast notification
     }
 
-    removePrice(price){
-        let i = this.pricing.findIndex( p => p === price);
-        this.pricing.splice(i, 1);
+    removePrice(price) {
+        let i = this.property.pricing.findIndex(p => p === price);
+        this.property.pricing.splice(i, 1);
     }
 
     onImage(imageId: string) {
@@ -146,64 +149,30 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
     }
 
     onChangeLocation(location: ILocation) {
-        this.property.geoLocation = location;
-        //TODO: can we move this logic inside location component, so location component just retunr location object ( we can use location.mapObject to filter other data like city & country)
-        this.onReverseGeocode(location, this.geocodedCity);
+        this.property.geoLocation = location;        
     }
-
-    onReverseGeocode(location, geocodedCity) {
-        this.mapsAPILoader.load().then(() => {
-            let geocoder = new google.maps.Geocoder;
-            let latlng = { lat: location.latitude, lng: location.longitude };
-
-            geocoder.geocode({ 'location': latlng }, function (results, status) {
-                console.log(results, status, latlng, geocodedCity);
-                //here we keep the full google map response
-                //this we can maybe use latter on for some other filters , so its better to have it saved.
-                location.mapObject = results;
-
-                if (results[0]) {
-                    location.formattedAddress = results[0].formatted_address;
-                    let country = results[0].address_components.filter(value => {
-                        if (value.types.some(type => type === 'country')) {
-                            return value;
-                        }
-                    });
-                    let city = results[0].address_components.filter(value => {
-                        if (value.types.some(type => type === 'locality')) {
-                            return value;
-                        }
-                    })
-
-                    geocodedCity.city = city[0].long_name;
-                    geocodedCity.country = country[0].long_name;
-
-                    // postaviti gornji geocodecity na ovaj nekako
-                    //this.geocodedCity = geocodedCity;
+    
+    /*
+        addAddress() {
+            console.log("Saving address ", this.geocodedCity);
+            MeteorObservable.call('addAddress', this.geocodedCity).subscribe({
+                next: (addressId: string) => {
+                    this.property.addressId = addressId;
+                },
+                error: (e: Error) => {
+                    console.log(e);
                 }
             });
-        })
-    }
+        }
+    */
+    nextStep(index: number) {
 
-    addAddress() {
-        console.log("Saving address ", this.geocodedCity);
-        MeteorObservable.call('addAddress', this.geocodedCity).subscribe({
-            next: (addressId: string) => {
-                this.property.addressId = addressId;
-            },
-            error: (e: Error) => {
-                console.log(e);
-            }
-        });
-    }
-
-    nextStep(index:number){
-        
     }
 
     addOrSaveProperty() {
         //TODO: Skontat bolje spremanje adrese. problem kako je mapirat na property....                        
-        this.setPropertyObject();        
+        this.setPropertyObject();
+
         const methodName = this.property._id ? 'updateProperty' : 'insertProperty';
         MeteorObservable.call(methodName, this.property).subscribe({
             next: (propertyId: string) => {
@@ -225,10 +194,10 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
     }
 
     //---------------------------------PRIVATE FUNCTIONS--------------------------------
-    private checkIfDateIsValid(start,end): Boolean {
+    private checkIfDateIsValid(start, end): Boolean {
         let valid = true;
-        for (let i = 0; i < this.pricing.length; i++) {
-            const price = this.pricing[i];
+        for (let i = 0; i < this.property.pricing.length; i++) {
+            const price = this.property.pricing[i];
             if ((start >= price.start && start <= price.end) || (end >= price.start && end <= price.end)) {
                 valid = false;
                 return;
@@ -243,6 +212,8 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
         this.property.summary = [{ text: this.descriptionForm.value.propertySummary, language: 'en' }];
         this.property.description = [{ text: this.descriptionForm.value.propertyDescription, language: 'en' }];
 
+        this.property.basePrice = this.basePrice.value;
+
         for (let i in this.propertyForm.value.places) {
             let plVal = this.propertyForm.value.places[i];
             if (plVal.title) {
@@ -256,7 +227,7 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
             }
         }
         console.log(this.property);
-        
+
     }
 
     private initPlaceForm(placeId: string) {
@@ -287,7 +258,7 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
     private findPictures() {
         this.pictures = Pictures.find({ _id: { $in: this.property.images } });
     }
-    
+
     private getPropertyTypes() {
         MeteorObservable.subscribe('property-types').takeUntil(componentDestroyed(this)).subscribe(() => {
             MeteorObservable.autorun().subscribe(() => {
@@ -295,8 +266,8 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
             });
         });
     }
-    
-    private findPropertyTypes():IPropertyType [] {
+
+    private findPropertyTypes(): IPropertyType[] {
         return PropertyTypes.find().fetch();
     }
 

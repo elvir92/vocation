@@ -1,20 +1,21 @@
-import {ILocation} from "./geo_location";
-import {ILengthUnit} from "./length_unit";
-import {IText} from "./text";
-import {IPicture} from "./picture";
+import { ILocation } from "./geo_location";
+import { ILengthUnit } from "./length_unit";
+import { IText } from "./text";
+import { IPicture } from "./picture";
 
 export interface IProperty {
     _id?: string;
-    userId?: string;
-    addressId?: string;
+    userId?: string;    
     propertyTypeId?: string;
-    name?: IText [];
-    headline?: IText [];
-    summary?: IText [];
-    description?: IText [];
+    name?: IText[];
+    headline?: IText[];
+    summary?: IText[];
+    description?: IText[];
     geoLocation?: ILocation;
     activities?: string[];
     images?: string[];
+    pricing?: IPropertyPrice[];
+    basePrice?: number;
     places?: IPropertyPlace[];
     insertedAt?: Date;
     updatedAt?: Date;
@@ -22,9 +23,16 @@ export interface IProperty {
     isEditMode: boolean;
 }
 
+export interface IPropertyPrice {
+    name: string;
+    start: Date;
+    end: Date;
+    value: string;
+}
+
 export interface IPropertyPlace {
     placeId: string;
-    title: IText [],
+    title: IText[],
     distanceValue: string,
     distanceType: ILengthUnit
 }
@@ -32,5 +40,5 @@ export interface IPropertyPlace {
 
 export interface IPropertyPictures {
     property: IProperty;
-    pictures: IPicture [],
+    pictures: IPicture[],
 }

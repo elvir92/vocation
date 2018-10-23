@@ -40,7 +40,7 @@ Meteor.startup(() => {
     loadAdminUser();
     loadListGroupsAndLists();
     loadPlaces();
-    loadAddresses();
+    // loadAddresses();
     loadLengthUnits();
     loadLengthUnits();
     loadPropertyTypes();
