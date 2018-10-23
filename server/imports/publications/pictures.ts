@@ -1,9 +1,11 @@
 import {Meteor} from 'meteor/meteor';
+import {Mongo} from 'meteor/mongo';
+
 import {IPicture} from "../../../imports/models";
 import {Pictures} from "../../../imports/collections";
 
 
-Meteor.publish('pictures-by-ids', function (ids: string[]): Mongo.Cursor<IPicture> {
+Meteor.publish('pictures-by-ids', function (ids: string[]) {
     const userId = this.userId;
     if (!userId) {
         return;
@@ -15,7 +17,7 @@ Meteor.publish('pictures-by-ids', function (ids: string[]): Mongo.Cursor<IPictur
     return Pictures.collection.find({userId, _id: {$in: ids}, isActive: true});
 });
 
-Meteor.publish('pictures', function (): Mongo.Cursor<IPicture> {
+Meteor.publish('pictures', function () {
     const userId = this.userId;
     if (!userId) {
         return;

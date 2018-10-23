@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import {IProfile} from "../../../imports/models";
 
 Meteor.methods({

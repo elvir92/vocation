@@ -8,11 +8,40 @@
             <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
                 <div fxFlex.xs="100">
                     <mat-horizontal-stepper [linear]="isLinear">
+
+                        // TODO: POTREBNE INFO : Odabir tip apartmana, velicina apartmana u kvadratima,
+                        // odabir lokacije, description, naziv apartmana, headline, spavace sobe, wc, places, nearBy,
+                        ostale atrakcije i aktivnosti,
+                        // unos cijenovnika po nocenju,
+                        //TODO: ADD CONTACT LANGUAGE ON MY PROFILE
+                        //TODO: ADD Description on Photos
+
                         <!--location stepp-->
                         <mat-step [stepControl]="locationValidation">
                             <ng-template matStepLabel>Location</ng-template>
 
                             <mat-divider></mat-divider>
+
+                            <!-- <mat-form-field>
+                                <mat-select placeholder="Select property type" [formControl]="animalControl" required>
+                                  <mat-option>--</mat-option>
+                                  <mat-option *ngFor="let animal of animals" [value]="animal">
+                                    {{animal.name}}
+                                  </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error>
+                                <mat-hint>{{animalControl.value?.sound}}</mat-hint>
+                              </mat-form-field> -->
+
+
+                            <mat-form-field class="full-width">
+                                <mat-select placeholder="Select property type" [(ngModel)]="property.propertyId"
+                                    required>
+                                    <mat-option *ngFor="let item of propertyTypes" [value]="item._id">
+                                        {{item.type[0].text}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
 
 
                             <app-location (onChange)="onChangeLocation($event)"></app-location>
@@ -29,6 +58,7 @@
                             </div>
 
                         </mat-step>
+
                         <!--Pricing-->
                         <mat-step>
                             <ng-template matStepLabel>Pricing</ng-template>
@@ -148,6 +178,7 @@
                             </form>
 
                         </mat-step>
+
                         <!--Activities step-->
                         <mat-step>
                             <ng-template matStepLabel>Activities</ng-template>
@@ -185,6 +216,7 @@
                             </div>
 
                         </mat-step>
+
                         <!--Descriptions-->
                         <mat-step [stepControl]="descriptionForm">
                             <form [formGroup]="descriptionForm">
@@ -246,6 +278,31 @@
 
                             </form>
                         </mat-step>
+
+                        <!--Something-->
+                        <mat-step>
+                            <ng-template matStepLabel>Something</ng-template>
+                            <h1>Something</h1>
+                            <mat-divider></mat-divider>
+
+                            <div fxLayout="row">
+                                <div fxLayout="row" fxFlex="50" fxLayoutAlign="start center">
+                                    <button mat-button matStepperPrevious>
+                                        <mat-icon>navigate_before</mat-icon>
+                                        Back
+                                    </button>
+                                </div>
+
+                                <div fxLayout="row" fxFlex="50" fxLayoutAlign="end center">
+                                    <div fxLayoutAlign="end">
+                                        <button mat-button matStepperNext (click)="saveProperty()">
+                                            Next
+                                            <mat-icon>navigate_next</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-step>
                         <!--Photos-->
                         <mat-step>
                             <ng-template matStepLabel>Photos</ng-template>
@@ -282,7 +339,7 @@
                                 <div fxLayout="row" fxFlex="50" fxLayoutAlign="end center">
                                     <div fxLayoutAlign="end">
                                         <button mat-button matStepperNext (click)="saveProperty()">
-                                            Next
+                                            Publish
                                             <mat-icon>navigate_next</mat-icon>
                                         </button>
                                     </div>

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {Router} from "@angular/router";
 import { User } from '../../../../../imports/models/user'
 import {errorMessages,regExps} from '../../../../../imports/models/validationModule'
+import {Accounts} from 'meteor/accounts-base';
 
 @Component({
   selector: 'register',

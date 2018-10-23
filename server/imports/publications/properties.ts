@@ -1,4 +1,7 @@
 import {Meteor} from 'meteor/meteor';
+import {Mongo} from 'meteor/mongo';
+import { publishComposite } from 'meteor/reywood:publish-composite';
+
 import {IProperty} from "../../../imports/models";
 import {Properties} from "../../../imports/collections";
 import {Pictures} from "../../../imports/collections/pictures";
@@ -6,7 +9,7 @@ import {IMongoOptions} from "../../../imports/models/mongo-options";
 import {IPicture} from "../../../imports/models/picture";
 
 
-Meteor.publish('backend-properties', function (limit?: number, skip?: number): Mongo.Cursor<IProperty> {
+Meteor.publish('backend-properties', function (limit?: number, skip?: number) {
     const userId = this.userId;
     if (!userId) {
         return;
@@ -20,7 +23,7 @@ Meteor.publish('backend-properties', function (limit?: number, skip?: number): M
     return options ? Properties.collection.find({userId}, options) : Properties.collection.find({userId});
 });
 
-Meteor.publishComposite('properties', function (limit?: number, skip?: number): PublishCompositeConfig<IProperty> {
+publishComposite('properties', function (limit?: number, skip?: number){
     let options: IMongoOptions = {
         skip: skip,
         limit: limit,

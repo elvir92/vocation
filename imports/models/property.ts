@@ -7,6 +7,7 @@ export interface IProperty {
     _id?: string;
     userId?: string;
     addressId?: string;
+    propertyTypeId?: string;
     name?: IText [];
     headline?: IText [];
     summary?: IText [];

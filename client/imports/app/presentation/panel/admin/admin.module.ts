@@ -63,10 +63,12 @@ import { BathroomTypeDialog } from './bathroom-type/bathroom-type-dialog.compone
         LengthUnitDialog, 
         PlacesDialog, 
         AddressesDialog, 
+        PropertyTypeDialog,
         BedroomTypeDialog,
         BathroomTypeDialog,
         ListGroupAddNewDialog, 
-        ListGroupDetailDialog],
+        ListGroupDetailDialog        
+    ],
     declarations: [
         PlacesComponent,
         AddressesComponent,
@@ -77,14 +79,15 @@ import { BathroomTypeDialog } from './bathroom-type/bathroom-type-dialog.compone
         BedroomTypeComponent,
         BathroomTypeComponent,
         SubscribersComponent,
+
         LengthUnitDialog,
+        PlacesDialog,
+        AddressesDialog,
         PropertyTypeDialog,
         BedroomTypeDialog,
         BathroomTypeDialog,
-        PlacesDialog,
-        AddressesDialog,
         ListGroupAddNewDialog,
-        ListGroupDetailDialog
+        ListGroupDetailDialog,        
     ]
 })
 

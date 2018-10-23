@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { MeteorObservable } from 'meteor-rxjs';
 import { Observable } from 'rxjs';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MapsAPILoader } from "@agm/core";
-import { IAddress } from '../../../../../../imports/models/address';
+import { componentDestroyed } from "ng2-rx-componentdestroyed";
+
 import {
     IPicture,
     IListing,
@@ -13,13 +14,13 @@ import {
     IList,
     IPlace,
     ILengthUnit,
-    ILocation
+    ILocation,
+    IAddress,
+    IPropertyType
 } from '../../../../../../imports/models';
-import { Pictures, ListsGroups, Lists, Places, LengthUnits } from "../../../../../../imports/collections";
-import { } from 'googlemaps';
+import { Pictures, ListsGroups, Lists, Places, LengthUnits, PropertyTypes } from "../../../../../../imports/collections";
+// import { } from 'googlemaps';
 
-import { Router } from "@angular/router";
-import { componentDestroyed } from "ng2-rx-componentdestroyed";
 
 @Component({
     //selector: 'app-',
@@ -39,6 +40,7 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
     pictures: Observable<IPicture[]>;
     places: IPlace[];
     lengthUnits: ILengthUnit[];
+    propertyTypes: IPropertyType[];
 
     geocodedCity: IAddress = { city: null, country: null };
 
@@ -67,20 +69,6 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
         isEditMode: true
     };
 
-
-    startDate = new Date(1990, 0, 1);
-    date = new FormControl(new Date());
-    serializedDate = new FormControl((new Date()).toISOString())
-    minDate = new Date(2000, 0, 1);
-    maxDate = new Date(2020, 0, 1);
-    events: string[] = [];
-    myFilter = (d: Date): boolean => {
-        const day = d.getDay();
-
-        return day !== 0 && day !== 6;
-    };
-
-
     constructor(private _fb: FormBuilder, private router: Router, private mapsAPILoader: MapsAPILoader) {
         //console.log("properties const");
     }
@@ -90,6 +78,7 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
         this.getLengthUnits();
         this.getPlaces();
         this.getPictures();
+        this.getPropertyTypes();
 
         this.propertyForm = this._fb.group({
             places: this._fb.array([])
@@ -208,9 +197,13 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
         });
     }
 
+    nextStep(index:number){
+        
+    }
+
     addOrSaveProperty() {
-        this.addAddress();
-        this.setPropertyObject();
+        //TODO: Skontat bolje spremanje adrese. problem kako je mapirat na property....                        
+        this.setPropertyObject();        
         const methodName = this.property._id ? 'updateProperty' : 'insertProperty';
         MeteorObservable.call(methodName, this.property).subscribe({
             next: (propertyId: string) => {
@@ -262,6 +255,8 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
                 });
             }
         }
+        console.log(this.property);
+        
     }
 
     private initPlaceForm(placeId: string) {
@@ -291,6 +286,18 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
 
     private findPictures() {
         this.pictures = Pictures.find({ _id: { $in: this.property.images } });
+    }
+    
+    private getPropertyTypes() {
+        MeteorObservable.subscribe('property-types').takeUntil(componentDestroyed(this)).subscribe(() => {
+            MeteorObservable.autorun().subscribe(() => {
+                this.propertyTypes = this.findPropertyTypes();
+            });
+        });
+    }
+    
+    private findPropertyTypes():IPropertyType [] {
+        return PropertyTypes.find().fetch();
     }
 
     private getListing() {

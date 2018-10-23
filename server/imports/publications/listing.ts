@@ -1,8 +1,10 @@
-import {Meteor} from 'meteor/meteor';
+import { publishComposite } from 'meteor/reywood:publish-composite';
+
+
 import {IList, IListGroup, IMongoOptions} from "../../../imports/models";
 import {Lists, ListsGroups} from "../../../imports/collections";
 
-Meteor.publishComposite('listing', function (limit?: number, skip?: number): PublishCompositeConfig<IListGroup> {
+publishComposite('listing', function (limit?: number, skip?: number) {
     if (!this.userId) {
         return;
     }
@@ -12,7 +14,7 @@ Meteor.publishComposite('listing', function (limit?: number, skip?: number): Pub
         limit: limit,
     };
     //console.log(options);
-
+    
     return {
         find: () => {
             return options ? ListsGroups.collection.find({}, options) : ListsGroups.collection.find({});
@@ -27,7 +29,7 @@ Meteor.publishComposite('listing', function (limit?: number, skip?: number): Pub
     };
 });
 
-Meteor.publishComposite('listing-by-group', function (groupId: string): PublishCompositeConfig<IListGroup> {
+publishComposite('listing-by-group', function (groupId: string) {
     //console.log("publish listing-by-group");
     if (!this.userId) {
         return;

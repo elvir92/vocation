@@ -2,7 +2,7 @@ import {Meteor} from 'meteor/meteor';
 import {IMongoOptions, IListGroup} from "../../../imports/models";
 import {ListsGroups} from "../../../imports/collections";
 
-Meteor.publish('lists-groups', function (limit?: number, skip?: number): Mongo.Cursor<IListGroup> {
+Meteor.publish('lists-groups', function (limit?: number, skip?: number) {
 
     //if (!this.userId || !("role" in Meteor.user() && Meteor.user().role == "admin" )) {
     if (!this.userId) {
