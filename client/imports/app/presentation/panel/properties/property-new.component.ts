@@ -20,8 +20,6 @@ import {
     IPropertyPrice
 } from '../../../../../../imports/models';
 import { Pictures, ListsGroups, Lists, Places, LengthUnits, PropertyTypes } from "../../../../../../imports/collections";
-// import { } from 'googlemaps';
-
 
 @Component({
     //selector: 'app-',
@@ -35,30 +33,18 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
     // Tako da se moze nastaviti kao pravi draft.
     isLinear = true;
 
-    locationValidation = false;
-
     listing: Observable<IListing[]>;
     pictures: Observable<IPicture[]>;
     places: IPlace[];
     lengthUnits: ILengthUnit[];
     propertyTypes: IPropertyType[];
-
-    geocodedCity: IAddress = { city: null, country: null };
-
-    basePrice = new FormControl();
-
-    periodName = new FormControl();
-    startPricePeriod = new FormControl();
-    endPricePeriod = new FormControl();
-    valuePricePeriod = new FormControl();
-
-    propertyForm: FormGroup;
-    descriptionForm: FormGroup;
-
+    //main object to save
     property: IProperty = {
+        propertySize:0,
+        maxGuest:0,
         geoLocation: {
-            longitude: 0,
-            latitude: 0,
+            longitude: null,
+            latitude: null,
             formattedAddress: '',
             mapObject: null,
             city: null,
@@ -71,6 +57,16 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
         isActive: false,
         isEditMode: true
     };
+    // geocodedCity: IAddress = { city: null, country: null }; //releted with addAddress method
+
+    //forms for validating wizard    
+    locationForm:FormGroup;
+    detailForm:FormGroup;
+    priceForm:FormGroup;
+    
+    propertyForm: FormGroup;
+    // descriptionForm: FormGroup;
+
 
     constructor(private _fb: FormBuilder, private router: Router, private mapsAPILoader: MapsAPILoader) {
         //console.log("properties const");
@@ -84,15 +80,34 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
         this.getPropertyTypes();
 
         this.propertyForm = this._fb.group({
-            places: this._fb.array([])
+            places: this._fb.array([]),            
+            basePrice: ['', Validators.required],            
         });
-
-        this.descriptionForm = this._fb.group({
+        
+        this.locationForm = this._fb.group({
+            propertyType: ['', Validators.required],
+            longitude: ['', Validators.required],
+            latitude: ['', Validators.required]
+        });
+        
+        this.detailForm = this._fb.group({
             propertyName: ['', Validators.required],
             propertyHeadline: ['', Validators.required],
             propertySummary: ['', Validators.required],
             propertyDescription: ['', Validators.required],
+            bedroomDescription: [''],
+            bathroomDescription: [''],            
+            propertySize: ['', Validators.required],            
+            maxGuest: ['', Validators.required],
         });
+
+        this.priceForm = this._fb.group({
+            basePrice: ['', Validators.required],
+            periodName: [''],
+            startPricePeriod: [''],
+            endPricePeriod: [''],
+            valuePricePeriod: [''],
+        })
 
     }
 
@@ -102,19 +117,19 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
     addNewPeriodPrice() {
         //TODO: Validirati period da li je vec dodan
         const price: IPropertyPrice = {
-            name: this.periodName.value,
-            start: this.startPricePeriod.value,
-            end: this.endPricePeriod.value,
-            value: this.valuePricePeriod.value
+            name: this.priceForm.value.periodName,
+            start: this.priceForm.value.startPricePeriod,
+            end: this.priceForm.value.endPricePeriod,
+            value: this.priceForm.value.valuePricePeriod
         };
         let isValid = this.checkIfDateIsValid(price.start, price.end);
         if (isValid) {
             this.property.pricing.push(price);
             //TODO: make reset function
-            this.startPricePeriod.reset();
-            this.endPricePeriod.reset();
-            this.periodName.reset();
-            this.valuePricePeriod.reset();
+            this.priceForm.controls['periodName'].reset();
+            this.priceForm.controls['startPricePeriod'].reset();
+            this.priceForm.controls['endPricePeriod'].reset();
+            this.priceForm.controls['valuePricePeriod'].reset();            
         }
         //TODO: add toast notification
     }
@@ -149,7 +164,9 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
     }
 
     onChangeLocation(location: ILocation) {
-        this.property.geoLocation = location;        
+        this.property.geoLocation = location;                
+        this.locationForm.controls['longitude'].setValue(this.property.geoLocation.longitude);        
+        this.locationForm.controls['latitude'].setValue(this.property.geoLocation.latitude);
     }
     
     /*
@@ -165,11 +182,8 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
             });
         }
     */
-    nextStep(index: number) {
 
-    }
-
-    addOrSaveProperty() {
+    updateProperty() {
         //TODO: Skontat bolje spremanje adrese. problem kako je mapirat na property....                        
         this.setPropertyObject();
 
@@ -188,7 +202,7 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
     saveProperty() {
         this.property.isEditMode = false;
         this.property.isActive = true;
-        this.addOrSaveProperty();
+        this.updateProperty();
 
         this.router.navigate(['/properties']);
     }
@@ -207,12 +221,22 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
     }
 
     private setPropertyObject(): void {
-        this.property.name = [{ text: this.descriptionForm.value.propertyName, language: 'en' }];
-        this.property.headline = [{ text: this.descriptionForm.value.propertyHeadline, language: 'en' }];
-        this.property.summary = [{ text: this.descriptionForm.value.propertySummary, language: 'en' }];
-        this.property.description = [{ text: this.descriptionForm.value.propertyDescription, language: 'en' }];
+        //set 1 wizard step
+        this.property.propertyTypeId = this.locationForm.value.propertyType;
+        //geoLocation is mapped on location change
+        
+        //set 2 wizard step
+        this.property.name = [{ text: this.detailForm.value.propertyName, language: 'en' }];
+        this.property.headline = [{ text: this.detailForm.value.propertyHeadline, language: 'en' }];
+        this.property.summary = [{ text: this.detailForm.value.propertySummary, language: 'en' }];
+        this.property.description = [{ text: this.detailForm.value.propertyDescription, language: 'en' }];
+        this.property.bedroomDescription = [{ text: this.detailForm.value.bedroomDescription, language: 'en' }];
+        this.property.bathroomDescription = [{ text: this.detailForm.value.bathroomDescription, language: 'en' }];
+        this.property.propertySize = this.detailForm.value.propertySize;
+        this.property.maxGuest = this.detailForm.value.maxGuest;        
 
-        this.property.basePrice = this.basePrice.value;
+        //set 3 wizard step
+        this.property.basePrice = this.priceForm.value.basePrice;
 
         for (let i in this.propertyForm.value.places) {
             let plVal = this.propertyForm.value.places[i];
@@ -227,7 +251,6 @@ export class PropertyNewComponent implements OnInit, OnDestroy {
             }
         }
         console.log(this.property);
-
     }
 
     private initPlaceForm(placeId: string) {

@@ -11,6 +11,10 @@ export interface IProperty {
     headline?: IText[];
     summary?: IText[];
     description?: IText[];
+    bedroomDescription?: IText[];
+    bathroomDescription?: IText[];
+    propertySize: 0,
+    maxGuest: 0,
     geoLocation?: ILocation;
     activities?: string[];
     images?: string[];

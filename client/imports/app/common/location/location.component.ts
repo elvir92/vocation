@@ -13,9 +13,11 @@ import { MapsAPILoader } from "@agm/core";
 export class LocationComponent implements OnInit, AfterViewInit {
     @Output() onChange: EventEmitter<ILocation> = new EventEmitter<ILocation>();
 
+    showMarker: boolean = false;
+
     location: ILocation = {
-        longitude: 39.8282,
-        latitude: -98.5795,
+        longitude: null,
+        latitude: null,
         formattedAddress: null,
         mapObject: null,
         city: null,
@@ -26,7 +28,7 @@ export class LocationComponent implements OnInit, AfterViewInit {
     geocoder: google.maps.Geocoder;
 
     searchControl: FormControl;
-    zoom: number = 4;
+    zoom: number = 2;
 
     @ViewChild("search")
     searchElementRef: ElementRef;
@@ -44,7 +46,6 @@ export class LocationComponent implements OnInit, AfterViewInit {
         //set current position
         this.setCurrentPosition();
         this.findAdress();
-
     }
 
 
@@ -58,6 +59,7 @@ export class LocationComponent implements OnInit, AfterViewInit {
 
             this.autocomplete.addListener("place_changed", () => {
                 this.ngZone.run(() => {
+                    this.showMarker = true;
                     //get the place result                    
                     let place: google.maps.places.PlaceResult = this.autocomplete.getPlace();
                     //verify result
@@ -69,78 +71,79 @@ export class LocationComponent implements OnInit, AfterViewInit {
                     this.location.longitude = place.geometry.location.lng();
                     this.location.formattedAddress = place.formatted_address;
                     this.zoom = 14;
-                    this.emitChanges();
+                    this.getFullLocation();
                 });
             });
         });
     }
 
     mapReady() {
-        this.emitChanges();
+        this.getFullLocation();
     }
 
     markerDragEnd($event) {
         this.location.latitude = $event.coords.lat;
         this.location.longitude = $event.coords.lng;
-        this.emitChanges();
+        this.getFullLocation();
     }
 
     mapClicked($event) {
         this.location.latitude = $event.coords.lat;
         this.location.longitude = $event.coords.lng;
-        this.emitChanges();
-    }
-
-    private emitChanges() {
         this.getFullLocation();
     }
 
     private getFullLocation() {
         if (!this.location.latitude || !this.location.longitude) return;
 
+        this.showMarker = true;
+        
         let request = { 'location': { lat: this.location.latitude, lng: this.location.longitude } };
 
-        this.geocoder.geocode(request, (results, status) => {
-            this.location.mapObject = results;
+        if (this.geocoder)
+            this.geocoder.geocode(request, (results, status) => {
+                this.location.mapObject = results;
 
-            if (status === google.maps.GeocoderStatus.OK) {
-                let result = results[0];
+                if (status === google.maps.GeocoderStatus.OK) {
+                    let result = results[0];
 
-                if (result) {
-                    this.location.formattedAddress = result.formatted_address;
+                    if (result) {
+                        this.location.formattedAddress = result.formatted_address;
+                        this.searchControl.setValue(this.location.formattedAddress);
 
-                    let country = result.address_components.filter(value => {
-                        if (value.types.some(type => type === 'country')) {
-                            return value;
+                        let country = result.address_components.filter(value => {
+                            if (value.types.some(type => type === 'country')) {
+                                return value;
+                            }
+                        });
+                        if (country && country.length > 0) {
+                            this.location.country = country[0].long_name;
+                            this.location.countryShort = country[0].short_name;
                         }
-                    });
-                    if (country && country.length > 0) {
-                        this.location.country = country[0].long_name;
-                        this.location.countryShort = country[0].short_name;
-                    }
 
-                    let city = result.address_components.filter(value => {
-                        if (value.types.some(type => type === 'locality')) {
-                            return value;
+                        let city = result.address_components.filter(value => {
+                            if (value.types.some(type => type === 'locality')) {
+                                return value;
+                            }
+                        });
+                        if (city && city.length > 0) {
+                            this.location.city = city[0].long_name;
+                            this.location.cityShort = city[0].short_name;
                         }
-                    });
-                    if (city && city.length > 0) {
-                        this.location.city = city[0].long_name;
-                        this.location.cityShort = city[0].short_name;
                     }
+                    this.onChange.emit(this.location);
                 }
-                this.onChange.emit(this.location);
-            }
-        });
+            });
     }
 
     private setCurrentPosition() {
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition((position) => {
+                console.log('current position : ', position.coords);
                 this.location.latitude = position.coords.latitude;
                 this.location.longitude = position.coords.longitude;
                 this.zoom = 14;
-                this.emitChanges();
+                this.getFullLocation();
             });
         }
     }
