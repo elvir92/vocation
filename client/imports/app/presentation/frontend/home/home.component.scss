@@ -9,3 +9,27 @@
 .mat-button, .mat-fab, .mat-icon-button, .mat-mini-fab, .mat-raised-button .mat-datepicker {
   color: black;
 }
+
+.home-container {
+  padding-bottom: 32px;
+}
+
+.home__intro-title {
+  font-size: 56px; 
+  line-height: 56px;
+  letter-spacing: 2px;
+  color: white; 
+  text-align: center; 
+  margin-top: 4vh;
+  margin: 3vw auto;
+  font-weight: 200;
+}
+
+.home__intro-text {
+  font-size:14px; 
+  color: white; 
+  text-align: center; 
+  margin: 5vh auto;
+  font-weight: 200;
+  width: 50%;
+}

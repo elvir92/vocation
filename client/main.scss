@@ -1,7 +1,13 @@
 @import '../node_modules/@angular/material/theming';
 @import "./imports/template/panel/theme";
 @import "./imports/template/panel/typography";
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 
+html {
+  font-family: 'Roboto', Arial,
+  Helvetica,
+  sans-serif;
+}
 
 /* CSS declarations go here */
 .m-t-10{

@@ -1,5 +1,6 @@
-<div style="background: url('/assets/img/hr.jpeg'); background-size: cover;">
+<div class="layout-cover"
+[style.min-height.px]="[headerContainerHeight]">
 <header-component></header-component>
 <router-outlet></router-outlet>
-<footer-component></footer-component>
 </div>
+<footer-component></footer-component>

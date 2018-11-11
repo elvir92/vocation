@@ -6,14 +6,24 @@ import {HeaderComponent} from "./header/header.component";
     selector: 'app-layout',
     templateUrl: './frontend-layout.component.html',
     styleUrls: ['./frontend-layout.component.scss'],
+    host: {
+        '(window:resize)': 'onResize()'
+    }
     //encapsulation: ViewEncapsulation.Native
 })
 export class FrontendLayoutComponent implements OnInit, OnDestroy {
+
+    headerContainerHeight: Number;
+
     constructor() {
     }
 
     ngOnInit(): void {
-        console.log("Front init")
+        this.headerContainerHeight = window.innerHeight;
+    }
+
+    onResize() {
+        this.headerContainerHeight = window.innerHeight;
     }
 
     ngOnDestroy() {
