@@ -43,3 +43,7 @@ publishComposite('properties', function (limit?: number, skip?: number){
     };
 });
 
+Meteor.publish('all-properties', function () {
+    return Properties.collection.find({});
+});
+

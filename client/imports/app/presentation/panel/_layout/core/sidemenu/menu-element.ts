@@ -77,7 +77,14 @@ export const menus = [
         "icon": "home",
         "link": "/properties",
         "open": false,
-    }
+    },
+    {
+        "name": "Reservations",
+        "icon": "explore",
+        "link": "/reservations",
+        "open": false,
+        "admin": true,
+    },
     /*
 
     {

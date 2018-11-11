@@ -1,3 +1,4 @@
+import { ReservationsComponent } from './reservations/reservations.component';
 import {Routes} from '@angular/router';
 import {HomeComponent} from "./home/home.component";
 import {PropertyNewComponent} from "./properties/property-new.component";
@@ -51,6 +52,14 @@ export const PanelRoutes: Routes = [
                 pathMatch: 'full',
                 data: {
                     title: 'My Profile'
+                }
+            }, 
+            {
+                path: 'reservations',
+                component: ReservationsComponent,
+                pathMatch: 'full',
+                data: {
+                    title: 'Reservations'
                 }
             },
         ]
