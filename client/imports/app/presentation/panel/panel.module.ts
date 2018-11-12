@@ -1,3 +1,4 @@
+import { ReservationsDialog } from './reservations/reservations-dialog.component';
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {PanelRoutes} from "./panel.routing";
@@ -49,6 +50,7 @@ import {PerfectScrollbarConfigInterface} from 'ngx-perfect-scrollbar';
 import {PanelLayoutComponent} from "./_layout/panel-layout.component";
 import {CoreModule} from "./_layout/core/core.module";
 import {FlexLayoutModule} from "@angular/flex-layout";
+import { ReservationsComponent } from './reservations/reservations.component';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -111,8 +113,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         MyProfileComponent,
         PropertiesComponent,
         PropertyEditComponent,
+        ReservationsDialog,
+        ReservationsComponent,
         ...COMMON_DECLARATIONS
     ],
+    entryComponents: [ReservationsDialog],
     providers: [
         {
             provide: PERFECT_SCROLLBAR_CONFIG,

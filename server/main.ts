@@ -20,6 +20,7 @@ import './imports/publications/property_types';
 import './imports/publications/bedroom_types';
 import './imports/publications/bathroom_types';
 import './imports/publications/addresses';
+import './imports/publications/reservations';
 
 import './imports/methods/lists_groups';
 import './imports/methods/lists';
@@ -33,6 +34,7 @@ import './imports/methods/users';
 import './imports/methods/property_types';
 import './imports/methods/bedroom_types';
 import './imports/methods/bathroom_types';
+import './imports/methods/reservations';
 
 
 Meteor.startup(() => {
