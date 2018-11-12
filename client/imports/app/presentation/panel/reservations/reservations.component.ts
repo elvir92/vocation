@@ -19,7 +19,8 @@ import { IProperty } from 'imports/models';
 
 export class ReservationsComponent implements OnInit, OnDestroy {
     list: Observable<IReservations[]>;
-    properties: Observable<IProperty[]>;
+    // TODO: fetch properties in format PropertyId && name. For now it can stay this.
+    properties: IProperty[];
 
     currentReservation: IReservations;
     private toasterService: ToasterService;
@@ -46,7 +47,8 @@ export class ReservationsComponent implements OnInit, OnDestroy {
                 propertyId: item ? item.propertyId : '',
                 from: item ? item.from : '',
                 to: item ? item.to : '',
-                status: item ? item.status : ''
+                status: item ? item.status : '',
+                properties: this.properties
             }
         });
 
@@ -123,8 +125,10 @@ export class ReservationsComponent implements OnInit, OnDestroy {
         return Reservations.find();
     }
 
-    findProperties(): Observable<IProperty[]> {
-        return Properties.find();
+    findProperties(): IProperty[] {
+        // search for active properties
+        // return Properties.find({ isActive: true, isEditMode: false }).fetch();
+        return Properties.find().fetch();
     }
 
 }
