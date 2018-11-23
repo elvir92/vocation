@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {FrontendRoutes} from "./frontend.routing";
 import {HomeComponent} from "./home/home.component";
-import {HomeTempComponent} from "./home/home-temp.component";
 import {GroupListComponent} from "./shared/group-list/group-list.component";
 import {GroupItemComponent} from "./shared/group-item/group-item.component";
 import {RegisterComponent} from "../auth/register.component";
@@ -10,6 +9,7 @@ import {ProfileComponent} from "./profile/profile.component";
 import {HousesListComponent} from "./shared/houses-list/houses-list.component";
 import {HouseCardItemComponent} from "./shared/house-card-item/house-card-item.component";
 import {AccommodationComponent} from "./accomodation/accommodation.component";
+import { RentalsSearchComponent } from './shared/rentals-search/rentals-search.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {CommonModule} from "@angular/common";
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -42,6 +42,7 @@ import {
         HousesListComponent,
         HouseCardItemComponent,
         RegisterComponent,
+        RentalsSearchComponent,
         GroupListComponent,
         GroupItemComponent,
         AccommodationComponent,

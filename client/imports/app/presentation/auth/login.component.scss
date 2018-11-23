@@ -4,6 +4,7 @@
     height: 100%;
     background: url('/assets/img/crohouse.jpg');
     background-size: cover;
+    font-size: 1.5rem;
     .login-form {
         position: relative;
         top: 10%;
@@ -18,11 +19,10 @@
         }
         .login-form__lost-pw{
             color: #7F7D7D;
-            text-decoration: none;            
-            font-size: 13px;            
+            text-decoration: none;
+            font-size: 13px;
             position: relative;
-            bottom: 20px;
-            right: 38px;
+            bottom: 0px;
             &:hover{
                 color: black;
             }

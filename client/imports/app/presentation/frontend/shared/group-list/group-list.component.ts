@@ -31,7 +31,12 @@ export class GroupListComponent implements OnInit, OnDestroy {
         //         console.log(this.list)
         //     });
         // });
-        this.list = [{_id:'1',title:"Beach Rentals",imageUrl:'/assets/img/hr.jpeg'},{_id:'2',title:"City Rentals",imageUrl:'/assets/img/zagreb.jpg'},{_id:'3',title:"Country Homes",imageUrl:'/assets/img/country_cabin.jpg'},{_id:'4',title:"Mountain Cabins",imageUrl:'/assets/img/mountain_cabin.jpg'}];
+        this.list = [
+            { _id: '1', title: "Beach Rentals", imageUrl: '/assets/img/hr.jpeg' },
+            { _id: '2', title: "City Rentals", imageUrl: '/assets/img/zagreb.jpg' },
+            { _id: '3', title: "Country Homes", imageUrl: '/assets/img/country_cabin.jpg' },
+            { _id: '4', title: "Mountain Cabins", imageUrl: '/assets/img/mountain_cabin.jpg' }
+        ];
 
     }
 

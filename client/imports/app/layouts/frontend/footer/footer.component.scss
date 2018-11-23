@@ -1,6 +1,10 @@
 .footer {
+  font-size: 1.5rem;
+  height: auto;
   display: flex;
   justify-content: center;
-  height: 7vw;
-  font-size: 12px;
+}
+
+.footer__navbar-logo {
+  width: 120px;
 }

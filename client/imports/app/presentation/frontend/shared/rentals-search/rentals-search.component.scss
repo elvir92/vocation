@@ -1,0 +1,54 @@
+.rentals-search__container {
+  font-size: 2rem;
+  padding: 4rem 10rem;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.rentals-search__filters-container {
+  display: flex;
+  justify-content: space-around;
+  mat-form-field {
+    font-weight: bold;
+    color: black !important;
+    &.mat-form-field-hide-placeholder, .mat-select-placeholder {
+      color: black !important;
+    }
+  }
+  @media only screen and(max-width: 768px) {
+    display: block;
+  }
+}
+
+.rentals-search__dates-container, 
+.rentals-search__filter-options-container {
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  @media only screen and(max-width: 1100px) {
+    display: block;
+    padding: 2rem;
+    mat-form-field {
+      display: block;
+    }
+  }
+  @media only screen and(max-width: 768px) {
+    width: 100%;
+    padding: 0 2rem;
+  }
+}
+
+.rentals-search__action {
+  display: block;
+  text-align: center;
+  margin-top: 2rem;
+  button {
+    margin: 0px !important;
+    width: 24rem !important;
+    background: rgba(255,255,255, 0.8);
+    color: black;
+    -webkit-box-shadow: 3px 5px 54px 0px rgba(0,0,0,0.4);
+    -moz-box-shadow: 3px 5px 54px 0px rgba(0,0,0,0.4);
+    box-shadow: 3px 5px 54px 0px rgba(0,0,0,0.4);
+  }
+}

@@ -27,6 +27,5 @@ export class GroupItemComponent implements OnInit, OnDestroy {
     }
     public selectAccomodation = (accommodation) => {
        this.router.navigate(['front/accommodation', { accommodation: accommodation }]);
-
     }
 }
