@@ -9,7 +9,8 @@ import {
     MatNativeDateModule,
     MatInputModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatToolbarModule
 } from '@angular/material';
 
 import { FrontendRoutes } from "./frontend.routing";
@@ -39,7 +40,8 @@ import { FrontendLayoutComponent } from "./_layout/frontend-layout.component";
         MatNativeDateModule,
         MatInputModule,
         MatButtonModule,
-        MatCardModule
+        MatCardModule,
+        MatToolbarModule
     ],
     declarations: [
         FrontendLayoutComponent,
