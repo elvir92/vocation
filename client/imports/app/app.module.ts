@@ -8,7 +8,7 @@ import {AppComponent} from './app.component';
 import {AppRoutes} from "./app.routing";
 import {FrontendLayoutComponent} from "./layouts/frontend/frontend-layout.component";
 import {FrontendTempLayoutComponent} from "./layouts/frontend/frontend-layout-temp.component";
-import {AuthLayoutComponent} from "./layouts/auth/auth-layout.component";
+import {AuthLayoutComponent} from "./presentation/auth/_layout/auth-layout.component";
 import {AuthGuard} from "./_guards/auth.guard";
 import {AuthAdminGuard} from "./_guards/auth.admin.guard";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -33,11 +33,11 @@ import { MatButtonModule,MatCardModule,MatToolbarModule,MatInputModule,MatListMo
     ],
     declarations: [
         AppComponent,
-        FrontendLayoutComponent,
-        FrontendTempLayoutComponent,
-        AuthLayoutComponent,
-        HeaderComponent,
-        FooterComponent,
+        // FrontendLayoutComponent,
+        // FrontendTempLayoutComponent,
+        // AuthLayoutComponent,
+        // HeaderComponent,
+        // FooterComponent,
     ],
     providers: [
         AuthGuard,

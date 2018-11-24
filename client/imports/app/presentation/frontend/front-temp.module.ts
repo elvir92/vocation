@@ -1,18 +1,22 @@
-import {NgModule} from '@angular/core';
-import {RouterModule} from '@angular/router';
-import {FrontendTempRoutes} from "./front-temp.routing";
-import {HomeTempComponent} from "./home/home-temp.component";
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {CommonModule} from "@angular/common";
-import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
-  MatDatepickerModule,
-  MatSelectModule,
-  MatNativeDateModule,
-  MatInputModule,
-  MatButtonModule,
-  MatCardModule
+    MatDatepickerModule,
+    MatSelectModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule
 } from '@angular/material';
+
+import { FrontendTempRoutes } from "./front-temp.routing";
+import { HomeTempComponent } from "./home/home-temp.component";
+
+import { FrontendTempLayoutComponent } from "./_layout/frontend-layout-temp.component";
+
 
 @NgModule({
     imports: [
@@ -29,9 +33,10 @@ import {
         MatCardModule
     ],
     declarations: [
-        HomeTempComponent
+        HomeTempComponent,
+        FrontendTempLayoutComponent
     ],
-    providers:[
+    providers: [
     ]
 })
 

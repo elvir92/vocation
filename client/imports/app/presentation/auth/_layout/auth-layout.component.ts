@@ -4,7 +4,7 @@ import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
     selector: 'app-layout',
     template: '<router-outlet></router-outlet>',
     styleUrls: ['./auth-layout.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    // encapsulation: ViewEncapsulation.None
 
 })
 export class AuthLayoutComponent implements OnInit, OnDestroy {

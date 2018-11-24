@@ -1,6 +1,4 @@
 import {Component, OnInit, OnDestroy, ViewEncapsulation} from '@angular/core';
-import {HeaderComponent} from "./header/header.component";
-'rxjs/add/operator/filter';
 
 @Component({
     selector: 'app-layout',
@@ -8,8 +6,8 @@ import {HeaderComponent} from "./header/header.component";
     styleUrls: ['./frontend-layout.component.scss'],
     host: {
         '(window:resize)': 'onResize()'
-    }
-    //encapsulation: ViewEncapsulation.Native
+    },
+    // encapsulation: ViewEncapsulation.None
 })
 export class FrontendLayoutComponent implements OnInit, OnDestroy {
 

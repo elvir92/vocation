@@ -4,9 +4,12 @@ import { ProfileComponent } from "./profile/profile.component";
 import { RegisterComponent } from "../auth/register.component";
 import { AccommodationComponent } from "./accomodation/accommodation.component";
 
+import { FrontendLayoutComponent } from "./_layout/frontend-layout.component"
+
 export const FrontendRoutes: Routes = [
     {
         path: 'front',
+        component: FrontendLayoutComponent,
         children: [
             {
                 path: '',
