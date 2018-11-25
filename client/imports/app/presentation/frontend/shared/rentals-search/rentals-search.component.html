@@ -1,35 +1,38 @@
 <div class="rentals-search__container" fxLayout="row" fxLayout.xs="column">
-  <div class="rentals-search__filters-container">
-    <div class="rentals-search__dates-container">
-      <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Start date">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
+  <div [formGroup]="searchForm">
+    <div class="rentals-search__filters-container">
+      <div class="rentals-search__dates-container">
+        <mat-form-field>
+              <input matInput [matDatepicker]="picker" formControlName="startDate" placeholder="Start date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
 
-      <mat-form-field>
-            <input matInput [matDatepicker]="picker1" placeholder="End date">
-            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-            <mat-datepicker #picker1></mat-datepicker>
-      </mat-form-field>
-    </div>
-    <div class="rentals-search__filter-options-container">
-      <mat-form-field>
-        <mat-select [(value)]="selected" placeholder="City" >
-            <mat-option *ngFor="let item of addresses | async" value="{{ item._id }}">{{ item.city }}</mat-option>
-        </mat-select>
-      </mat-form-field>
+        <mat-form-field>
+              <input matInput [matDatepicker]="picker1" formControlName="endDate" placeholder="End date">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="rentals-search__filter-options-container">
+        <mat-form-field>
+              <mat-select placeholder="Guests" formControlName="numberOfGuests">
+                  <mat-option *ngFor="let number of [1,2,3,4,5,6,7,8,9,10]" value={{number}}>{{number}}</mat-option>
+              </mat-select>
+        </mat-form-field>
 
-      <mat-form-field>
-            <mat-select placeholder="Guests">
-                <mat-option value="1">1</mat-option>
-                <mat-option value="2">2</mat-option>
-                <mat-option value="3">3</mat-option>
-            </mat-select>
-      </mat-form-field>
+          <mat-form-field>
+              <input matInput placeholder="Looking for..."
+                    autocorrect="off"
+                    autocapitalize="on"
+                    spellcheck="off" 
+                    type="text" 
+                    formControlName="searchControl">
+          </mat-form-field>
+      </div>
     </div>
-  </div>
-  <div class="rentals-search__action">
-      <button mat-button style="width:40vh; margin-left:4vh; padding: 1vh;">Search</button>
+    <div class="rentals-search__action">
+        <button mat-button style="width:40vh; margin-left:4vh; padding: 1vh;" (click)="searchActiveProperties()">Search</button>
+    </div>
   </div>
 </div>

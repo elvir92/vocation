@@ -1,5 +1,4 @@
 import {Meteor} from 'meteor/meteor';
-import {Mongo} from 'meteor/mongo';
 import { publishComposite } from 'meteor/reywood:publish-composite';
 
 import {IProperty} from "../../../imports/models";
@@ -21,6 +20,10 @@ Meteor.publish('backend-properties', function (limit?: number, skip?: number) {
     };
 
     return options ? Properties.collection.find({userId}, options) : Properties.collection.find({userId});
+});
+
+Meteor.publish('frontend-properties', function () {
+    return  Properties.collection.find({isActive: true});
 });
 
 publishComposite('properties', function (limit?: number, skip?: number){

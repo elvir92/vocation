@@ -28,6 +28,7 @@
     "babel-runtime": "^6.26.0",
     "bcrypt": "^1.0.3",
     "bootstrap": "^4.0.0-beta.2",
+    "lodash": "^4.17.11",
     "meteor-node-stubs": "^0.3.2",
     "meteor-rxjs": "^0.4.8",
     "ng2-pagination": "^2.0.2",

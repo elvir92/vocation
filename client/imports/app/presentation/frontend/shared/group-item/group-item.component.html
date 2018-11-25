@@ -1,8 +1,13 @@
 <div class="group-card-item" tabindex="0">
     <div class="group-card-item-header">
-        <div>
+        <div *ngIf="data.title; else propTitle">
             {{data.title}}
         </div>
+        <ng-template #propTitle>
+            <div>
+                {{data.name[0].text}}
+            </div>
+        </ng-template>
     </div>
-    <img mat-card-image src="{{data.imageUrl}}" class="group-card-image" />
+    <img *ngIf="data.imageUrl;" mat-card-image src="{{data.imageUrl}}" class="group-card-image" />
 </div>
