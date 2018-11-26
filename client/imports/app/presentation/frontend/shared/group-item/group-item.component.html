@@ -9,5 +9,8 @@
             </div>
         </ng-template>
     </div>
-    <img *ngIf="data.imageUrl;" mat-card-image src="{{data.imageUrl}}" class="group-card-image" />
+    <img *ngIf="data.imageUrl; else propImg" mat-card-image src="{{data.imageUrl}}" class="group-card-image" />
+    <ng-template #propImg>
+        <img src="/assets/img/default-image.png" alt="" class="group-card-image">
+    </ng-template>
 </div>

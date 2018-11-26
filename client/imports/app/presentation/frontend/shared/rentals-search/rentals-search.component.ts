@@ -1,6 +1,9 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import 'rxjs/add/operator/map';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import * as moment from 'moment';
+
+const formatDate = "DDMMYYYY";
 
 @Component({
     selector: 'rentals-search',
@@ -41,7 +44,7 @@ export class RentalsSearchComponent implements OnInit {
 
 
     private checkIfDatesAreValid(start, end): Boolean {
-        if (!start || !end || new Date(start) <= new Date() || new Date(start) >= new Date(end)) {
+        if (!start || !end || moment(start).format(formatDate) < moment().format(formatDate) || moment(start).format(formatDate) >= moment(end).format(formatDate)) {
             return false;
         }
         return true;

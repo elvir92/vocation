@@ -5,8 +5,11 @@ import { MeteorObservable } from 'meteor-rxjs';
 import { componentDestroyed } from 'ng2-rx-componentdestroyed';
 import { Properties } from 'imports/collections';
 import * as _ from 'lodash'; 
+import { IReservations } from 'imports/models/reservations';
+import { Reservations } from 'imports/collections/reservations';
+import * as moment from 'moment';
 
-
+const formatDate = "DDMMYYYY";
 @Component({
     styleUrls: ['./home.component.scss'],
     templateUrl: './home.component.html',
@@ -19,6 +22,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     headerContainerHeight: Number;
 
     properties: IProperty[];
+    reservations: IReservations[];
     filtered: IProperty[];
 
     constructor(){
@@ -29,6 +33,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.headerContainerHeight = window.innerHeight;
         this.filtered = [];
         this.getProperties();
+        this.getReservations();
     }
 
     onResize() {
@@ -40,24 +45,32 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     onSearch(filter) {
         this.filtered = [];
-        let searchObj = this.properties.map((prop, index) => {
-            return {
-                index: index,
-                descriptions: prop.description.map(elem => elem.text).join(','),
-                city: prop.geoLocation.city,
-                country: prop.geoLocation.country,
-                headlines: prop.headline.map(elem => elem.text).join(','),
-                names: prop.name.map(elem => elem.text).join(',')
-            }
-        });
+        let reservationsInOfScope = this.reservations.filter(reservation => {
+            return moment(filter.startDate).format(formatDate) >= moment(reservation.from).format(formatDate) &&  moment(filter.startDate).format(formatDate) <= moment(reservation.to).format(formatDate) ||
+                     moment(filter.endDate).format(formatDate) >= moment(reservation.from).format(formatDate) && moment(filter.endDate).format(formatDate) <= moment(reservation.to).format(formatDate) || 
+                     moment(filter.startDate).format(formatDate) >= moment(reservation.from).format(formatDate) && moment(filter.endDate).format(formatDate) <= moment(reservation.to).format(formatDate);
+        }).map(res => res.propertyId);
 
-        let res = this.filterByValue(searchObj, filter.searchQuery).map(elem => elem.index);
+        let outOfDateScope = this.properties.filter(prop => reservationsInOfScope.indexOf(prop._id) == -1)
 
-        res.forEach(index => {
-            this.filtered.push(this.properties[index]);
-        })
-
-        console.log(this.filtered);
+        if (filter.searchQuery) {
+            let searchObj = outOfDateScope.map((prop, index) => {
+                return {
+                    index: index,
+                    descriptions: prop.description.map(elem => elem.text).join(','),
+                    city: prop.geoLocation.city,
+                    country: prop.geoLocation.country,
+                    headlines: prop.headline.map(elem => elem.text).join(','),
+                    names: prop.name.map(elem => elem.text).join(',')
+                }
+            });
+    
+            let res = this.filterByValue(searchObj, filter.searchQuery).map(elem => elem.index);
+    
+            res.forEach(index => {
+                this.filtered.push(this.properties[index]);
+            })
+        }
         
     }
 
@@ -73,8 +86,20 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
     }
 
+    private getReservations() {
+        MeteorObservable.subscribe('search-component-reservations').takeUntil(componentDestroyed(this)).subscribe(() => {
+            MeteorObservable.autorun().subscribe(() => {
+                this.reservations = this.findReservations();
+            });
+        });
+    }
+
     private findProperties(): IProperty[] {
         return Properties.find().fetch();
+    }
+
+    private findReservations(): IReservations[] {
+        return Reservations.find().fetch();
     }
 
 }

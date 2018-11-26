@@ -10,3 +10,7 @@ Meteor.publish('reservations', function (): Mongo.Cursor<IReservations> {
 
   return Reservations.collection.find({});
 });
+
+Meteor.publish('search-component-reservations', function (): Mongo.Cursor<IReservations>  {
+  return  Reservations.collection.find({status: "Reserved"});
+});

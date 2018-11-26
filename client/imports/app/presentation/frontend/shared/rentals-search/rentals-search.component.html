@@ -3,13 +3,13 @@
     <div class="rentals-search__filters-container">
       <div class="rentals-search__dates-container">
         <mat-form-field>
-              <input matInput [matDatepicker]="picker" formControlName="startDate" placeholder="Start date">
+              <input matInput [matDatepicker]="picker" formControlName="startDate" placeholder="Start date*">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field>
-              <input matInput [matDatepicker]="picker1" formControlName="endDate" placeholder="End date">
+              <input matInput [matDatepicker]="picker1" formControlName="endDate" placeholder="End date*">
               <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
               <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
@@ -32,7 +32,7 @@
       </div>
     </div>
     <div class="rentals-search__action">
-        <button mat-button style="width:40vh; margin-left:4vh; padding: 1vh;" (click)="searchActiveProperties()">Search</button>
+        <button mat-button style="width:40vh; margin-left:4vh; padding: 1vh;" [disabled]="searchForm.invalid" (click)="searchActiveProperties()">Search</button>
     </div>
   </div>
 </div>

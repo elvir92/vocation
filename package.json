@@ -31,6 +31,7 @@
     "lodash": "^4.17.11",
     "meteor-node-stubs": "^0.3.2",
     "meteor-rxjs": "^0.4.8",
+    "moment": "^2.22.2",
     "ng2-pagination": "^2.0.2",
     "ng2-rx-componentdestroyed": "^1.1.2",
     "ngx-dropzone-wrapper": "^4.6.6",
