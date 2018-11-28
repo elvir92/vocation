@@ -1,6 +1,6 @@
 .rentals-search__container {
-  font-size: 2rem;
-  padding: 4rem 10rem;
+  font-size: 16px;
+  padding: 32px 80px;
   background-color: rgba(255, 255, 255, 0.3);
   color: white;
 }
@@ -27,21 +27,21 @@
   justify-content: space-around;
   @media only screen and(max-width: 1100px) {
     display: block;
-    padding: 2rem;
+    padding: 16px;
     mat-form-field {
       display: block;
     }
   }
   @media only screen and(max-width: 768px) {
     width: 100%;
-    padding: 0 2rem;
+    padding: 0 16px;
   }
 }
 
 .rentals-search__action {
   display: block;
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 16px;
   button {
     margin: 0px !important;
     width: 24rem !important;
@@ -50,5 +50,9 @@
     -webkit-box-shadow: 3px 5px 54px 0px rgba(0,0,0,0.4);
     -moz-box-shadow: 3px 5px 54px 0px rgba(0,0,0,0.4);
     box-shadow: 3px 5px 54px 0px rgba(0,0,0,0.4);
+    &[disabled] {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
   }
 }
