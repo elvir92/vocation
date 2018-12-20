@@ -1,6 +1,12 @@
-<div *ngIf="isEmptyObject(properties)" class="card-container">
+<div *ngIf="isEmptyObjectAndFilterOff(properties, filterOn)" class="card-container">
   <div *ngFor="let item of list">
     <group-card-item [data]="item"> </group-card-item>
+  </div>
+</div>
+
+<div *ngIf="isEmptyObjectAndFilterOn(properties, filterOn)" class="card-container">
+  <div class="group-list-component__no-results">
+    Oops... There is no results matching your criteria...
   </div>
 </div>
 

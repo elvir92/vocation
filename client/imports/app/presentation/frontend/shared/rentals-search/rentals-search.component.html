@@ -1,5 +1,5 @@
 <div class="rentals-search__container" fxLayout="row" fxLayout.xs="column">
-  <div [formGroup]="searchForm">
+  <div [formGroup]="searchForm" (keyup.enter)="searchActiveProperties()">
     <div class="rentals-search__filters-container">
       <div class="rentals-search__dates-container">
         <mat-form-field>
@@ -13,6 +13,7 @@
               <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
               <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
+
       </div>
       <div class="rentals-search__filter-options-container">
         <mat-form-field>
@@ -32,7 +33,10 @@
       </div>
     </div>
     <div class="rentals-search__action">
-        <button mat-button style="width:40vh; margin-left:4vh; padding: 1vh;" [disabled]="searchForm.invalid" (click)="searchActiveProperties()">Search</button>
+        <button 
+          mat-button style="width:40vh; margin-left:4vh; padding: 1vh;" 
+          [disabled]="searchForm.invalid" 
+          (click)="searchActiveProperties()">Search</button>
     </div>
   </div>
 </div>

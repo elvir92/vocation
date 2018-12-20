@@ -1,7 +1,8 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import 'rxjs/add/operator/map';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import * as moment from 'moment';
+import { DateValidators } from '../../validators/date-validators';
 
 const formatDate = "DDMMYYYY";
 
@@ -16,7 +17,6 @@ export class RentalsSearchComponent implements OnInit {
     @Output() filterValues = new EventEmitter();
 
     constructor(private _fb: FormBuilder){
-
     }
 
     ngOnInit() {
@@ -24,8 +24,38 @@ export class RentalsSearchComponent implements OnInit {
             startDate: ['', Validators.required],
             endDate: ['', Validators.required],
             numberOfGuests: [''],
-            searchControl: [''], 
+            searchControl: ['']
+        }, {
+            validator: Validators.compose([
+                this.dateLessThan('startDate', 'endDate'),
+                this.correctStartDate('startDate')
+            ])
         });
+    }
+
+    dateLessThan(from: string, to: string) {
+        return (group: FormGroup): {[key: string]: any} => {
+         let f = group.controls[from];
+         let t = group.controls[to];
+         if (f.value > t.value) {
+           return {
+             dates: "Date from should be less than Date to"
+           };
+         }
+         return {};
+        }
+    }
+
+    correctStartDate(start: string) {
+        return (group: FormGroup): {[key: string]: any} => {
+            let startDate = group.controls[start];
+            if (moment(startDate.value).format(formatDate) < moment().format(formatDate)) {
+                return {
+                    dates: "Date from should be less than Date to"
+                };
+            }
+            return {};
+        }
     }
 
     searchActiveProperties() {
@@ -39,12 +69,14 @@ export class RentalsSearchComponent implements OnInit {
         let isValid = this.checkIfDatesAreValid(filter.startDate, filter.endDate);
         if (isValid) {
             this.filterValues.emit(filter);
+        } else {
+            this.filterValues.emit({validation_error:true})
         }
     }
 
 
     private checkIfDatesAreValid(start, end): Boolean {
-        if (!start || !end || moment(start).format(formatDate) < moment().format(formatDate) || moment(start).format(formatDate) >= moment(end).format(formatDate)) {
+        if (!start || !end || moment(start).format(formatDate) < moment().format(formatDate) || moment(start) >= moment(end)) {
             return false;
         }
         return true;

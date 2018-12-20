@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     properties: IProperty[];
     reservations: IReservations[];
     filtered: IProperty[];
+    filterOn: boolean;
 
     constructor(){
 
@@ -45,33 +46,41 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     onSearch(filter) {
         this.filtered = [];
-        let reservationsInOfScope = this.reservations.filter(reservation => {
-            return moment(filter.startDate).format(formatDate) >= moment(reservation.from).format(formatDate) &&  moment(filter.startDate).format(formatDate) <= moment(reservation.to).format(formatDate) ||
-                     moment(filter.endDate).format(formatDate) >= moment(reservation.from).format(formatDate) && moment(filter.endDate).format(formatDate) <= moment(reservation.to).format(formatDate) || 
-                     moment(filter.startDate).format(formatDate) >= moment(reservation.from).format(formatDate) && moment(filter.endDate).format(formatDate) <= moment(reservation.to).format(formatDate);
-        }).map(res => res.propertyId);
 
-        let outOfDateScope = this.properties.filter(prop => reservationsInOfScope.indexOf(prop._id) == -1)
+        if (!filter.validation_error) {
+            this.filterOn = true;
+            let reservationsInScope = this.reservations.filter(reservation => {
+                return moment(filter.startDate).format(formatDate) >= moment(reservation.from).format(formatDate) &&  moment(filter.startDate).format(formatDate) <= moment(reservation.to).format(formatDate) ||
+                            moment(filter.endDate).format(formatDate) >= moment(reservation.from).format(formatDate) && moment(filter.endDate).format(formatDate) <= moment(reservation.to).format(formatDate) || 
+                            moment(filter.startDate).format(formatDate) >= moment(reservation.from).format(formatDate) && moment(filter.endDate).format(formatDate) <= moment(reservation.to).format(formatDate);
+            }).map(res => res.propertyId);
+            let outOfDateScope = this.properties.filter(prop => reservationsInScope.indexOf(prop._id) == -1)
 
-        if (filter.searchQuery) {
-            let searchObj = outOfDateScope.map((prop, index) => {
-                return {
-                    index: index,
-                    descriptions: prop.description.map(elem => elem.text).join(','),
-                    city: prop.geoLocation.city,
-                    country: prop.geoLocation.country,
-                    headlines: prop.headline.map(elem => elem.text).join(','),
-                    names: prop.name.map(elem => elem.text).join(',')
+            if (filter.searchQuery || filter.numOfGuests) {
+                if (filter.numOfGuests > 0) {
+                    outOfDateScope = outOfDateScope.filter(prop => filter.numOfGuests <= prop.maxGuest);
                 }
-            });
-    
-            let res = this.filterByValue(searchObj, filter.searchQuery).map(elem => elem.index);
-    
-            res.forEach(index => {
-                this.filtered.push(this.properties[index]);
-            })
+                if (filter.searchQuery != "") {
+                    let searchObj = outOfDateScope.map((prop, index) => {
+                        return {
+                            index: index,
+                            city: prop.geoLocation.city,
+                            country: prop.geoLocation.country,
+                            headlines: prop.headline.map(elem => elem.text).join(','),
+                            names: prop.name.map(elem => elem.text).join(',')
+                        };
+                    });
+                    let res = this.filterByValue(searchObj, filter.searchQuery).map(elem => elem.index);
+                    res.forEach(index => {
+                        this.filtered.push(outOfDateScope[index]);
+                    })
+                } else {
+                    this.filtered = outOfDateScope;
+                }
+            } else {
+                this.filtered = outOfDateScope;
+            }
         }
-        
     }
 
     private filterByValue (object, value) {

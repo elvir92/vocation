@@ -11,6 +11,7 @@ import {IGroup, IProperty} from '../../../../../../../imports/models';
 export class GroupListComponent implements OnInit, OnDestroy {
 
     @Input() properties: IProperty[];
+    @Input() filterOn: boolean;
 
     list: IGroup[];
 
@@ -26,8 +27,12 @@ export class GroupListComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
     }
 
-    isEmptyObject(obj) {
-        return (obj && (Object.keys(obj).length === 0));
+    isEmptyObjectAndFilterOff(obj, filterOn) {
+        return (obj && (Object.keys(obj).length === 0) && !filterOn);
+    }
+
+    isEmptyObjectAndFilterOn(obj, filterOn) {
+        return (obj && (Object.keys(obj).length === 0) && filterOn);
     }
 
     getGroups() {

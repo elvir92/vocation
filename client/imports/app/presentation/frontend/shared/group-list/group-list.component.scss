@@ -4,3 +4,11 @@
     justify-content: center;
     margin-top: 56px;
 }
+
+.group-list-component__no-results {
+    height: 28vh;
+    object-fit: cover;
+    line-height: 28vh;
+    color: white;
+    font-size: 24px;
+}
