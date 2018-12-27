@@ -12,3 +12,31 @@
     color: white;
     font-size: 24px;
 }
+
+.selected-property__container {
+    margin: 20px auto;
+    padding: 20px;
+    opacity: 0.8;
+    width: 1200px;
+    background: white;
+    position: relative;
+
+    .title {
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .close-btn {
+        position: absolute;
+        cursor: pointer;
+        top: 2px;
+        right: 4px;
+        text-transform: lowercase;
+        font-size: 12px;
+        border: 1px solid rgb(220, 220, 220);
+        border-radius: 20%;
+        width: 15px;
+        text-align: center;
+        background: rgb(220, 220, 220);
+    }
+}

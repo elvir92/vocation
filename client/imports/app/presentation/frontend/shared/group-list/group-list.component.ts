@@ -12,6 +12,7 @@ export class GroupListComponent implements OnInit, OnDestroy {
 
     @Input() properties: IProperty[];
     @Input() filterOn: boolean;
+    selectedProperty: null;
 
     list: IGroup[];
 
@@ -33,6 +34,14 @@ export class GroupListComponent implements OnInit, OnDestroy {
 
     isEmptyObjectAndFilterOn(obj, filterOn) {
         return (obj && (Object.keys(obj).length === 0) && filterOn);
+    }
+
+    onSelect(prop) {
+        this.selectedProperty = prop;
+    }
+
+    onDeselect() {
+        this.selectedProperty = null;
     }
 
     getGroups() {

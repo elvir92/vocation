@@ -1,17 +1,35 @@
-<div *ngIf="isEmptyObjectAndFilterOff(properties, filterOn)" class="card-container">
-  <div *ngFor="let item of list">
-    <group-card-item [data]="item"> </group-card-item>
-  </div>
+<div *ngIf="selectedProperty; else groupList">
+    <div class="selected-property__container">
+      <div class="close-btn"  (click)="onDeselect()">
+        X
+      </div>
+
+      <div class="title">
+        {{selectedProperty.name[0].text}}
+      </div>
+
+      <div class="content">
+        
+      </div>
+    </div>
 </div>
 
-<div *ngIf="isEmptyObjectAndFilterOn(properties, filterOn)" class="card-container">
-  <div class="group-list-component__no-results">
-    Oops... There is no results matching your criteria...
+<ng-template #groupList>
+  <div *ngIf="isEmptyObjectAndFilterOff(properties, filterOn)" class="card-container">
+    <div *ngFor="let item of list">
+      <group-card-item [data]="item"> </group-card-item>
+    </div>
   </div>
-</div>
-
-<div class="card-container">
-  <div *ngFor="let prop of properties">
-      <group-card-item [data]="prop"> </group-card-item>
+  
+  <div *ngIf="isEmptyObjectAndFilterOn(properties, filterOn)" class="card-container">
+    <div class="group-list-component__no-results">
+      Oops... There is no results matching your criteria...
+    </div>
   </div>
-</div>
+  
+  <div class="card-container">
+    <div *ngFor="let prop of properties" (click)="onSelect(prop)">
+        <group-card-item [data]="prop"> </group-card-item>
+    </div>
+  </div>
+</ng-template>
