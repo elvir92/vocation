@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NguCarouselConfig } from '@ngu/carousel';
+import { NguCarousel } from '@ngu/carousel';
 
 @Component({
   selector: 'app-portfolio-carousel',
@@ -9,34 +9,34 @@ import { NguCarouselConfig } from '@ngu/carousel';
 export class PortfolioCarouselComponent implements OnInit {
   @Input('backgroundGray') public backgroundGray;
   
-  public carouselOptions: NguCarouselConfig;
+  public carouselOptions: NguCarousel;
   public portfolios = [{
-    photo: 'assets/images/sq-10.jpg',
+    photo: '/assets/images/front/sq-10.jpg',
     text: `Adipisci quas repellat sed. Quasi quaerat aut nam possimus 
     vitae dignissimos, sapiente est atque tenetur`,
     title: 'Project One',
   }, {
-    photo: 'assets/images/sq-11.jpg',
+    photo: '/assets/images/front/sq-11.jpg',
     text: `Adipisci quas repellat sed. Quasi quaerat aut nam possimus 
     vitae dignissimos, sapiente est atque tenetur`,
     title: 'Project Two',
   }, {
-    photo: 'assets/images/sq-12.jpg',
+    photo: '/assets/images/front/sq-12.jpg',
     text: `Adipisci quas repellat sed. Quasi quaerat aut nam possimus 
     vitae dignissimos, sapiente est atque tenetur`,
     title: 'Project Three',
   }, {
-    photo: 'assets/images/sq-13.jpg',
+    photo: '/assets/images/front/sq-13.jpg',
     text: `Adipisci quas repellat sed. Quasi quaerat aut nam possimus 
     vitae dignissimos, sapiente est atque tenetur`,
     title: 'Project Four',
   }, {
-    photo: 'assets/images/sq-15.jpg',
+    photo: '/assets/images/front/sq-15.jpg',
     text: `Adipisci quas repellat sed. Quasi quaerat aut nam possimus 
     vitae dignissimos, sapiente est atque tenetur`,
     title: 'Project Five',
   }, {
-    photo: 'assets/images/sq-16.jpg',
+    photo: '/assets/images/front/sq-16.jpg',
     text: `Adipisci quas repellat sed. Quasi quaerat aut nam possimus 
     vitae dignissimos, sapiente est atque tenetur`,
     title: 'Project Six',
@@ -48,10 +48,7 @@ export class PortfolioCarouselComponent implements OnInit {
       grid: { xs: 1, sm: 2, md: 3, lg: 3, all: 0 },
       slide: 2,
       speed: 400,
-      interval: {
-        timing: 4000,
-        initialDelay: 1000
-      },
+      interval: 4000,
       point: {
         visible: true
       },
