@@ -20,11 +20,6 @@ export const FrontendRoutes: Routes = [
 
             },
             {
-                path: 'v2', 
-                loadChildren: './home_v2/home.module#HomeModule'
-            },
-
-            {
                 path: 'profile',
                 component: ProfileComponent,
                 data: {
