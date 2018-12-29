@@ -30,6 +30,11 @@
   padding: 0 !important;
   box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
   animation: .6s slideDown forwards;
+  .home-logo {
+    img {
+      top: -8px;
+    }
+  }
 }
 .header-fixed .container {
   height: 60px !important;
@@ -42,6 +47,14 @@
   align-items: center;
   a {
     display: inherit;
+  }
+  img {
+    position: absolute;
+    width: 80px;
+    top: 0px;
+    @media only screen and(max-width: 992px) {
+      display: none;
+    }
   }
 }
 #menu-toggle {

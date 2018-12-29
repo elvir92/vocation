@@ -1,19 +1,16 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { LandingFixService } from '../_layout/shared/services/landing-fix.service';
+import { IProperty } from 'imports/models';
 
 @Component({
   selector: 'app-home-one',
-  template: `<app-header></app-header>
-  <app-intro></app-intro>
-  <app-portfolio></app-portfolio>
-  <app-services [backgroundGray]="true"></app-services>
-  <app-testimonials-carousel></app-testimonials-carousel>
-  <app-cta></app-cta>
-  <app-pricings></app-pricings>
-  <app-contact [backgroundGray]="true"></app-contact>
-  <app-footer></app-footer>`
+  templateUrl: './home-one.component.html'
 })
 export class HomeOneComponent implements OnInit, OnDestroy {
+
+  properties: IProperty[] = [];
+  filterOn: boolean;
+
   constructor(
     private fix: LandingFixService
   ) { }
@@ -23,6 +20,15 @@ export class HomeOneComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     this.fix.removeFix();
+  }
+
+  getFiltered(props) {
+    this.filterOn = true;
+    if (props.length > 0) {
+      this.properties = props;
+    } else {
+      this.properties = [];
+    }
   }
   
 

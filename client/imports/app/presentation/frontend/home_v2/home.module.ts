@@ -12,7 +12,11 @@ import {
   MatInputModule,
   MatRippleModule,
   MatSlideToggleModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatOptionModule,
+  MatDatepickerModule,
+  MatSelectModule,
+  MatNativeDateModule
  } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NguCarouselModule } from '@ngu/carousel';
@@ -39,6 +43,8 @@ import { DemoComponent } from './demo/demo.component';
 import { AllSectionsComponent } from './all-sections.component';
 
 import { WINDOW_PROVIDERS } from '../_layout/shared/helpers/window.helper';
+import { RentalsSearchComponent } from '../shared/rentals-search/rentals-search.component';
+import { RentDetailsDialog } from './portfolio/rent-details-dialog.component';
 
 
 @NgModule({
@@ -59,8 +65,14 @@ import { WINDOW_PROVIDERS } from '../_layout/shared/helpers/window.helper';
     MatSnackBarModule,
     FlexLayoutModule,
     NguCarouselModule,
+    MatDatepickerModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatSelectModule,
+    MatNativeDateModule,
     RouterModule.forChild(HomeRoutes)
   ],
+  entryComponents: [RentDetailsDialog],
   declarations: [
     HomeOneComponent,
     HomeTwoComponent, 
@@ -78,7 +90,9 @@ import { WINDOW_PROVIDERS } from '../_layout/shared/helpers/window.helper';
     TestimonialsCarouselComponent, 
     ServicesCarouselComponent, 
     DemoComponent,
-    AllSectionsComponent
+    AllSectionsComponent,
+    RentalsSearchComponent,
+    RentDetailsDialog
   ],
   providers: [WINDOW_PROVIDERS]
 
