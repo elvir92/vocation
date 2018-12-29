@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NguCarouselConfig } from '@ngu/carousel';
+import { NguCarousel } from '@ngu/carousel';
 
 @Component({
   selector: 'app-testimonials',
@@ -8,7 +8,7 @@ import { NguCarouselConfig } from '@ngu/carousel';
 })
 export class TestimonialsComponent implements OnInit {
   @Input('backgroundGray') public backgroundGray;
-  public carouselOptions: NguCarouselConfig;
+  public carouselOptions: NguCarousel;
   public testimonials = [{
     logo: 'assets/images/mock-logo-4.png',
     photo: 'assets/images/face-1.jpg',
@@ -39,10 +39,7 @@ export class TestimonialsComponent implements OnInit {
       grid: { xs: 1, sm: 1, md: 1, lg: 3, all: 0 },
       slide: 2,
       speed: 400,
-      interval: {
-        timing: 4000,
-        initialDelay: 1000
-      },
+      interval: 4000,
       point: {
         visible: true
       },
