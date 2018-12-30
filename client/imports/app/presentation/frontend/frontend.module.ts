@@ -27,6 +27,7 @@ import { AccommodationComponent } from "./accomodation/accommodation.component";
 import { RentalsSearchComponent } from './shared/rentals-search/rentals-search.component';
 
 import { FrontendLayoutComponent } from "./_layout/frontend-layout.component";
+import { SharedModule } from "./_layout/shared/shared.module";
 
 @NgModule({
     imports: [
@@ -41,7 +42,8 @@ import { FrontendLayoutComponent } from "./_layout/frontend-layout.component";
         MatInputModule,
         MatButtonModule,
         MatCardModule,
-        MatToolbarModule
+        MatToolbarModule,
+        SharedModule
     ],
     declarations: [
         FrontendLayoutComponent,

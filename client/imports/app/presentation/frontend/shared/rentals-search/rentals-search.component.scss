@@ -3,6 +3,9 @@
   padding: 32px 80px;
   background-color: rgba(255, 255, 255, 0.3);
   color: white;
+  > div {
+    width: 100%;
+  }
 }
 
 .rentals-search__filters-container {
@@ -54,6 +57,9 @@
     &[disabled] {
       cursor: not-allowed;
       opacity: 0.5;
+    }
+    @media only screen and(max-width: 768px) {
+      width: 14rem !important;
     }
   }
 }
