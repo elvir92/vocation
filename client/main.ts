@@ -1,8 +1,6 @@
 import './imports/polyfills';
-import './imports/vendor/pace/pace.min.js';
 
 import {Meteor} from 'meteor/meteor';
-import 'hammerjs';
 
 import {enableProdMode} from '@angular/core';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';

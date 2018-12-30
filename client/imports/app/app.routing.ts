@@ -10,15 +10,7 @@ export const AppRoutes: Routes = [
         path: '',        
         loadChildren: './presentation/frontend/front-temp.module#FrontTempModule'        
     },    
-    { 
-        path: 'v2', 
-        redirectTo: 'home/demos', 
-        pathMatch: 'full' 
-      },
-    {
-        path: 'home', 
-        loadChildren: './presentation/frontend/home_v2/home.module#HomeModule',
-    },
+    
     {
         path: '',        
         loadChildren: './presentation/frontend/frontend.module#FrontendModule'        
