@@ -5,6 +5,7 @@ import {PanelRoutes} from "./panel.routing";
 import {HomeComponent} from "./home/home.component";
 import {FormWizardModule} from 'angular2-wizard';
 import {PropertyNewComponent} from "./properties/property-new.component";
+import {PropertyWizardComponent} from "./properties/property-wizard.component";
 import {CommonModule} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AgmCoreModule} from "@agm/core";
@@ -110,6 +111,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         PanelLayoutComponent,
         HomeComponent,
         PropertyNewComponent,
+        PropertyWizardComponent,
         MyProfileComponent,
         PropertiesComponent,
         PropertyEditComponent,

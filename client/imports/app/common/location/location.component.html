@@ -7,19 +7,17 @@
            #search
            [formControl]="searchControl">
 </mat-form-field>
-
 <agm-map 
-         (mapReady)="mapReady()" 
-         [latitude]="location.latitude"
-         [longitude]="location.longitude"
-         [zoom]="zoom" 
-         [scrollwheel]="false"
-         (mapClick)="mapClicked($event)">
-    <agm-marker *ngIf="showMarker"
-                [latitude]="location.latitude"
-                [longitude]="location.longitude"
-                [markerDraggable]="true"
-                (dragEnd)="markerDragEnd($event)">
-
-    </agm-marker>
+    (mapReady)="mapReady()" 
+    [latitude]="location.latitude"
+    [longitude]="location.longitude"
+    [zoom]="zoom" 
+    [scrollwheel]="false"
+    (mapClick)="mapClicked($event)">
+        <agm-marker *ngIf="showMarker"
+        [latitude]="location.latitude"
+        [longitude]="location.longitude"
+        [markerDraggable]="true"
+        (dragEnd)="markerDragEnd($event)">    
+        </agm-marker>
 </agm-map>

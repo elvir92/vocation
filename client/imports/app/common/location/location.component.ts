@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit, ViewChild, ElementRef, NgZone, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl } from "@angular/forms";
 
 import { ILocation } from "../../../../../imports/models/geo_location";
@@ -10,25 +10,19 @@ import { MapsAPILoader } from "@agm/core";
     templateUrl: './location.component.html',
     styleUrls: ['./location.component.scss']
 })
-export class LocationComponent implements OnInit, AfterViewInit {
+export class LocationComponent implements OnInit, AfterViewInit, OnChanges {
     @Output() onChange: EventEmitter<ILocation> = new EventEmitter<ILocation>();
 
+    @Input() location: ILocation ;
+    @Input() askForAutoLocation: boolean;
+    
     showMarker: boolean = false;
-
-    location: ILocation = {
-        longitude: null,
-        latitude: null,
-        formattedAddress: null,
-        mapObject: null,
-        city: null,
-        country: null
-    };
 
     autocomplete: google.maps.places.Autocomplete;
     geocoder: google.maps.Geocoder;
 
     searchControl: FormControl;
-    zoom: number = 2;
+    zoom = 2;
 
     @ViewChild("search")
     searchElementRef: ElementRef;
@@ -46,6 +40,13 @@ export class LocationComponent implements OnInit, AfterViewInit {
         //set current position
         this.setCurrentPosition();
         this.findAdress();
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (this.location.latitude && this.location.longitude) {
+            this.zoom = 14;            
+            this.getFullLocation();
+        }
     }
 
 
@@ -97,7 +98,7 @@ export class LocationComponent implements OnInit, AfterViewInit {
         if (!this.location.latitude || !this.location.longitude) return;
 
         this.showMarker = true;
-        
+
         let request = { 'location': { lat: this.location.latitude, lng: this.location.longitude } };
 
         if (this.geocoder)
@@ -136,10 +137,10 @@ export class LocationComponent implements OnInit, AfterViewInit {
             });
     }
 
-    private setCurrentPosition() {
-        if ("geolocation" in navigator) {
+    private setCurrentPosition() {        
+        if (this.askForAutoLocation && "geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition((position) => {
-                console.log('current position : ', position.coords);
+                // console.log('current position : ', position.coords);
                 this.location.latitude = position.coords.latitude;
                 this.location.longitude = position.coords.longitude;
                 this.zoom = 14;

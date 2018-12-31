@@ -1,0 +1,396 @@
+<div class="stepper-container">
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
+        <div fxFlex.xs="100">
+            <mat-horizontal-stepper [linear]="isLinear">
+                <!--location stepp-->
+                <mat-step [stepControl]="locationForm">
+                    <form [formGroup]="locationForm">
+                        <ng-template matStepLabel>Location</ng-template>
+                        <mat-divider></mat-divider>
+
+                        <mat-form-field class="full-width">
+                            <mat-select placeholder="Select property type" autocorrect="off" formControlName="propertyType"
+                                required>
+                                <mat-option *ngFor="let item of propertyTypes" [value]="item._id">
+                                    {{item.type[0].text}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="locationForm.controls['propertyType'].invalid">This field is
+                                required!</mat-error>
+                        </mat-form-field>
+
+
+                        <app-location [askForAutoLocation]="askForAutoLocation" [location]="property.geoLocation"
+                            (onChange)="onChangeLocation($event)"></app-location>
+
+                        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
+                            <div fxFlex.xs="100" fxFlex.lg="20" fxFlex.md="20" fxFlex.sm="20">
+                                <mat-form-field class="full-width">
+                                    <input matInput disabled value="{{property.geoLocation.longitude}}">
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex.xs="100" fxFlex.lg="20" fxFlex.md="20" fxFlex.sm="20">
+                                <mat-form-field class="full-width">
+                                    <input matInput required disabled value="{{property.geoLocation.latitude}}">
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex.xs="100" fxFlex.lg="60" fxFlex.md="60" fxFlex.sm="60">
+                                <mat-form-field class="full-width">
+                                    <input matInput disabled value="{{property.geoLocation.formattedAddress}}">
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+
+                        <mat-divider></mat-divider>
+                        <br>
+
+                        <div fxLayoutAlign="end">
+                            <button mat-raised-button color="primary" matStepperNext (click)="updateProperty()">
+                                Next
+                                <mat-icon>navigate_next</mat-icon>
+                            </button>
+                        </div>
+                    </form>
+                </mat-step>
+
+                <!--Details-->
+                <mat-step [stepControl]="detailForm">
+                    <form [formGroup]="detailForm">
+                        <ng-template matStepLabel>Details</ng-template>
+                        <mat-divider></mat-divider>
+                        <!-- Description part -->
+                        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
+                            <div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
+                                <mat-form-field class="full-width">
+                                    <input matInput id="inputPropName" placeholder="Property name" autocorrect="off"
+                                        autocapitalize="off" spellcheck="off" type="text" required formControlName="propertyName">
+                                    <mat-error *ngIf="detailForm.controls['propertyName'].invalid">This field
+                                        is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
+                                <mat-form-field class="full-width">
+                                    <input matInput id="inputPropHeadline" placeholder="Property headline" autocorrect="off"
+                                        autocapitalize="off" spellcheck="off" type="text" required formControlName="propertyHeadline">
+                                    <mat-error *ngIf="detailForm.controls['propertyHeadline'].invalid">This
+                                        field is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <mat-form-field class="full-width">
+                            <textarea matInput id="inputSummary" placeholder="Property summary" matTextareaAutosize
+                                matAutosizeMinRows="2" matAutosizeMaxRows="6" required formControlName="propertySummary"></textarea>
+                            <mat-error *ngIf="detailForm.controls['propertySummary'].invalid">This
+                                field is required!</mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="full-width">
+                            <textarea matInput id="inputPropDescription" placeholder="Property description"
+                                matTextareaAutosize matAutosizeMinRows="10" matAutosizeMaxRows="30" required
+                                formControlName="propertyDescription"></textarea>
+                            <mat-error *ngIf="detailForm.controls['propertyDescription'].invalid">This
+                                field is required!
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!-- TODO: Add bedroom with name and type, then for that newly bedroom describe beds
+                        (number of beds and type fore each one)
+                        TODO: Add bathroom with name and type, then for that newly bathroom describe
+                        facilities -->
+
+                        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
+                            <div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
+                                <mat-form-field class="full-width">
+                                    <input matInput id="inputBedroomDescription" placeholder="Property bedroom description"
+                                        autocorrect="off" autocapitalize="off" spellcheck="off" type="text" required
+                                        formControlName="bedroomDescription">
+                                    <mat-error *ngIf="detailForm.controls['bedroomDescription'].invalid">This
+                                        field
+                                        is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
+                                <mat-form-field class="full-width">
+                                    <input matInput id="inputBathroomDescription" placeholder="Property bathroom description"
+                                        autocorrect="off" autocapitalize="off" spellcheck="off" type="text" required
+                                        formControlName="bathroomDescription">
+                                    <mat-error *ngIf="detailForm.controls['bathroomDescription'].invalid">This
+                                        field
+                                        is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
+                            <div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
+                                <mat-form-field class="full-width">
+                                    <input matInput id="maxGuests" placeholder="Property max guests" autocorrect="off"
+                                        autocapitalize="off" spellcheck="off" type="text" formControlName="maxGuest">
+
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
+                                <mat-form-field class="full-width">
+                                    <input matInput id="propertySize" placeholder="Property size in m2" autocorrect="off"
+                                        autocapitalize="off" spellcheck="off" type="text" formControlName="propertySize">
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <mat-divider></mat-divider>
+
+                        <div fxLayout="row">
+                            <div fxLayout="row" fxFlex="50" fxLayoutAlign="start center">
+                                <button mat-raised-button color="primary" matStepperPrevious>
+                                    <mat-icon>navigate_before</mat-icon>
+                                    Back
+                                </button>
+                            </div>
+
+                            <div fxLayout="row" fxFlex="50" fxLayoutAlign="end center">
+                                <div fxLayoutAlign="end">
+                                    <button mat-raised-button color="primary" matStepperNext (click)="updateProperty()">
+                                        Next
+                                        <mat-icon>navigate_next</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </mat-step>
+
+
+                <!--Pricing-->
+                <mat-step [stepControl]="priceForm">
+                    <form [formGroup]="priceForm">
+                        <ng-template matStepLabel>Pricing</ng-template>
+
+                        <mat-divider></mat-divider>
+
+                        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
+                            <div fxFlex.xs="100" fxFlex.lg="20" fxFlex.md="20" fxFlex.sm="20">
+                                <mat-form-field class="full-width">
+                                    <input matInput required formControlName="basePrice" id="basePrice" placeholder="Base price in €"
+                                        autocorrect="off" autocapitalize="off" spellcheck="off" type="text">
+                                    <mat-error *ngIf="priceForm.controls['basePrice'].invalid">This
+                                        field is required!</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <mat-divider></mat-divider>
+
+                        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
+
+                            <div fxFlex.xs="100" fxFlex.lg="25" fxFlex.md="25" fxFlex.sm="25">
+                                <mat-form-field>
+                                    <input matInput formControlName="periodName" id="periodName" placeholder="Period name"
+                                        autocorrect="off" autocapitalize="off" spellcheck="off" type="text">
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex.xs="100" fxFlex.lg="25" fxFlex.md="25" fxFlex.sm="25">
+                                <mat-form-field>
+                                    <input matInput formControlName="startPricePeriod" [matDatepicker]="picker1"
+                                        placeholder="Start">
+                                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker1></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex.xs="100" fxFlex.lg="25" fxFlex.md="25" fxFlex.sm="25">
+
+                                <mat-form-field>
+                                    <input matInput formControlName="endPricePeriod" [matDatepicker]="picker2"
+                                        placeholder="End">
+                                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker2></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex.xs="100" fxFlex.lg="25" fxFlex.md="25" fxFlex.sm="25">
+                                <mat-form-field>
+                                    <input matInput formControlName="valuePricePeriod" id="valuePricePeriod"
+                                        placeholder="Value" autocorrect="off" autocapitalize="off" spellcheck="off"
+                                        type="text">
+                                </mat-form-field>
+                            </div>
+
+                            <div fxFlex.xs="100" fxFlex.lg="20" fxFlex.md="20" fxFlex.sm="20" fxLayoutAlign="end center">
+                                <div fxLayoutAlign="end">
+                                    <button mat-button (click)="addNewPeriodPrice()">
+                                        Add price
+                                        <mat-icon>plus</mat-icon>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+
+
+
+                    <mat-divider></mat-divider>
+
+                    <div fxLayout="column">
+                        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" *ngFor="let price of property.pricing">
+                            <div fxFlex.xs="100" fxFlex.lg="40" fxFlex.md="40" fxFlex.sm="20">
+                                <b>{{price.name}}</b>
+                            </div>
+                            <div fxFlex.xs="100" fxFlex.lg="40" fxFlex.md="40" fxFlex.sm="20">
+                                <b>{{price.start | date:"dd/MM/yyyy"}}</b>
+                            </div>
+                            <div fxFlex.xs="100" fxFlex.lg="40" fxFlex.md="40" fxFlex.sm="20">
+                                <b>{{price.end | date:"dd/MM/yyyy"}}</b>
+                            </div>
+                            <div fxFlex.xs="100" fxFlex.lg="40" fxFlex.md="40" fxFlex.sm="20">
+                                <b>{{price.value}}</b>
+                            </div>
+                            <div fxFlex.xs="100" fxFlex.lg="40" fxFlex.md="40" fxFlex.sm="20">
+                                <mat-icon (click)="removePrice(price)">close</mat-icon>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <mat-divider></mat-divider>
+
+                    <div fxLayout="row">
+                        <div fxLayout="row" fxFlex="50" fxLayoutAlign="start center">
+                            <button mat-button matStepperPrevious>
+                                <mat-icon>navigate_before</mat-icon>
+                                Back
+                            </button>
+                        </div>
+
+                        <div fxLayout="row" fxFlex="50" fxLayoutAlign="end center">
+                            <div fxLayoutAlign="end">
+                                <button mat-button matStepperNext (click)="updateProperty()">
+                                    Next
+                                    <mat-icon>navigate_next</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </mat-step>
+
+                <!--Places step-->
+                <mat-step>
+                    <form [formGroup]="propertyForm">
+                        <ng-template matStepLabel>Places</ng-template>
+
+                        <mat-divider></mat-divider>
+
+                        <app-place *ngFor="let placeForm of propertyForm.controls.places.controls; let i=index" [group]="placeForm"
+                            [lengthUnits]="lengthUnits" [place]="places[i]"></app-place>
+
+                        <mat-divider></mat-divider>
+
+                        <div fxLayout="row">
+                            <div fxLayout="row" fxFlex="50" fxLayoutAlign="start center">
+                                <button mat-raised-button color="primary" matStepperPrevious>
+                                    <mat-icon>navigate_before</mat-icon>
+                                    Back
+                                </button>
+                            </div>
+
+                            <div fxLayout="row" fxFlex="50" fxLayoutAlign="end center">
+                                <div fxLayoutAlign="end">
+                                    <button mat-raised-button color="primary" matStepperNext (click)="updateProperty()">
+                                        Next
+                                        <mat-icon>navigate_next</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </mat-step>
+
+                <!--Activities step-->
+                <mat-step>
+                    <form [formGroup]="propertyForm">
+                        <ng-template matStepLabel>Activities</ng-template>
+                        <div class="col-xs-12" *ngFor="let list of listing | async">
+                            <h2 class="page-header"> {{list.listGroup.title[0].text}}</h2>
+                            <div class="property-amenities">
+                                <div *ngFor="let item of list.lists">
+                                    <mat-checkbox color="primary" [checked]="isActivityChecked(item)" (change)="onChangeActivity($event)"
+                                        [value]="item._id">{{item.title[0].text}}</mat-checkbox>
+                                </div>
+                            </div>
+                        </div>
+
+                        <mat-divider></mat-divider>
+
+                        <div fxLayout="row">
+                            <div fxLayout="row" fxFlex="50" fxLayoutAlign="start center">
+                                <button mat-raised-button color="primary" matStepperPrevious>
+                                    <mat-icon>navigate_before</mat-icon>
+                                    Back
+                                </button>
+                            </div>
+
+                            <div fxLayout="row" fxFlex="50" fxLayoutAlign="end center">
+                                <div fxLayoutAlign="end">
+                                    <button mat-raised-button color="primary" matStepperNext (click)="updateProperty()">
+                                        Next
+                                        <mat-icon>navigate_next</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </mat-step>
+
+                <!--Photos-->
+                <mat-step>
+                    <ng-template matStepLabel>Photos</ng-template>
+                    <h1>Pictures</h1>
+                    <app-picture-upload (onFile)="onImage($event)"></app-picture-upload>
+                    <h1 class="page-header">Uploaded pictures</h1>
+
+                    <div class="gallery">
+                        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
+                            <div fxFlex.xs="100" fxFlex.lg="20" fxFlex.md="20" fxFlex.sm="20" *ngFor="let item of pictures | async">
+                                <div class="gallery-item">
+                                    <div class="gallery-image">
+                                        <img [src]="item.url" [alt]="item.name" />
+                                    </div><!-- /.gallery-image -->
+
+                                    <div class="gallery-caption">
+                                        <a href="javascript:;" (click)="deletePicture(item)" class="btn-alert">Delete</a>
+                                    </div><!-- /.gallery-caption -->
+                                </div><!-- /.gallery-item -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <mat-divider></mat-divider>
+
+                    <div fxLayout="row">
+                        <div fxLayout="row" fxFlex="50" fxLayoutAlign="start center">
+                            <button mat-raised-button color="primary" matStepperPrevious>
+                                <mat-icon>navigate_before</mat-icon>
+                                Back
+                            </button>
+                        </div>
+
+                        <div fxLayout="row" fxFlex="50" fxLayoutAlign="end center">
+                            <div fxLayoutAlign="end">
+                                <button mat-raised-button color="primary" matStepperNext (click)="saveProperty()">
+                                    Publish
+                                    <mat-icon>navigate_next</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </mat-step>
+            </mat-horizontal-stepper>
+        </div>
+    </div>
+</div>

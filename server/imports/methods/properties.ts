@@ -45,7 +45,7 @@ Meteor.methods({
         property.updatedAt = new Date();
         Properties.collection.update(property._id, {
             $set: {
-                geLocation: property.geoLocation,                
+                geoLocation: property.geoLocation,                
                 name: property.name,
                 headline: property.headline,
                 summary: property.summary,
@@ -54,6 +54,8 @@ Meteor.methods({
                 bathroomDescription:property.bathroomDescription,
                 maxGuest:property.maxGuest,
                 propertySize:property.propertySize,
+                basePrice:property.basePrice,
+                pricing:property.pricing,
                 activities: property.activities,
                 images: property.images,
                 places: property.places,

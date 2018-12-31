@@ -48,7 +48,7 @@
                 <ng-container matColumnDef="action">
                     <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
                     <mat-cell *matCellDef="let row">
-                        <!-- <a [routerLink]="['/property-edit',row._id ]" class="btn-standard">Edit</a>-/- -->
+                        <a [routerLink]="['/property-edit',row._id ]" class="btn-standard">Edit</a>-/-
                         <a href="javascript:;" (click)="deleteProperty(row)"
                            class="btn-alert">Delete</a>
                     </mat-cell>
