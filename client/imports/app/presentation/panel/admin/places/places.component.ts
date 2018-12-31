@@ -5,12 +5,10 @@ import {Places} from "../../../../../../../imports/collections";
 import {Observable} from 'rxjs/Observable';
 import {MeteorObservable} from 'meteor-rxjs';
 import 'rxjs/add/operator/combineLatest';
-import {FormGroup, FormBuilder, Validators} from "@angular/forms";
-import {NgbModal, NgbModalOptions, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
+import {FormGroup, FormBuilder} from "@angular/forms";
 import {ToasterService} from "angular2-toaster";
 import {componentDestroyed} from "ng2-rx-componentdestroyed";
 import { MatDialogRef, MatDialog } from '@angular/material';
-import { filter } from 'rxjs/operators';
 
 @Component({
     //selector: 'app-dashboard',

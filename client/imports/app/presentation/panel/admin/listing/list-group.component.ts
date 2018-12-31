@@ -9,7 +9,6 @@ import {PaginationInstance, PaginationService} from "ng2-pagination";
 import 'rxjs/add/operator/combineLatest';
 import {IMongoOptions} from "../../../../../../../imports/models/index";
 import {Router} from "@angular/router";
-import {NgbModal, NgbModalRef, NgbModalOptions} from "@ng-bootstrap/ng-bootstrap";
 import {ToasterService} from "angular2-toaster";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {componentDestroyed} from "ng2-rx-componentdestroyed";

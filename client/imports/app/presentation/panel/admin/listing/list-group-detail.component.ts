@@ -5,7 +5,6 @@ import {MeteorObservable} from 'meteor-rxjs';
 import {ActivatedRoute, Router, Params} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import 'rxjs/add/operator/combineLatest';
-import {NgbModal, NgbModalOptions, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {ToasterService} from "angular2-toaster";
 import {componentDestroyed} from "ng2-rx-componentdestroyed";
 import { ListGroupDetailDialog } from './list-group-detail-dialog.component';
