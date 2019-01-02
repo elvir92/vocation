@@ -42,22 +42,22 @@ export class RegisterComponent {
          Accounts.createUser({
              email: user.email,
              password: user.password,
-             name: user.name,
-             description: user.description,
+             username: user.name,             
              profile: {
+                description: user.description,
                  type: 0
              }
          }, (err) => {
              console.log(err);
              if (err) {
                  this.zone.run(() => {
-                     this.error = err;
+                     this.errors = err;
                  });
              } else {
                  Meteor.loginWithPassword(user.email, user.password, (err) => {
                      this.zone.run(() => {
                          if (err) {
-                             this.error = err;
+                             this.errors = err;
                          } else {
                              this.router.navigate(['/profile']);
                          }

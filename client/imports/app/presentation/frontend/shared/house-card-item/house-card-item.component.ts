@@ -1,8 +1,6 @@
 import {Component, OnDestroy, OnInit, Input} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import {IProperty, IPropertyPictures} from "../../../../../../imports/models/property";
-import {MeteorObservable} from 'meteor-rxjs';
 import {IPlace} from '../../../../../../../imports/models';
 
 @Component({
@@ -14,7 +12,7 @@ import {IPlace} from '../../../../../../../imports/models';
 export class HouseCardItemComponent implements OnInit, OnDestroy {
 
     @Input()
-    data: Iplace;
+    data: IPlace;
 
 
     constructor(){

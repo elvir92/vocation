@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import {IProperty, IPropertyPictures} from "../../../../../../imports/models/property";
 import {MeteorObservable} from 'meteor-rxjs';
 import {componentDestroyed} from "ng2-rx-componentdestroyed";
 import {IPlace} from '../../../../../../../imports/models';
