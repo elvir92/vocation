@@ -9,17 +9,8 @@
     <ngu-carousel
     [inputs]="carouselOptions">
       <ngu-item NguCarouselItem *ngFor="let p of portfolios">
-          <mat-card class="p-0">
-              <img mat-card-image [src]="p.photo">
-              <mat-card-content>
-                <h5><strong><a href="">{{p.title}}</a></strong></h5>
-                <p>
-                  {{p.text}}
-                </p>
-                <mat-divider class="mb-1"></mat-divider>
-                <button mat-icon-button><mat-icon class="text-muted">link</mat-icon></button>
-                <button mat-icon-button><mat-icon class="text-muted">share</mat-icon></button>
-              </mat-card-content>
+          <mat-card>
+              <img mat-card-image [src]="p.photo">              
             </mat-card>
       </ngu-item>
       

@@ -7,14 +7,15 @@ import { AuthAdminGuard } from "./_guards/auth.admin.guard";
 
 export const AppRoutes: Routes = [
     {
-        path: '',
+        path: 'v2',
         loadChildren: './presentation/frontend/home_v2/home.module#HomeModule',
     },
-    /*
+    
     {
         path: '',        
         loadChildren: './presentation/frontend/front-temp.module#FrontTempModule'        
     },    
+    /*
     { 
         path: '', 
         redirectTo: 'home/demos', 
