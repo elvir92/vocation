@@ -29,7 +29,6 @@ import { HomeTwoComponent } from './home-two.component';
 import { HeaderComponent } from './header/header.component';
 import { IntroOneComponent } from './intro-one/intro-one.component';
 import { IntroTwoComponent } from './intro-two/intro-two.component';
-import { PortfolioComponent } from './portfolio/portfolio.component';
 import { ServicesComponent } from './services/services.component';
 import { CtaComponent } from './cta/cta.component';
 import { PricingsComponent } from './pricings/pricings.component';
@@ -42,10 +41,11 @@ import { ServicesCarouselComponent } from './services-carousel/services-carousel
 import { DemoComponent } from './demo/demo.component';
 import { AllSectionsComponent } from './all-sections.component';
 
-import { WINDOW_PROVIDERS } from '../_layout/shared/helpers/window.helper';
 import { RentalsSearchComponent } from '../shared/rentals-search/rentals-search.component';
-import { RentDetailsDialog } from './portfolio/rent-details-dialog.component';
+import { ApartmentsComponent } from './apartments/apartments.component';
+import { RentDetailsDialog } from './apartments/rent-details-dialog.component';
 
+import { WINDOW_PROVIDERS } from '../_layout/shared/helpers/window.helper';
 
 @NgModule({
   imports: [
@@ -79,7 +79,7 @@ import { RentDetailsDialog } from './portfolio/rent-details-dialog.component';
     HeaderComponent, 
     IntroOneComponent,
     IntroTwoComponent, 
-    PortfolioComponent, 
+    ApartmentsComponent, 
     ServicesComponent, 
     CtaComponent, 
     PricingsComponent, 

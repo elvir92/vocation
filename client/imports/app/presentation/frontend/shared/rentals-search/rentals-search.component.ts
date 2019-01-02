@@ -1,8 +1,7 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import 'rxjs/add/operator/map';
-import { FormBuilder, Validators, FormGroup, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
-import { DateValidators } from '../../validators/date-validators';
 
 const formatDate = "DDMMYYYY";
 
@@ -14,7 +13,7 @@ const formatDate = "DDMMYYYY";
 
 export class RentalsSearchComponent implements OnInit {
     searchForm: FormGroup;
-    @Output() filterValues = new EventEmitter();
+    @Output() onSearchSubmit = new EventEmitter();
 
     constructor(private _fb: FormBuilder){
     }
@@ -58,7 +57,7 @@ export class RentalsSearchComponent implements OnInit {
         }
     }
 
-    searchActiveProperties() {
+    searchSubmit() {
         const filter = {
             startDate: this.searchForm.value.startDate,
             endDate: this.searchForm.value.endDate,
@@ -68,9 +67,9 @@ export class RentalsSearchComponent implements OnInit {
 
         let isValid = this.checkIfDatesAreValid(filter.startDate, filter.endDate);
         if (isValid) {
-            this.filterValues.emit(filter);
+            this.onSearchSubmit.emit(filter);
         } else {
-            this.filterValues.emit({validation_error:true})
+            this.onSearchSubmit.emit({validation_error:true})
         }
     }
 

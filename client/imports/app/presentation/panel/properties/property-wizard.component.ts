@@ -86,7 +86,7 @@ export class PropertyWizardComponent implements OnInit, OnDestroy {
         this.propertyForm = this._fb.group({
             places: this._fb.array([]),
             basePrice: ['', Validators.required],
-            activities : this._fb.array([]),
+            activities: this._fb.array([]),
         });
 
         this.locationForm = this._fb.group({
@@ -160,7 +160,7 @@ export class PropertyWizardComponent implements OnInit, OnDestroy {
         });
     }
 
-    onChangeActivity(event) {       
+    onChangeActivity(event) {
         const activities = <FormArray>this.propertyForm.get('activities') as FormArray;
 
         if (event.checked) {
@@ -168,7 +168,7 @@ export class PropertyWizardComponent implements OnInit, OnDestroy {
         } else {
             const i = activities.controls.findIndex(x => x.value === event.source.value);
             activities.removeAt(i);
-        }        
+        }
     }
 
     onChangeLocation(location: ILocation) {
@@ -177,10 +177,10 @@ export class PropertyWizardComponent implements OnInit, OnDestroy {
         this.locationForm.controls['latitude'].setValue(this.property.geoLocation.latitude);
     }
 
-    isActivityChecked(item : IList) {
+    isActivityChecked(item: IList) {
         return this.property.activities ? this.property.activities.some(x => x == item._id) : false;
     }
-    
+
     updateProperty() {
         this.setPropertyObject();
 
@@ -217,7 +217,7 @@ export class PropertyWizardComponent implements OnInit, OnDestroy {
         return valid;
     }
 
-    
+
 
     private getPropertyDetail() {
         if (this.id) {
@@ -259,31 +259,31 @@ export class PropertyWizardComponent implements OnInit, OnDestroy {
 
             // 4. Places
             this.fillPlacePropertyFormGroup();
-            
+
             // 5. Activities
-            if(this.loadedActivities && this.property.activities && this.property.activities.length > 0){
+            if (this.loadedActivities && this.property.activities && this.property.activities.length > 0) {
                 const activities = <FormArray>this.propertyForm.get('activities') as FormArray;
-                this.property.activities.forEach(a => activities.push(new FormControl(a)))                               
+                this.property.activities.forEach(a => activities.push(new FormControl(a)))
             }
             this.findPictures();
         }
     }
 
     private fillPlacePropertyFormGroup() {
-        if(this.loadedPlaces){
+        if (this.loadedPlaces) {
             const placeForm = <FormArray>this.propertyForm.get('places') as FormArray;
-                for (let i = 0; i < placeForm.controls.length; i++) {
-                    let element =<FormGroup>placeForm.controls[i];
-                                    
-                    let savedPlace = this.property.places.find(x=>x.placeId === element.value.placeId);
-                    
-                    if (savedPlace) {                        
-                        element.controls['title'].setValue(this.getTranslationText(savedPlace.title));
-                        element.controls['distanceValue'].setValue(savedPlace.distanceValue);
-                        if (savedPlace.distanceType) element.controls['distanceType'].setValue(savedPlace.distanceType._id);
-                     }
+            for (let i = 0; i < placeForm.controls.length; i++) {
+                let element = <FormGroup>placeForm.controls[i];
+
+                let savedPlace = this.property.places.find(x => x.placeId === element.value.placeId);
+
+                if (savedPlace) {
+                    element.controls['title'].setValue(this.getTranslationText(savedPlace.title));
+                    element.controls['distanceValue'].setValue(savedPlace.distanceValue);
+                    if (savedPlace.distanceType) element.controls['distanceType'].setValue(savedPlace.distanceType._id);
                 }
             }
+        }
     }
 
 
@@ -305,20 +305,25 @@ export class PropertyWizardComponent implements OnInit, OnDestroy {
         // 3. Price
         this.property.basePrice = this.priceForm.value.basePrice;
 
-        // 4. Places
+        // 4. Places        
         for (let i in this.propertyForm.value.places) {
             let plVal = this.propertyForm.value.places[i];
             if (plVal.title) {
                 const lngthObj = this.lengthUnits.find(obj => obj._id == plVal.distanceType);
-                this.property.places.push({
+                const place = {
                     title: [{ text: plVal.title, language: 'en' }],
                     distanceType: lngthObj ? lngthObj : plVal.distanceType,
                     placeId: plVal.placeId,
                     distanceValue: plVal.distanceValue
-                });
+                };
+                const foundIndex = this.property.places.findIndex(x => x.placeId === plVal.placeId);
+                console.log(foundIndex,this.property.places);                
+                if (foundIndex > -1) this.property.places[foundIndex] = place;
+                else this.property.places.push(place);
+                console.log(this.property.places);                
             }
         }
-        
+
         // 5. Activities
         this.property.activities = this.propertyForm.value.activities;
     }
@@ -348,8 +353,8 @@ export class PropertyWizardComponent implements OnInit, OnDestroy {
         });
     }
 
-    private findPictures() {        
-        this.pictures = Pictures.find({ _id: { $in: this.property.images } });        
+    private findPictures() {
+        this.pictures = Pictures.find({ _id: { $in: this.property.images } });
     }
 
     private getPropertyTypes() {

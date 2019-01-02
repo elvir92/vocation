@@ -1,0 +1,48 @@
+<section id="portfolio-section" class="portfolio home-section" [ngClass]="{'light-gray': backgroundGray}">
+  <div class="container">
+    <div class="section-header">
+      <h2>Apartments for rent.</h2>
+      <p>
+        Filter out our apartments and see what we are offering.
+      </p>
+      <p *ngIf="isEmptyObjectAndFilterOn()">
+        <b>Oops... There is no results matching your criteria...</b>
+      </p>
+    </div>
+
+    <div *ngIf="apartments" fxLayout="row" fxLayout.lt-sm="column" fxLayoutWrap="nowrap" fxLayoutGap="30px">
+      <div *ngFor="let apartment of apartments" fxFlex="33.33" class="house-card" (click)="openDialog(apartment)">
+        <mat-card class="p-0 m-0">
+          <img mat-card-image *ngIf="!isObjectEmpty(apartment.pictures)" [src]="apartment.pictures[0].url" [alt]="apartment.pictures[0].name">
+          <mat-card-content>
+            <!-- <div *ngFor="let apartment of apartments | async">
+    <span>{{apartment.apartment._id}}</span>
+    <br>
+    <span>{{apartment.type._id}}</span>
+    <br>
+    <img [src]="apartment.pictures[0].url" [alt]="apartment.pictures[0].name" width="100" height="100" />
+
+</div> -->
+            <h5>
+              <strong>
+                <a href="javascript:;">
+                  {{apartment.property.name[0].text}}
+                </a>
+              </strong>
+            </h5>
+            <p>
+              {{apartment.property.headline[0].text}}
+            </p>
+            <mat-divider class="mb-1"></mat-divider>
+            <button mat-icon-button>
+              <mat-icon class="text-muted">link</mat-icon>
+            </button>
+            <button mat-icon-button>
+              <mat-icon class="text-muted">share</mat-icon>
+            </button>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</section>

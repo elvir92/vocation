@@ -53,7 +53,7 @@ import { SharedModule } from "./_layout/shared/shared.module";
         HousesListComponent,
         HouseCardItemComponent,
         RegisterComponent,
-        RentalsSearchComponent,
+        // RentalsSearchComponent,
         GroupListComponent,
         GroupItemComponent,
         AccommodationComponent,

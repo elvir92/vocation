@@ -6,3 +6,4 @@ export * from './places';
 export * from './pictures';
 export * from './emails';
 export * from './property_types';
+export * from './reservations';

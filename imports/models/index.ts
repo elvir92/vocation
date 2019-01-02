@@ -13,3 +13,5 @@ export * from './groups';
 export * from './profile';
 export * from './property_type';
 export * from './address';
+export * from './reservations';
+export * from './main_apartments';

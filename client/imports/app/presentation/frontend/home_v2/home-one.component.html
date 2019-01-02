@@ -1,6 +1,11 @@
 <app-header></app-header>
-<app-intro (filteredProperties)='getFiltered($event)'></app-intro>
-<app-portfolio [properties]="properties" [filterOn]="filterOn"></app-portfolio>
+
+<!-- Search section -->
+<app-intro (onSearchSubmit)='onSearchSubmit($event)'></app-intro>
+
+<!-- Apartment list view -->
+<app-apartments [apartments]="apartments" [filterOn]="filterOn"></app-apartments>
+
 <app-services [backgroundGray]="true"></app-services>
 <app-testimonials-carousel></app-testimonials-carousel>
 <app-cta></app-cta>

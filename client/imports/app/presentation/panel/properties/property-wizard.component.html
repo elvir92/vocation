@@ -355,19 +355,19 @@
                     <h1 class="page-header">Uploaded pictures</h1>
 
                     <div class="gallery">
-                        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
-                            <div fxFlex.xs="100" fxFlex.lg="20" fxFlex.md="20" fxFlex.sm="20" *ngFor="let item of pictures | async">
-                                <div class="gallery-item">
-                                    <div class="gallery-image">
-                                        <img [src]="item.url" [alt]="item.name" />
-                                    </div><!-- /.gallery-image -->
-
-                                    <div class="gallery-caption">
-                                        <a href="javascript:;" (click)="deletePicture(item)" class="btn-alert">Delete</a>
-                                    </div><!-- /.gallery-caption -->
-                                </div><!-- /.gallery-item -->
-                            </div>
-                        </div>
+                            <mat-grid-list cols="4" rowHeight="150px">
+                                    <mat-grid-tile *ngFor="let item of pictures | async" [colspan]="1" [rowspan]="1">
+                                        <div class="gallery-item">
+                                            <div class="gallery-image">
+                                                <img [src]="item.url" [alt]="item.name" />
+                                            </div><!-- /.gallery-image -->
+                                
+                                            <div class="gallery-caption">
+                                                <a href="javascript:;" (click)="deletePicture(item)" class="btn-alert">Delete</a>
+                                            </div><!-- /.gallery-caption -->
+                                        </div><!-- /.gallery-item -->
+                                    </mat-grid-tile>
+                                </mat-grid-list>     
                     </div>
 
                     <mat-divider></mat-divider>

@@ -20,7 +20,7 @@ publishComposite('listing', function (limit?: number, skip?: number) {
             return options ? ListsGroups.collection.find({}, options) : ListsGroups.collection.find({});
         },
         children: [
-            <PublishCompositeConfig1<IListGroup, IList>> {
+            {
                 find: (listGroup) => {
                     return Lists.collection.find({parentId: listGroup._id, isActive: true});
                 }
@@ -39,7 +39,7 @@ publishComposite('listing-by-group', function (groupId: string) {
             return ListsGroups.collection.find({_id: groupId});
         },
         children: [
-            <PublishCompositeConfig1<IListGroup, IList>> {
+            {
                 find: (listGroup) => {
                     return Lists.collection.find({parentId: listGroup._id, isActive: true});
                 }

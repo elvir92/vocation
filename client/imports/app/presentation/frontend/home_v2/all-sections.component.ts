@@ -4,8 +4,7 @@ import { LandingFixService } from '../_layout/shared/services/landing-fix.servic
 @Component({
   selector: 'app-home-one',
   template: `<app-header></app-header>
-  <div style="height: 80px; width: 100%"></div>
-  <app-portfolio [backgroundGray]="true"></app-portfolio>
+  <div style="height: 80px; width: 100%"></div>  
   <app-portfolio-carousel></app-portfolio-carousel>
   <app-services [backgroundGray]="true"></app-services>
   <app-services-carousel></app-services-carousel>

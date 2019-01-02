@@ -1,11 +1,8 @@
-import {Meteor} from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor';
 import { publishComposite } from 'meteor/reywood:publish-composite';
 
-import {IProperty} from "../../../imports/models";
-import {Properties} from "../../../imports/collections";
-import {Pictures} from "../../../imports/collections/pictures";
-import {IMongoOptions} from "../../../imports/models/mongo-options";
-import {IPicture} from "../../../imports/models/picture";
+import { IMongoOptions } from "../../../imports/models";
+import { Properties, Pictures, PropertyTypes, Reservations } from "../../../imports/collections";
 
 
 Meteor.publish('backend-properties', function (limit?: number, skip?: number) {
@@ -19,14 +16,36 @@ Meteor.publish('backend-properties', function (limit?: number, skip?: number) {
         limit: limit,
     };
 
-    return options ? Properties.collection.find({userId}, options) : Properties.collection.find({userId});
+    return options ? Properties.collection.find({ userId }, options) : Properties.collection.find({ userId });
 });
 
-Meteor.publish('frontend-properties', function () {
-    return  Properties.collection.find({isActive: true});
+publishComposite('frontend-properties', function () {
+    return {
+        find: () => {
+            return Properties.collection.find({ isActive: true });
+        },
+        children: [
+            {
+                find: function (property) {
+                    return Pictures.collection.find({ _id: { $in: property.images }, isActive: true });
+                }
+            },
+            {
+                find: function (property) {
+                    return Reservations.collection.find({ propertyId: property._id, status: { $in: ['Hold', 'Reserved'] } });
+                }
+            },
+            // {
+            //     find: function (property) {
+            //         return PropertyTypes.collection.find({ _id: property.propertyTypeId });
+            //     }
+            // },
+        ]
+    };
 });
 
-publishComposite('properties', function (limit?: number, skip?: number){
+
+publishComposite('properties', function (limit?: number, skip?: number) {
     let options: IMongoOptions = {
         skip: skip,
         limit: limit,
@@ -34,12 +53,12 @@ publishComposite('properties', function (limit?: number, skip?: number){
 
     return {
         find: () => {
-            return options ? Properties.collection.find({isActive: true}, options) : Properties.collection.find({isActive: true});
+            return options ? Properties.collection.find({ isActive: true }, options) : Properties.collection.find({ isActive: true });
         },
         children: [
-            <PublishCompositeConfig1<IProperty, IPicture>> {
+            {
                 find: (property) => {
-                    return Pictures.collection.find({_id: {$in: property.images}, isActive: true});
+                    return Pictures.collection.find({ _id: { $in: property.images }, isActive: true });
                 }
             }
         ]

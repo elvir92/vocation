@@ -31,9 +31,4 @@ export class HeaderComponent implements OnInit {
   toggleMenu() {
     this.menuOpened = !this.menuOpened
   }
-
-  buyEgret() {
-    this.window.open('https://themeforest.net/item/egret-angular-4-material-design-admin-template/20161805?ref=mh_rafi');
-  }
-
 }
