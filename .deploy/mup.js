@@ -2,10 +2,10 @@ module.exports = {
     servers: {
         one: {
             // TODO: set host address, username, and authentication method
-            host: '46.101.210.161',
+            host: '',
             username: 'root',
             //pem: '~/.ssh/id_rsa'
-            password: 'Np1OkPAkQ8'
+            password: ''
             // or neither for authenticate from ssh-agent
         }
     },
@@ -14,7 +14,7 @@ module.exports = {
         // TODO: change app name and path
         //Uncomment this line for developmenet deployment
         //name: 'vocation',
-        name: 'crohouse',
+        name: '',
         path: '../',
 
         servers: {
@@ -30,9 +30,9 @@ module.exports = {
             // If you are using ssl, it needs to start with https://
             //Uncomment this line for developmenet deployment
             //PORT: 3000,
-            ROOT_URL: 'http://crohouse.com',
-            MONGO_URL: 'mongodb://mongodb/meteor',
-            MONGO_OPLOG_URL: 'mongodb://mongodb/local',
+            ROOT_URL: '',
+            MONGO_URL: '',
+            MONGO_OPLOG_URL: '',
         },
 
         docker: {
